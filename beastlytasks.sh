@@ -19,3 +19,10 @@
 user=$(whoami)
 
 echo "Hello "$user", welcome to BeastlyTasks!"
+
+if [ ! -e "/home/$user/.beastlytasks" ]; then
+    echo -n "creating initial config file ..."
+    touch /home/$user/.beastlytasks
+    chown $user: /home/$user/.beastlytasks
+    echo " done."
+fi
