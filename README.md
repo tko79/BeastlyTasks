@@ -14,3 +14,11 @@ simply running it from the console.
 
     cd ~/BeastlyTasks/
     sh ./beastlytasks.sh
+
+***
+
+# License
+
+BeastlyTasks is licensed under the GNU General Public License, version 3. See
+[COPYING](https://github.com/tko79/BeastlyTasks/blob/master/COPYING) for
+details.
