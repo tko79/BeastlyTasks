@@ -33,7 +33,7 @@ function convert_countdown() {
     IFS=":" read -r t_hh t_mm t_ss <<< "$time_val"
     IFS=":" read -r d_hh d_mm d_ss <<< "$diff_val"
 
-    result_val=$(( ($d_hh*60*60-$d_mm*60+$d_ss)-($t_hh*60*60+$t_mm*60+$t_ss) ))
+    result_val=$(( ($d_hh*60*60+$d_mm*60+$d_ss)-($t_hh*60*60+$t_mm*60+$t_ss) ))
     r_hh=$(( $result_val/(60*60) ))
     r_mm=$(( ($result_val-$r_hh*60*60)/60 ))
     r_ss=$(( $result_val-$r_hh*60*60-$r_mm*60 ))
