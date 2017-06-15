@@ -40,3 +40,23 @@ function convert_countdown() {
 
     printf "%02d:%02d:%02d\n" "$r_hh" "$r_mm" "$r_ss"
 }
+
+# function sum_time
+#          sum up two time values
+# param    $1: time1 (format hh:mm:ss)
+#          $2: time2 (format hh:mm:ss)
+# return   printf: calculated time (format hh:mm:ss)
+function sum_time() {
+    time1_val=$1
+    time2_val=$2
+
+    IFS=":" read -r t1_hh t1_mm t1_ss <<< "$time1_val"
+    IFS=":" read -r t2_hh t2_mm t2_ss <<< "$time2_val"
+
+    result_val=$(( ($t1_hh*60*60+$t1_mm*60+$t1_ss)+($t2_hh*60*60+$t2_mm*60+$t2_ss) ))
+    r_hh=$(( $result_val/(60*60) ))
+    r_mm=$(( ($result_val-$r_hh*60*60)/60 ))
+    r_ss=$(( $result_val-$r_hh*60*60-$r_mm*60 ))
+
+    printf "%02d:%02d:%02d\n" "$r_hh" "$r_mm" "$r_ss"
+}
