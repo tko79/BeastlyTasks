@@ -17,11 +17,34 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# function __sum_sub_time
+#          sum up or substract two time values
+# param    $1: time1 (format hh:mm:ss)
+#          $2: time2 (format hh:mm:ss)
+#          $3: "sum" or "sub"
+# return   printf: calculated time (format hh:mm:ss)
+function __sum_sub_time() {
+    IFS=":" read -r t1_hh t1_mm t1_ss <<< "$1"
+    IFS=":" read -r t2_hh t2_mm t2_ss <<< "$2"
+
+    if [ "$3" == "sum" ]; then
+	result_val=$(( ($t1_hh*60*60+$t1_mm*60+$t1_ss)+($t2_hh*60*60+$t2_mm*60+$t2_ss) ))
+    else
+	result_val=$(( ($t1_hh*60*60+$t1_mm*60+$t1_ss)-($t2_hh*60*60+$t2_mm*60+$t2_ss) ))
+    fi
+
+    r_hh=$(( $result_val/(60*60) ))
+    r_mm=$(( ($result_val-$r_hh*60*60)/60 ))
+    r_ss=$(( $result_val-$r_hh*60*60-$r_mm*60 ))
+
+    printf "%02d:%02d:%02d\n" "$r_hh" "$r_mm" "$r_ss"
+}
+
 # function convert_countdown
 #          convert countdown timer values to time and vice versa
 # param    $1: time value (format hh:mm:ss)
 #          $2: diff value (format hh:mm:ss), default 10 hours (10:00:00)
-# return   printf: calculated time (format hh:mm:ss)
+# return   echo: calculated time (format hh:mm:ss)
 function convert_countdown() {
     time_val=$1
     diff_val=$2
@@ -30,33 +53,17 @@ function convert_countdown() {
 	diff_val="10:00:00"
     fi
 
-    IFS=":" read -r t_hh t_mm t_ss <<< "$time_val"
-    IFS=":" read -r d_hh d_mm d_ss <<< "$diff_val"
-
-    result_val=$(( ($d_hh*60*60+$d_mm*60+$d_ss)-($t_hh*60*60+$t_mm*60+$t_ss) ))
-    r_hh=$(( $result_val/(60*60) ))
-    r_mm=$(( ($result_val-$r_hh*60*60)/60 ))
-    r_ss=$(( $result_val-$r_hh*60*60-$r_mm*60 ))
-
-    printf "%02d:%02d:%02d\n" "$r_hh" "$r_mm" "$r_ss"
+    echo $(__sum_sub_time $diff_val $time_val "sub")
 }
 
 # function sum_time
 #          sum up two time values
 # param    $1: time1 (format hh:mm:ss)
 #          $2: time2 (format hh:mm:ss)
-# return   printf: calculated time (format hh:mm:ss)
+# return   echo: calculated time (format hh:mm:ss)
 function sum_time() {
     time1_val=$1
     time2_val=$2
 
-    IFS=":" read -r t1_hh t1_mm t1_ss <<< "$time1_val"
-    IFS=":" read -r t2_hh t2_mm t2_ss <<< "$time2_val"
-
-    result_val=$(( ($t1_hh*60*60+$t1_mm*60+$t1_ss)+($t2_hh*60*60+$t2_mm*60+$t2_ss) ))
-    r_hh=$(( $result_val/(60*60) ))
-    r_mm=$(( ($result_val-$r_hh*60*60)/60 ))
-    r_ss=$(( $result_val-$r_hh*60*60-$r_mm*60 ))
-
-    printf "%02d:%02d:%02d\n" "$r_hh" "$r_mm" "$r_ss"
+    echo $(__sum_sub_time $time1_val $time2_val "sum")
 }
