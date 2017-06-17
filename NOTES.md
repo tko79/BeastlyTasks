@@ -17,6 +17,7 @@ user interfaces
 - web-ui
 
 misc
-- timers to count the time spent for a task
+- timers to count the time spent for a task (-> timer_functions.sh)
+- calender functions
 - configurable dashboard
 - calculate some statistics
