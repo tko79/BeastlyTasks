@@ -67,3 +67,20 @@ function sum_time() {
 
     echo $(__sum_sub_time $time1_val $time2_val "sum")
 }
+
+# function time_left
+#          calculate the time left (considering days)
+# param    $1: now (format d:hh:mm)
+#          $2: until (format d:hh:mm)
+# return   printf: calculated time left (format mm)
+function time_left() {
+    now_val=$1
+    until_val=$2
+
+    IFS=":" read -r n_d n_hh n_mm <<< "$now_val"
+    IFS=":" read -r u_d u_hh u_mm <<< "$until_val"
+
+    result_val=$(( ($u_d*24*60+$u_hh*60+$u_mm)-($n_d*24*60+$n_hh*60+$n_mm) ))
+
+    printf "%d\n" "$result_val"
+}
