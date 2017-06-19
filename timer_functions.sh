@@ -84,3 +84,17 @@ function time_left() {
 
     printf "%d\n" "$result_val"
 }
+
+# function time_per_task
+#          calculate available time per task
+# param    $1: time (format mm)
+#          $2: ntasks
+# return   printf: calculated time per task (format mm)
+function time_per_task() {
+    time_val=$1
+    ntasks_val=$2
+
+    result_val=$(( time_val/ntasks_val ))
+
+    printf "%d\n" "$result_val"
+}
