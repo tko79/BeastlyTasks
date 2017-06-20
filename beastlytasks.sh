@@ -32,8 +32,6 @@ configfile="/home/"$user"/.beastlytasks"
 echo -e "$license"
 echo -e ""
 
-echo "Hello "$user", welcome to BeastlyTasks!"
-
 # check and create config file
 if [ ! -e "$configfile" ]; then
     echo -n "creating initial config file..."
@@ -41,3 +39,23 @@ if [ ! -e "$configfile" ]; then
     chown $user: $configfile
     echo " done."
 fi
+
+# check and fetch user name from config file or user input
+name=$(grep "name=" $configfile)
+if [ $? == 1 ]; then
+    echo -ne "Please tell me your name: "
+    read name
+    if [ "$name" == "" ]; then
+	echo "Hmm, no name? I'll call you "$user" then!"
+	name=$user
+    fi
+    echo -n "writing your name to config file..."
+    echo "name="$name >> $configfile
+    echo " done."
+else
+    echo -n "reading your name from config file..."
+    name=$(echo $name | awk -F= '{ print $2 }')
+    echo " done."
+fi
+
+echo "Hello "$name"! Welcome to BeastlyTasks!"
