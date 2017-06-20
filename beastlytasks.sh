@@ -27,15 +27,17 @@ EOF
 )
 
 user=$(whoami)
+configfile="/home/"$user"/.beastlytasks"
 
 echo -e "$license"
 echo -e ""
 
 echo "Hello "$user", welcome to BeastlyTasks!"
 
-if [ ! -e "/home/$user/.beastlytasks" ]; then
-    echo -n "creating initial config file ..."
-    touch /home/$user/.beastlytasks
-    chown $user: /home/$user/.beastlytasks
+# check and create config file
+if [ ! -e "$configfile" ]; then
+    echo -n "creating initial config file..."
+    touch $configfile
+    chown $user: $configfile
     echo " done."
 fi
