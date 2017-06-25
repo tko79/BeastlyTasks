@@ -16,3 +16,31 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# function check_configfile
+#          check if a config file exists
+# param    $1: config filename
+# return   echo "true": config file exists
+#          echo "false": config file does not exist
+function check_configfile() {
+    local configfile=$1
+
+    if [ ! -e "$configfile" ]; then
+	echo "false"
+    else
+	echo "true"
+    fi
+}
+
+# function create_configfile
+#          creates an empty config file
+# param    $1: config filename
+#          $2: username
+# return   <none>
+function create_configfile() {
+    local configfile=$1
+    local user=$2
+
+    touch $configfile
+    chown $user: $configfile
+}

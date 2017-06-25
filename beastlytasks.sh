@@ -29,14 +29,15 @@ EOF
 user=$(whoami)
 configfile="/home/"$user"/.beastlytasks"
 
+source config_functions.sh
+
 echo -e "$license"
 echo -e ""
 
 # check and create config file
-if [ ! -e "$configfile" ]; then
+if [ "$(check_configfile $configfile)" == "false" ]; then
     echo -n "creating initial config file..."
-    touch $configfile
-    chown $user: $configfile
+    create_configfile $configfile $user
     echo " done."
 fi
 
