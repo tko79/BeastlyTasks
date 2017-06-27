@@ -42,8 +42,10 @@ if [ "$(check_configfile $configfile)" == "false" ]; then
 fi
 
 # check and fetch user name from config file or user input
+echo -n "reading your name from config file..."
 name=$(grep "name=" $configfile)
 if [ $? == 1 ]; then
+    echo " failed."
     echo -ne "Please tell me your name: "
     read name
     if [ "$name" == "" ]; then
@@ -52,11 +54,9 @@ if [ $? == 1 ]; then
     fi
     echo -n "writing your name to config file..."
     echo "name="$name >> $configfile
-    echo " done."
 else
-    echo -n "reading your name from config file..."
     name=$(echo $name | awk -F= '{ print $2 }')
-    echo " done."
 fi
+echo " done."
 
 echo "Hello "$name"! Welcome to BeastlyTasks!"
