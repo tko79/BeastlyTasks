@@ -43,7 +43,7 @@ fi
 
 # check and fetch user name from config file or user input
 echo -n "reading your name from config file..."
-name=$(grep "name=" $configfile)
+name=$(get_config_name $configfile)
 if [ $? == 1 ]; then
     echo " failed."
     echo -ne "Please tell me your name: "
@@ -53,9 +53,7 @@ if [ $? == 1 ]; then
 	name=$user
     fi
     echo -n "writing your name to config file..."
-    echo "name="$name >> $configfile
-else
-    name=$(echo $name | awk -F= '{ print $2 }')
+    set_config_name $configfile $name
 fi
 echo " done."
 

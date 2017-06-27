@@ -44,3 +44,33 @@ function create_configfile() {
     touch $configfile
     chown $user: $configfile
 }
+
+# function get_config_name
+#          read username from config
+# param    $1: config filename
+# return   echo: name
+#          return 1: in case of error
+function get_config_name() {
+    local configfile=$1
+    local name=""
+
+    name=$(grep "name=" $configfile)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	echo $(echo $name | awk -F= '{ print $2 }')
+    fi
+}
+
+# function set_config_name
+#          write username to config
+# param    $1: config filename
+#          $2: name
+# return   <none>
+function set_config_name() {
+    local configfile=$1
+    local name=$2
+
+    echo "name="$name >> $configfile
+}
