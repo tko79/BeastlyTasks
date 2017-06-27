@@ -20,15 +20,12 @@
 # function check_configfile
 #          check if a config file exists
 # param    $1: config filename
-# return   echo "true": config file exists
-#          echo "false": config file does not exist
+# return   return 1: in case of file does not exist
 function check_configfile() {
     local configfile=$1
 
     if [ ! -e "$configfile" ]; then
-	echo "false"
-    else
-	echo "true"
+	return 1
     fi
 }
 

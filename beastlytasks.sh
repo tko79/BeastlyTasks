@@ -35,7 +35,8 @@ echo -e "$license"
 echo -e ""
 
 # check and create config file
-if [ "$(check_configfile $configfile)" == "false" ]; then
+check_configfile $configfile
+if [ $? == 1 ]; then
     echo -n "creating initial config file..."
     create_configfile $configfile $user
     echo " done."
