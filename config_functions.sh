@@ -56,7 +56,7 @@ function get_config_name() {
 	echo ""
 	return 1
     else
-	echo $(echo $name | awk -F= '{ print $2 }')
+	echo ${name#name=}
     fi
 }
 
