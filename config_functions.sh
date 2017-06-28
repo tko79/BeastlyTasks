@@ -56,7 +56,7 @@ function get_config_name() {
 	echo ""
 	return 1
     else
-	echo ${name#name=}
+	echo ${name#name=} | sed -e 's/\"//g'
     fi
 }
 
@@ -69,5 +69,5 @@ function set_config_name() {
     local configfile=$1
     local name=$2
 
-    echo "name="$name >> $configfile
+    echo "name=\""$name"\"" >> $configfile
 }

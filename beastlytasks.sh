@@ -54,7 +54,7 @@ if [ $? == 1 ]; then
 	name=$user
     fi
     echo -n "writing your name to config file..."
-    set_config_name $configfile $name
+    set_config_name $configfile "$name"
 fi
 echo " done."
 
