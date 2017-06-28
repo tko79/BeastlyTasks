@@ -28,9 +28,9 @@ function __sum_sub_time() {
     IFS=":" read -r t2_hh t2_mm t2_ss <<< "$2"
 
     if [ "$3" == "sum" ]; then
-	result_val=$(( ($t1_hh*60*60+$t1_mm*60+$t1_ss)+($t2_hh*60*60+$t2_mm*60+$t2_ss) ))
+	result_val=$(( (${t1_hh#0}*60*60+${t1_mm#0}*60+${t1_ss#0})+(${t2_hh#0}*60*60+${t2_mm#0}*60+${t2_ss#0}) ))
     else
-	result_val=$(( ($t1_hh*60*60+$t1_mm*60+$t1_ss)-($t2_hh*60*60+$t2_mm*60+$t2_ss) ))
+	result_val=$(( (${t1_hh#0}*60*60+${t1_mm#0}*60+${t1_ss#0})-(${t2_hh#0}*60*60+${t2_mm#0}*60+${t2_ss#0}) ))
     fi
 
     r_hh=$(( $result_val/(60*60) ))
@@ -80,7 +80,7 @@ function time_left() {
     IFS=":" read -r n_d n_hh n_mm <<< "$now_val"
     IFS=":" read -r u_d u_hh u_mm <<< "$until_val"
 
-    result_val=$(( ($u_d*24*60+$u_hh*60+$u_mm)-($n_d*24*60+$n_hh*60+$n_mm) ))
+    result_val=$(( (${u_d#0}*24*60+${u_hh#0}*60+${u_mm#0})-(${n_d#0}*24*60+${n_hh#0}*60+${n_mm#0}) ))
 
     printf "%d\n" "$result_val"
 }
