@@ -26,10 +26,32 @@ or (at your option) any later version.
 EOF
 )
 
+params_cnt=$#
+params_array=("$@")
 user=$(whoami)
 configfile="/home/"$user"/.beastlytasks"
 
 source config_functions.sh
+
+# check script arguments
+if [ $params_cnt -gt 0 ]; then
+    params_curr=0
+    for param in ${params_array[@]}; do
+	case "$param" in
+	    "--get-name")
+		name=$(get_config_name $configfile)
+		echo "name=\""$name"\""
+		;;
+	    "--set-name")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    set_config_name $configfile "${params_array[$params_curr+1]}"
+		fi
+		;;
+	esac
+	params_curr=$(( $params_curr+1 ))
+    done
+fi
+echo -e ""
 
 echo -e "$license"
 echo -e ""
