@@ -40,18 +40,19 @@ if [ $params_cnt -gt 0 ]; then
 	case "$param" in
 	    "--get-name")
 		name=$(get_config_name $configfile)
-		echo "name=\""$name"\""
+		echo $name
+		exit 0
 		;;
 	    "--set-name")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
 		    set_config_name $configfile "${params_array[$params_curr+1]}"
 		fi
+		exit 0
 		;;
 	esac
 	params_curr=$(( $params_curr+1 ))
     done
 fi
-echo -e ""
 
 echo -e "$license"
 echo -e ""
