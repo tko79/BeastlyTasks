@@ -68,6 +68,12 @@ function get_config_name() {
 function set_config_name() {
     local configfile=$1
     local name=$2
+    local __name_from_config=""
 
-    echo "name=\""$name"\"" >> $configfile
+    __name_from_config=$(get_config_name $configfile)
+    if [ $? == 1 ]; then
+	echo "name=\""$name"\"" >> $configfile
+    else
+	sed -i 's/name=\"'${__name_from_config}'\"/name=\"'${name}'\"/g' $configfile
+    fi
 }
