@@ -74,6 +74,6 @@ function set_config_name() {
     if [ $? == 1 ]; then
 	echo "name=\""$name"\"" >> $configfile
     else
-	sed -i 's/name=\"'${__name_from_config}'\"/name=\"'${name}'\"/g' $configfile
+	sed -i "s/name=\"${__name_from_config}\"/name=\"${name}\"/g" $configfile
     fi
 }
