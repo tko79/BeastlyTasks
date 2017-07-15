@@ -77,3 +77,29 @@ function set_config_name() {
 	sed -i "s/name=\"${__name_from_config}\"/name=\"${name}\"/g" $configfile
     fi
 }
+
+# function add_config_counter
+#          add counter to config
+# param    $1: config filename
+#          $2: unique id
+#          $3: description
+#          $4: start value
+#          $5: threshold
+#          $6: below or above is bad? (format: {below|above}
+#          $7: text, when counter is good
+#          $8: text, when counter equals threshold value
+#          $9: text, when counter is bad
+# return   <none>
+function add_config_counter() {
+    local configfile=$1
+    local counter_id=$2
+    local counter_description=$3
+    local counter_value=$4
+    local counter_threshold=$5
+    local counter_below_above=$6
+    local counter_desc_good=$7
+    local counter_desc_threshold=$8
+    local counter_desc_bad=$9
+
+    echo "counter="$counter_id";\""$counter_description"\";"$counter_value";"$counter_threshold";"$counter_below_above";\""$counter_desc_good\"";\""$counter_desc_threshold\"";\""$counter_desc_bad"\"" >> $configfile
+}
