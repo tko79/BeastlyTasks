@@ -115,3 +115,22 @@ function del_config_counter() {
 
     sed -i "/counter=$counter_id;/d" $configfile
 }
+
+# function get_config_counter
+#          get counter from config
+# param    $1: config filename
+#          $2: unique id
+# return   return 1: in case of error (counter id not found)
+function get_config_counter() {
+    local configfile=$1
+    local counter_id=$2
+    local counter_from_config=""
+
+    counter=$(grep "counter=$counter_id;" $configfile)
+    if [ $? == 1 ]; then
+       echo ""
+       return 1
+    else
+       echo ${counter#counter=$counter_id;}
+    fi
+}
