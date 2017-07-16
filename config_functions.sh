@@ -103,3 +103,15 @@ function add_config_counter() {
 
     echo "counter="$counter_id";\""$counter_description"\";"$counter_value";"$counter_threshold";"$counter_below_above";\""$counter_desc_good\"";\""$counter_desc_threshold\"";\""$counter_desc_bad"\"" >> $configfile
 }
+
+# function del_config_counter
+#          delete counter from config
+# param    $1: config filename
+#          $2: unique id
+# return   <none>
+function del_config_counter() {
+    local configfile=$1
+    local counter_id=$2
+
+    sed -i "/counter=$counter_id;/d" $configfile
+}
