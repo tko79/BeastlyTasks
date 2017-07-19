@@ -46,7 +46,7 @@ function create_configfile() {
 #          read username from config
 # param    $1: config filename
 # return   echo: name
-#          return 1: in case of error
+#          return 1: in case of error (no name entry found)
 function get_config_name() {
     local configfile=$1
     local name=""
@@ -68,13 +68,13 @@ function get_config_name() {
 function set_config_name() {
     local configfile=$1
     local name=$2
-    local __name_from_config=""
+    local name_from_config=""
 
-    __name_from_config=$(get_config_name $configfile)
+    name_from_config=$(get_config_name $configfile)
     if [ $? == 1 ]; then
 	echo "name=\""$name"\"" >> $configfile
     else
-	sed -i "s/name=\"${__name_from_config}\"/name=\"${name}\"/g" $configfile
+	sed -i "s/name=\"${name_from_config}\"/name=\"${name}\"/g" $configfile
     fi
 }
 
@@ -85,7 +85,7 @@ function set_config_name() {
 #          $3: description
 #          $4: start value
 #          $5: threshold
-#          $6: below or above is bad? (format: {below|above}
+#          $6: below or above is bad? (format: {below|above})
 #          $7: text, when counter is good
 #          $8: text, when counter equals threshold value
 #          $9: text, when counter is bad
@@ -126,12 +126,12 @@ function get_config_counter() {
     local counter_id=$2
     local counter_from_config=""
 
-    counter=$(grep "counter=$counter_id;" $configfile)
+    counter_from_config=$(grep "counter=$counter_id;" $configfile)
     if [ $? == 1 ]; then
-       echo ""
-       return 1
+	echo ""
+	return 1
     else
-       echo ${counter#counter=$counter_id;}
+	echo ${counter_from_config#counter=$counter_id;}
     fi
 }
 
