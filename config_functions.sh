@@ -51,7 +51,7 @@ function get_config_name() {
     local configfile=$1
     local name=""
 
-    name=$(grep "name=" $configfile | sed -n 1p)
+    name=$(grep "name=" $configfile)
     if [ $? == 1 ]; then
 	echo ""
 	return 1
