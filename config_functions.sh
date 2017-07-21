@@ -101,7 +101,7 @@ function add_config_counter() {
     local counter_desc_threshold=$8
     local counter_desc_bad=$9
 
-    echo "counter="$counter_id";\""$counter_description"\";"$counter_value";"$counter_threshold";"$counter_below_above";\""$counter_desc_good\"";\""$counter_desc_threshold\"";\""$counter_desc_bad"\"" >> $configfile
+    echo "counter=$counter_id;\"$counter_description;$counter_value;$counter_threshold;$counter_below_above;$counter_desc_good;$counter_desc_threshold;$counter_desc_bad\"" >> $configfile
 }
 
 # function del_config_counter
@@ -131,7 +131,7 @@ function get_config_counter() {
 	echo ""
 	return 1
     else
-	echo ${counter_from_config#counter=$counter_id;}
+	echo ${counter_from_config#counter=$counter_id;} | sed -e 's/\"//g'
     fi
 }
 
@@ -165,6 +165,6 @@ function set_config_counter() {
 	return 1
     else
 	sed -i "/counter=$counter_id;/d" $configfile
-	echo "counter="$counter_id";\""$counter_description"\";"$counter_value";"$counter_threshold";"$counter_below_above";\""$counter_desc_good\"";\""$counter_desc_threshold\"";\""$counter_desc_bad"\"" >> $configfile
+	echo "counter=$counter_id;\"$counter_description;$counter_value;$counter_threshold;$counter_below_above;$counter_desc_good;$counter_desc_threshold;$counter_desc_bad\"" >> $configfile
     fi
 }
