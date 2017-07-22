@@ -170,7 +170,6 @@ function set_config_counter() {
 	echo ""
 	return 1
     else
-	sed -i "/counter=$counter_id;/d" $configfile
-	echo "counter=$counter_id;\"$counter_description;$counter_value;$counter_threshold;$counter_below_above;$counter_desc_good;$counter_desc_threshold;$counter_desc_bad\"" >> $configfile
+	sed -i "s/counter=$counter_id;\"${counter_from_config}\"/counter=$counter_id;\"$counter_description;$counter_value;$counter_threshold;$counter_below_above;$counter_desc_good;$counter_desc_threshold;$counter_desc_bad\"/g" $configfile
     fi
 }
