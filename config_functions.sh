@@ -89,7 +89,7 @@ function set_config_name() {
 #          $7: text, when counter is good
 #          $8: text, when counter equals threshold value
 #          $9: text, when counter is bad
-# return   <none>
+# return   return 1: in case of error (counter id already existing)
 function add_config_counter() {
     local configfile=$1
     local counter_id=$2
@@ -100,8 +100,14 @@ function add_config_counter() {
     local counter_desc_good=$7
     local counter_desc_threshold=$8
     local counter_desc_bad=$9
+    local counter_from_config=""
 
-    echo "counter=$counter_id;\"$counter_description;$counter_value;$counter_threshold;$counter_below_above;$counter_desc_good;$counter_desc_threshold;$counter_desc_bad\"" >> $configfile
+    counter_from_config=$(get_config_counter $configfile $counter_id)
+    if [ $? == 1 ]; then
+	echo "counter=$counter_id;\"$counter_description;$counter_value;$counter_threshold;$counter_below_above;$counter_desc_good;$counter_desc_threshold;$counter_desc_bad\"" >> $configfile
+    else
+	return 1
+    fi
 }
 
 # function del_config_counter
@@ -159,7 +165,7 @@ function set_config_counter() {
     local counter_desc_bad=$9
     local counter_from_config=""
 
-    counter_from_config=$(grep "counter=$counter_id;" $configfile)
+    counter_from_config=$(get_config_counter $configfile $counter_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1
