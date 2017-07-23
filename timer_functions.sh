@@ -78,24 +78,24 @@ function sum_time() {
 
 # function time_left
 #          calculate the time left (considering days)
-# param    $1: now (format d:hh:mm)
+# param    $1: from (format d:hh:mm)
 #          $2: until (format d:hh:mm)
 # return   printf: calculated time left (format mm)
 function time_left() {
-    local now_val=$1
+    local from_val=$1
     local until_val=$2
 
-    local n_d=''
-    local n_hh=''
-    local n_mm=''
+    local f_d=''
+    local f_hh=''
+    local f_mm=''
     local u_d=''
     local u_hh=''
     local u_mm=''
 
-    IFS=":" read -r n_d n_hh n_mm <<< "$now_val"
+    IFS=":" read -r f_d f_hh f_mm <<< "$from_val"
     IFS=":" read -r u_d u_hh u_mm <<< "$until_val"
 
-    local result_val=$(( (${u_d#0}*24*60+${u_hh#0}*60+${u_mm#0})-(${n_d#0}*24*60+${n_hh#0}*60+${n_mm#0}) ))
+    local result_val=$(( (${u_d#0}*24*60+${u_hh#0}*60+${u_mm#0})-(${f_d#0}*24*60+${f_hh#0}*60+${f_mm#0}) ))
 
     printf "%d\n" "$result_val"
 }
