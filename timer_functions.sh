@@ -126,3 +126,18 @@ function time_per_task() {
 
     printf "%d\n" "$result_val"
 }
+
+# function time_per_task_currtime
+#          calculate available time per task from now on
+# param    $1: until (format d:hh:mm)
+#          $2: ntasks
+# return   printf: calculated time per task (format mm)
+function time_per_task_currtime() {
+    local until_val=$1
+    local ntasks_val=$2
+
+    local time_val=$(time_left_currtime $until_val)
+    local result_val=$(( time_val/ntasks_val ))
+
+    printf "%d\n" "$result_val"
+}
