@@ -100,6 +100,19 @@ function time_left() {
     printf "%d\n" "$result_val"
 }
 
+# function time_left_currtime
+#          calculate the time left from now on (considering days)
+# param    $1: until (format d:hh:mm)
+# return   printf: calculated time left (format mm)
+function time_left_currtime() {
+    local until_val=$1
+
+    local now_val="1:"$(date +"%H:%M")
+    local result_val=$(time_left $now_val $until_val)
+
+    printf "%d\n" "$result_val"
+}
+
 # function time_per_task
 #          calculate available time per task
 # param    $1: time (format mm)
