@@ -76,6 +76,22 @@ function sum_time() {
     echo $(__sum_sub_time $time1_val $time2_val "sum")
 }
 
+# function sum_10h_timers
+#          sum up two 10h timers
+# param    $1: timer1
+#          $2: timer2
+# return   echo: calculated timer (format hh:mm:ss)
+function sum_10h_timers() {
+    local timer1=$1
+    local timer2=$2
+
+    local time1=$(convert_countdown $timer1)
+    local time2=$(convert_countdown $timer2)
+    local sum=$(sum_time $time1 $time2)
+
+    echo $(convert_countdown $sum)
+}
+
 # function time_left
 #          calculate the time left (considering days)
 # param    $1: from (format d:hh:mm)
