@@ -32,6 +32,7 @@ user=$(whoami)
 configfile="/home/"$user"/.beastlytasks"
 
 source config_functions.sh
+source timer_functions.sh
 
 # check script arguments
 if [ $params_cnt -gt 0 ]; then
@@ -46,6 +47,18 @@ if [ $params_cnt -gt 0 ]; then
 	    "--set-name")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
 		    set_config_name $configfile "${params_array[$params_curr+1]}"
+		fi
+		exit 0
+		;;
+	    "--time-per-task-currtime")
+		if [ "${params_array[$params_curr+2]}" != "" ]; then
+		    echo $(time_per_task_currtime ${params_array[$params_curr+1]} ${params_array[$params_curr+2]})
+		fi
+		exit 0
+		;;
+	    "--sum-10h-timers")
+		if [ "${params_array[$params_curr+2]}" != "" ]; then
+		    echo $(sum_10h_timers ${params_array[$params_curr+1]} ${params_array[$params_curr+2]})
 		fi
 		exit 0
 		;;
