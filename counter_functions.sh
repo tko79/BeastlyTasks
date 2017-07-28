@@ -16,3 +16,35 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# function get_counter_param
+#          wrapper to get counter parameter (value, description, ...)
+# param    $1: config filename
+#          $2: unique id
+#          $3: requested counter parameter
+# return   echo: counter parameter
+#          return 1: in case of error (get_config_counter failed)
+function get_counter_param() {
+    local configfile=$1
+    local counter_id=$2
+    local counter_param=$3
+
+    local counter_from_config=""
+
+    counter_from_config=$(get_config_counter $configfile $counter_id)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	counter_from_config=${counter_from_config#counter=$counter_id;} | sed -e 's/\"//g'
+	case "$counter_param" in
+	    "description") echo $counter_from_config | awk -F';' '{ print $1 }' ;;
+	    "value")       echo $counter_from_config | awk -F';' '{ print $2 }' ;;
+	    "threshold")   echo $counter_from_config | awk -F';' '{ print $3 }' ;;
+	    "belabo")      echo $counter_from_config | awk -F';' '{ print $4 }' ;;
+	    "txtgood")     echo $counter_from_config | awk -F';' '{ print $5 }' ;;
+	    "txtequal")    echo $counter_from_config | awk -F';' '{ print $6 }' ;;
+	    "txtbad")      echo $counter_from_config | awk -F';' '{ print $7 }' ;;
+	esac
+    fi
+}
