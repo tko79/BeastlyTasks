@@ -94,3 +94,66 @@ function set_counter_param() {
 	return $retval
     fi
 }
+
+# function increment_counter
+#          increment counter value
+# param    $1: config filename
+#          $2: unique id
+# return   return 1: in case of error (get_counter_param failed)
+function increment_counter() {
+    local configfile=$1
+    local counter_id=$2
+
+    local counter_val=0
+
+    counter_val=$(get_counter_param $configfile $counter_id value)
+    if [ $? == 1 ]; then
+	return 1
+    else
+	counter_val=$(( $counter_val+1 ))
+	$(set_counter_param $configfile $counter_id value $counter_val)
+    fi
+}
+
+# function decrement_counter
+#          decrement counter value
+# param    $1: config filename
+#          $2: unique id
+# return   return 1: in case of error (get_counter_param failed)
+#          return 2: in case of negative value
+function decrement_counter() {
+    local configfile=$1
+    local counter_id=$2
+
+    local counter_val=0
+
+    counter_val=$(get_counter_param $configfile $counter_id value)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	if [ $counter_val -eq 0 ]; then
+	    return 2
+	else
+	    counter_val=$(( $counter_val-1 ))
+	    $(set_counter_param $configfile $counter_id value $counter_val)
+	fi
+    fi
+}
+
+# function reset_counter
+#          reset counter value to zero
+# param    $1: config filename
+#          $2: unique id
+# return   return 1: in case of error (get_config_counter failed)
+function reset_counter() {
+    local configfile=$1
+    local counter_id=$2
+
+    counter_from_config=$(get_config_counter $configfile $counter_id)
+    if [ $? == 1 ]; then
+	return 1
+    else
+	$(set_counter_param $configfile $counter_id value 0)
+    fi
+}
