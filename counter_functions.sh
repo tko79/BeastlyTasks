@@ -157,3 +157,52 @@ function reset_counter() {
 	$(set_counter_param $configfile $counter_id value 0)
     fi
 }
+
+# function get_counter
+#          read counter value
+# param    $1: config filename
+#          $2: unique id
+# return   echo: formatted counter text
+#          return 1: in case of error (get_config_counter failed)
+function get_counter() {
+    local configfile=$1
+    local counter_id=$2
+
+    counter_from_config=$(get_config_counter $configfile $counter_id)
+    if [ $? == 1 ]; then
+	return 1
+    else
+	local counter_description=$(echo    $counter_from_config | awk -F';' '{ print $1 }')
+	local counter_value=$(echo          $counter_from_config | awk -F';' '{ print $2 }')
+	local counter_threshold=$(echo      $counter_from_config | awk -F';' '{ print $3 }')
+	local counter_below_above=$(echo    $counter_from_config | awk -F';' '{ print $4 }')
+	local counter_desc_good=$(echo      $counter_from_config | awk -F';' '{ print $5 }')
+	local counter_desc_threshold=$(echo $counter_from_config | awk -F';' '{ print $6 }')
+	local counter_desc_bad=$(echo       $counter_from_config | awk -F';' '{ print $7 }')
+
+	local red="\e[1;31m"
+	local yellow="\e[1;33m"
+	local green="\e[1;32m"
+	local white="\e[0;37m"
+
+	if [ $counter_value -lt $counter_threshold ]; then
+	    if [ "$counter_below_above" == "below" ]; then
+		counter_val_desc=$green$counter_desc_good$white
+	    else
+		counter_val_desc=$red$counter_desc_bad$white
+	    fi
+	fi
+	if [ $counter_value -eq $counter_threshold ]; then
+	    counter_val_desc=$yellow$counter_desc_threshold$white
+	fi
+	if [ $counter_value -gt $counter_threshold ]; then
+	    if [ "$counter_below_above" == "below" ]; then
+		counter_val_desc=$red$counter_desc_bad$white
+	    else
+		counter_val_desc=$green$counter_desc_good$white
+	    fi
+	fi
+
+	echo $counter_id" ("$counter_description"): "$counter_value"\n -> "$counter_val_desc
+    fi
+}
