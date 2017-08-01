@@ -78,6 +78,18 @@ function set_config_name() {
     fi
 }
 
+# function list_config_counters
+#          get counters from config
+# param    $1: config filename
+# return   echo counters from config
+function list_config_counters() {
+    local configfile=$1
+    local counters_from_config=""
+
+    counters_from_config=$(grep "counter=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
+    echo $counters_from_config
+}
+
 # function add_config_counter
 #          add counter to config
 # param    $1: config filename
