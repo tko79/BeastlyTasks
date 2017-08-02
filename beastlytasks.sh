@@ -33,6 +33,7 @@ configfile="/home/"$user"/.beastlytasks"
 
 source config_functions.sh
 source timer_functions.sh
+source counter_functions.sh
 
 # check script arguments
 if [ $params_cnt -gt 0 ]; then
@@ -59,6 +60,52 @@ if [ $params_cnt -gt 0 ]; then
 	    "--sum-10h-timers")
 		if [ "${params_array[$params_curr+2]}" != "" ]; then
 		    echo $(sum_10h_timers ${params_array[$params_curr+1]} ${params_array[$params_curr+2]})
+		fi
+		exit 0
+		;;
+	    "--list-counters")
+		echo $(list_config_counters $configfile)
+		exit 0
+		;;
+	    "--add-counter")
+		if [ "${params_array[$params_curr+8]}" != "" ]; then
+		    add_config_counter $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}" "${params_array[$params_curr+4]}" "${params_array[$params_curr+5]}" "${params_array[$params_curr+6]}" "${params_array[$params_curr+7]}" "${params_array[$params_curr+8]}"
+		fi
+		exit 0
+		;;
+	    "--get-counter")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    echo -e $(get_counter ~/.beastlytasks ${params_array[$params_curr+1]})
+		fi
+		exit 0
+		;;
+	    "--set-counter")
+		if [ "${params_array[$params_curr+3]}" != "" ]; then
+		    set_counter_param $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}"
+		fi
+		exit 0
+		;;
+	    "--del-counter")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    del_config_counter $configfile "${params_array[$params_curr+1]}"
+		fi
+		exit 0
+		;;
+	    "--increment-counter")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    increment_counter $configfile "${params_array[$params_curr+1]}"
+		fi
+		exit 0
+		;;
+	    "--decrement-counter")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    decrement_counter $configfile "${params_array[$params_curr+1]}"
+		fi
+		exit 0
+		;;
+	    "--reset-counter")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    reset_counter $configfile "${params_array[$params_curr+1]}"
 		fi
 		exit 0
 		;;
