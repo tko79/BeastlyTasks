@@ -3,6 +3,7 @@
 | <sub>item | <sub>description | <sub>parameters and format in config |
 |-----------|------------------|--------------------------------------|
 | <sub>name | <sub>user name | <sub>`"$name"` |
+| <sub>counter | <sub>event counter with threshold and value description | <sub>`$id;"$description;$value;$threshold;$belabo;$descgood;$descthreshold;$descbad"` |
 
 ***
 
@@ -16,3 +17,19 @@
 | <sub>parameter | <sub>description | <sub>format |
 |----------------|------------------|-------------|
 | <sub>name      | <sub>user name   | <sub>string |
+
+### counter
+
+- description: event counter with threshold and value description
+- parameters and format in config: `$id;"$description;$value;$threshold;$belabo;$descgood;$descthreshold;$descbad"`
+
+| <sub>parameter     | <sub>description            | <sub>format                |
+|--------------------|-----------------------------|----------------------------|
+| <sub>id            | <sub>unique id              | <sub>string                |
+| <sub>description   | <sub>description            | <sub>string                |
+| <sub>value         | <sub>current value          | <sub>number                |
+| <sub>threshold     | <sub>threshold value        | <sub>number                |
+| <sub>belabo        | <sub>below or above is good | <sub>string:{below\|above} |
+| <sub>descgood      | <sub>description good       | <sub>string                |
+| <sub>descthreshold | <sub>description threshold  | <sub>string                |
+| <sub>descbad       | <sub>description bad        | <sub>string                |
