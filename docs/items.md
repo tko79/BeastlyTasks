@@ -4,6 +4,13 @@
 |-----------|------------------|--------------------------------------|
 | <sub>name | <sub>user name | <sub>`"$name"` |
 | <sub>counter | <sub>event counter with threshold and value description | <sub>`$id;"$description;$value;$threshold;$belabo;$descgood;$descthreshold;$descbad"` |
+| <sub>timer | timer to count time spent for a task ||
+| <sub>cal | calender entries ||
+| <sub>task | misc tasks ||
+| <sub>daily | daily tasks ||
+| <sub>weekly | weekly tasks ||
+| <sub>monthly | monthly tasks ||
+| <sub>yearly | yearly tasks ||
 
 ***
 
