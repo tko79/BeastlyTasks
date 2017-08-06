@@ -3,7 +3,7 @@
 | <sub>item | <sub>description | <sub>parameters and format in config |
 |-----------|------------------|--------------------------------------|
 | <sub>name | <sub>user name | <sub>`"$name"` |
-| <sub>counter | <sub>event counter with threshold and value description | <sub>`$id;"$description;$value;$threshold;$belabo;$descgood;$descthreshold;$descbad"` |
+| <sub>counter | <sub>event counter with threshold and value description | <sub>`$uid;"$description;$value;$threshold;$belabo;$descgood;$descthreshold;$descbad"` |
 | <sub>timer | timer to count time spent for a task ||
 | <sub>cal | calender entries ||
 | <sub>task | misc tasks ||
@@ -28,11 +28,11 @@
 ### counter
 
 - description: event counter with threshold and value description
-- parameters and format in config: `$id;"$description;$value;$threshold;$belabo;$descgood;$descthreshold;$descbad"`
+- parameters and format in config: `$uid;"$description;$value;$threshold;$belabo;$descgood;$descthreshold;$descbad"`
 
 | <sub>parameter     | <sub>description            | <sub>format                |
 |--------------------|-----------------------------|----------------------------|
-| <sub>id            | <sub>unique id              | <sub>string                |
+| <sub>uid           | <sub>unique id              | <sub>string                |
 | <sub>description   | <sub>description            | <sub>string                |
 | <sub>value         | <sub>current value          | <sub>number                |
 | <sub>threshold     | <sub>threshold value        | <sub>number                |
