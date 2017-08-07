@@ -1,8 +1,8 @@
 # Overview
 
-| <sub>item | <sub>description | <sub>parameters and format in config |
-|-----------|------------------|--------------------------------------|
-| <sub>name | <sub>user name | <sub>`"$name"` |
+| <sub>item    | <sub>description                                        | <sub>parameters and format in config                                                   |
+|--------------|---------------------------------------------------------|----------------------------------------------------------------------------------------|
+| <sub>name    | <sub>user name                                          | <sub>`"$name"`                                                                         |
 | <sub>counter | <sub>event counter with threshold and value description | <sub>`$uid;"$description;$value;$threshold;$belabo;$descgood;$descthreshold;$descbad"` |
 | <sub>timer | timer to count time spent for a task ||
 | <sub>cal | calender entries ||
