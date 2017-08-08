@@ -4,13 +4,13 @@
 |--------------|---------------------------------------------------------|----------------------------------------------------------------------------------------|
 | <sub>name    | <sub>user name                                          | <sub>`"$name"`                                                                         |
 | <sub>counter | <sub>event counter with threshold and value description | <sub>`$uid;"$description;$value;$threshold;$belabo;$descgood;$descthreshold;$descbad"` |
-| <sub>timer | timer to count time spent for a task ||
-| <sub>cal | calender entries ||
-| <sub>task | misc tasks ||
-| <sub>daily | daily tasks ||
-| <sub>weekly | weekly tasks ||
-| <sub>monthly | monthly tasks ||
-| <sub>yearly | yearly tasks ||
+| <sub>timer   | <sub>timer to count time spent for a task               | <sub>`$uid;"$description;$value"`                                                      |
+| <sub>cal     | <sub>calender entries                                   | <sub>`$uid;"$description;$label;$date"`                                                |
+| <sub>task    | <sub>misc tasks                                         | <sub>`$uid;"$description;$label;$status;$duedate"`                                     |
+| <sub>daily   | <sub>daily tasks                                        | <sub>`$uid;"$description;$label;$status"`                                              |
+| <sub>weekly  | <sub>weekly tasks                                       | <sub>`$uid;"$description;$label;$status;$biweekly"`                                    |
+| <sub>monthly | <sub>monthly tasks                                      | <sub>`$uid;"$description;$label;$status"`                                              |
+| <sub>yearly  | <sub>yearly tasks                                       | <sub>`$uid;"$description;$label;$status;$duedate"`                                     |
 
 ***
 
