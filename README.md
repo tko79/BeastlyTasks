@@ -17,6 +17,13 @@ simply running it from the console.
     cd ~/BeastlyTasks/
     sh ./beastlytasks.sh
 
+Using parameters is also possible. For example `--get-name` and `--set-name`
+can be used to read and write your user name:
+
+    ./beastlytasks.sh --set-name 'My Name !'
+    ./beastlytasks.sh --get-name
+    My Name !
+
 ***
 
 # License
