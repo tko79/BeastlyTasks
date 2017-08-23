@@ -40,3 +40,14 @@
 | <sub>descgood      | <sub>description good       | <sub>string                |
 | <sub>descthreshold | <sub>description threshold  | <sub>string                |
 | <sub>descbad       | <sub>description bad        | <sub>string                |
+
+### timer
+
+- description: timer to count time spent for a task
+- parameters and format in config: `$uid;"$description;$value"`
+
+| <sub>parameter   | <sub>description   | <sub>format          |
+|------------------|--------------------|----------------------|
+| <sub>uid         | <sub>unique id     | <sub>string          |
+| <sub>description | <sub>description   | <sub>string          |
+| <sub>value       | <sub>current value | <sub>time:(hh:mm:ss) |
