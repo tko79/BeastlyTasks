@@ -51,3 +51,15 @@
 | <sub>uid         | <sub>unique id     | <sub>string          |
 | <sub>description | <sub>description   | <sub>string          |
 | <sub>value       | <sub>current value | <sub>time:(hh:mm:ss) |
+
+### cal
+
+- description: calender entries
+- parameters and format in config: `$uid;"$description;$label;$date"`
+
+| <sub>parameter   | <sub>description             | <sub>format            |
+|------------------|------------------------------|------------------------|
+| <sub>uid         | <sub>unique id               | <sub>string            |
+| <sub>description | <sub>description             | <sub>string            |
+| <sub>label       | <sub>one or more labels/tags | <sub>string            |
+| <sub>date        | <sub>date of entry           | <sub>date:(dd.mm.yyyy) |
