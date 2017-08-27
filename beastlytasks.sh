@@ -41,70 +41,81 @@ if [ $params_cnt -gt 0 ]; then
     for param in ${params_array[@]}; do
 	case "$param" in
 	    "--get-name")
-		name=$(get_config_name $configfile)
-		echo $name
+		# get_config_name
+		echo $(get_config_name $configfile)
 		exit 0
 		;;
 	    "--set-name")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # set_config_name $name
 		    set_config_name $configfile "${params_array[$params_curr+1]}"
 		fi
 		exit 0
 		;;
 	    "--time-per-task-currtime")
 		if [ "${params_array[$params_curr+2]}" != "" ]; then
+		    # time_per_task_currtime $until $ntasks
 		    echo $(time_per_task_currtime ${params_array[$params_curr+1]} ${params_array[$params_curr+2]})
 		fi
 		exit 0
 		;;
 	    "--sum-10h-timers")
 		if [ "${params_array[$params_curr+2]}" != "" ]; then
+		    # sum_10h_timers $timer1 $timer2
 		    echo $(sum_10h_timers ${params_array[$params_curr+1]} ${params_array[$params_curr+2]})
 		fi
 		exit 0
 		;;
 	    "--list-counters")
+		# list_config_counters
 		echo $(list_config_counters $configfile)
 		exit 0
 		;;
 	    "--add-counter")
 		if [ "${params_array[$params_curr+8]}" != "" ]; then
+		    # add_config_counter $uid $description $value $threshold $belabo $descgood $descthreshold $descbad
 		    add_config_counter $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}" "${params_array[$params_curr+4]}" "${params_array[$params_curr+5]}" "${params_array[$params_curr+6]}" "${params_array[$params_curr+7]}" "${params_array[$params_curr+8]}"
 		fi
 		exit 0
 		;;
 	    "--get-counter")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
-		    echo -e $(get_counter ~/.beastlytasks ${params_array[$params_curr+1]})
+		    # get_counter $uid
+		    echo -e $(get_counter $configfile ${params_array[$params_curr+1]})
 		fi
 		exit 0
 		;;
 	    "--set-counter")
 		if [ "${params_array[$params_curr+3]}" != "" ]; then
+		    # set_counter_param $uid $param $newval
 		    set_counter_param $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}"
 		fi
 		exit 0
 		;;
 	    "--del-counter")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # del_config_counter $uid
 		    del_config_counter $configfile "${params_array[$params_curr+1]}"
 		fi
 		exit 0
 		;;
 	    "--increment-counter")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # increment_counter $uid
 		    increment_counter $configfile "${params_array[$params_curr+1]}"
 		fi
 		exit 0
 		;;
 	    "--decrement-counter")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # decrement_counter $uid
 		    decrement_counter $configfile "${params_array[$params_curr+1]}"
 		fi
 		exit 0
 		;;
 	    "--reset-counter")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # reset_counter $uid
 		    reset_counter $configfile "${params_array[$params_curr+1]}"
 		fi
 		exit 0
