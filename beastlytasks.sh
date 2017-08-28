@@ -31,9 +31,15 @@ params_array=("$@")
 user=$(whoami)
 configfile="/home/"$user"/.beastlytasks"
 
-source config_functions.sh
-source timer_functions.sh
-source counter_functions.sh
+if [ "$BTPATH" == "" ]; then
+    btpath="."
+else
+    btpath=$BTPATH
+fi
+
+source $btpath/config_functions.sh
+source $btpath/timer_functions.sh
+source $btpath/counter_functions.sh
 
 # check script arguments
 if [ $params_cnt -gt 0 ]; then
