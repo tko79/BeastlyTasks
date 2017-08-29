@@ -203,6 +203,6 @@ function get_counter() {
 	    fi
 	fi
 
-	echo $counter_id" ("$counter_description"): "$counter_value"\n -> "$counter_val_desc
+	printf "%s [%s]\n   -> cnt=%d %s" "$counter_id" "$counter_description" $counter_value "$counter_val_desc"
     fi
 }

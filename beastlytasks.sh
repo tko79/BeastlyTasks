@@ -87,7 +87,7 @@ if [ $params_cnt -gt 0 ]; then
 	    "--get-counter")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
 		    # get_counter $uid
-		    echo -e $(get_counter $configfile ${params_array[$params_curr+1]})
+		    printf "$(get_counter $configfile ${params_array[$params_curr+1]})\n"
 		fi
 		exit 0
 		;;
