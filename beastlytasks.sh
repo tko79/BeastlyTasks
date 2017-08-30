@@ -73,8 +73,10 @@ if [ $params_cnt -gt 0 ]; then
 		exit 0
 		;;
 	    "--list-counters")
-		# list_config_counters
-		echo $(list_config_counters $configfile)
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # list_counters $format
+		    printf "$(list_counters $configfile ${params_array[$params_curr+1]})\n"
+		fi
 		exit 0
 		;;
 	    "--add-counter")
@@ -86,8 +88,8 @@ if [ $params_cnt -gt 0 ]; then
 		;;
 	    "--get-counter")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
-		    # get_counter $uid
-		    printf "$(get_counter $configfile ${params_array[$params_curr+1]})\n"
+		    # get_counter $uid 'single'
+		    printf "$(get_counter $configfile ${params_array[$params_curr+1]} 'single')\n"
 		fi
 		exit 0
 		;;

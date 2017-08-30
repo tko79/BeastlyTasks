@@ -162,11 +162,13 @@ function reset_counter() {
 #          read counter value
 # param    $1: config filename
 #          $2: unique id
-# return   echo: formatted counter text
+#          $3: format {single|table}
+# return   printf: formatted counter text
 #          return 1: in case of error (get_config_counter failed)
 function get_counter() {
     local configfile=$1
     local counter_id=$2
+    local format=$3
 
     counter_from_config=$(get_config_counter $configfile $counter_id)
     if [ $? == 1 ]; then
@@ -203,6 +205,41 @@ function get_counter() {
 	    fi
 	fi
 
-	printf "%s [%s]\n   -> cnt=%d %s" "$counter_id" "$counter_description" $counter_value "$counter_val_desc"
+	if [ "$format" == "single" ]; then
+	    printf "%s [%s]\n   -> cnt=%d %s" "$counter_id" "$counter_description" $counter_value "$counter_val_desc"
+	else
+	    printf "%-8s %-60s %3d %s" "$counter_id" "$counter_description" $counter_value "$counter_val_desc"
+	fi
     fi
+}
+
+# function list_counters
+#          list all available counters as a list or a table
+# param    $1: config filename
+#          $2: format {list|table}
+# return   printf: formatted list or table of counters
+#          return 1: in case of error (format parameter is not table or list)
+function list_counters() {
+    local configfile=$1
+    local format=$2
+
+    local counters_from_config=""
+
+    counters_from_config=$(list_config_counters $configfile)
+    if [ "$format" == "list" ]; then
+	printf "$counters_from_config"
+	return 0
+    fi
+    if [ "$format" == "table" ]; then
+	local counters_table=""
+	local counter_id=""
+	counters_table=$(printf "%-8s %-60s %s %s" "id" "description" "cnt" "cnt-description\n")
+	counters_table=$counters_table"--------------------------------------------------------------------------------------------------------\n"
+	for counter_id in $counters_from_config; do
+	    counters_table=$counters_table$(get_counter $configfile $counter_id 'table')"\n"
+	done
+	printf "$counters_table"
+	return 0
+    fi
+    return 1
 }
