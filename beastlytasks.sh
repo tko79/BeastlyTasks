@@ -72,6 +72,13 @@ if [ $params_cnt -gt 0 ]; then
 		fi
 		exit 0
 		;;
+	    "--swl")
+		if [ "${params_array[$params_curr+4]}" != "" ]; then
+		    # show_whats_left $starttime $until $startitems $items
+		    printf "$(show_whats_left ${params_array[$params_curr+1]} ${params_array[$params_curr+2]} ${params_array[$params_curr+3]} ${params_array[$params_curr+4]})"
+		fi
+		exit 0
+		;;
 	    "--list-counters")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
 		    # list_counters $format

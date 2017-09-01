@@ -157,3 +157,26 @@ function time_per_task_currtime() {
 
     printf "%d\n" "$result_val"
 }
+
+# function show_whats_left
+#          calculate some statistics (items/time left, in total/percent)
+# param    $1: start (format d:hh:mm)
+#          $2: until (format d:hh:mm)
+#          $3: nitems at start
+#          $4: nitems current
+# return   printf: calculated stats
+function show_whats_left() {
+    local starttime=$1
+    local until=$2
+    local startitems=$3
+    local items=$4
+
+    local now="1:"$(date +"%H:%M")
+    local timeleft=$(time_left $now $until)
+    local pertask=$(time_per_task $timeleft $items)
+    local timedone=$(time_left $starttime $now)
+    local perc_items=$(( ($startitems-$items)*100/$startitems ))
+    local perc_time=$(( $timedone*100/($timedone+$timeleft) ))
+
+    printf "now: %s until: %s items: %d/%d(%d%s) timeleft: %dmin(%d%s) pertask: %dmin%s" "$(date +"%H:%M")" "${until#1:}" $items $startitems $perc_items "%%" $timeleft $perc_time "%%" $pertask "\n"
+}
