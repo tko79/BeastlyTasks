@@ -73,9 +73,9 @@ if [ $params_cnt -gt 0 ]; then
 		exit 0
 		;;
 	    "--swl")
-		if [ "${params_array[$params_curr+4]}" != "" ]; then
+		if [ "${params_array[$params_curr+5]}" != "" ]; then
 		    # show_whats_left $starttime $until $startitems $items
-		    printf "$(show_whats_left ${params_array[$params_curr+1]} ${params_array[$params_curr+2]} ${params_array[$params_curr+3]} ${params_array[$params_curr+4]})"
+		    printf "$(show_whats_left ${params_array[$params_curr+1]} ${params_array[$params_curr+2]} ${params_array[$params_curr+3]} ${params_array[$params_curr+4]} ${params_array[$params_curr+5]})"
 		fi
 		exit 0
 		;;

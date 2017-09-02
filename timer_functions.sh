@@ -160,16 +160,18 @@ function time_per_task_currtime() {
 
 # function show_whats_left
 #          calculate some statistics (items/time left, in total/percent)
-# param    $1: start (format d:hh:mm)
-#          $2: until (format d:hh:mm)
-#          $3: nitems at start
-#          $4: nitems current
+# param    $1: format {normal|csv}
+#          $2: start (format d:hh:mm)
+#          $3: until (format d:hh:mm)
+#          $4: nitems at start
+#          $5: nitems current
 # return   printf: calculated stats
 function show_whats_left() {
-    local starttime=$1
-    local until=$2
-    local startitems=$3
-    local items=$4
+    local format=$1
+    local starttime=$2
+    local until=$3
+    local startitems=$4
+    local items=$5
 
     local now="1:"$(date +"%H:%M")
     local timeleft=$(time_left $now $until)
@@ -178,5 +180,10 @@ function show_whats_left() {
     local perc_items=$(( ($startitems-$items)*100/$startitems ))
     local perc_time=$(( $timedone*100/($timedone+$timeleft) ))
 
-    printf "now: %s until: %s items: %d/%d(%d%s) timeleft: %dmin(%d%s) pertask: %dmin%s" "$(date +"%H:%M")" "${until#1:}" $items $startitems $perc_items "%%" $timeleft $perc_time "%%" $pertask "\n"
+    if [ "$format" == "normal" ]; then
+	printf "now: %s until: %s items: %d/%d(%d%s) timeleft: %dmin(%d%s) pertask: %dmin%s" "$(date +"%H:%M")" "${until#1:}" $items $startitems $perc_items "%%" $timeleft $perc_time "%%" $pertask "\n"
+    fi
+    if [ "$format" == "csv" ]; then
+	printf "%s,%s,%d,%d,%d,%d,%d,%d%s" "$(date +"%H:%M")" "${until#1:}" $items $startitems $perc_items $timeleft $perc_time $pertask "\n"
+    fi
 }
