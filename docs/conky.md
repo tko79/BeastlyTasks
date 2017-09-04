@@ -10,8 +10,6 @@ Here is a nice conky example:
 
 # Files
 
-base path: `*`
-
 | <sub>file                 | <sub>function          | <sub>data                                  |
 |---------------------------|------------------------|--------------------------------------------|
 | <sub>/tmp/conky_stats     | <sub>show_whats_left() | <sub>statistics about tasks done and to do |
