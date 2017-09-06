@@ -160,7 +160,7 @@ function time_per_task_currtime() {
 
 # function show_whats_left
 #          calculate some statistics (items/time left, in total/percent)
-# param    $1: format {normal|csv}
+# param    $1: format {normal|csv|conky}
 #          $2: start (format d:hh:mm)
 #          $3: until (format d:hh:mm)
 #          $4: nitems at start
@@ -185,5 +185,24 @@ function show_whats_left() {
     fi
     if [ "$format" == "csv" ]; then
 	printf "%s,%s,%d,%d,%d,%d,%d,%d%s" "$(date +"%H:%M")" "${until#1:}" $items $startitems $perc_items $timeleft $perc_time $pertask "\n"
+    fi
+    if [ "$format" == "conky" ]; then
+	local pertask_hour=""
+	local move_ass=""
+
+	local conky_stats="/tmp/conky_stats"
+	local conky_percitems="/tmp/conky_percitems"
+	local conky_perctime="/tmp/conky_perctime"
+
+	if [ $pertask -gt 120 ]; then
+	    pertask_hour=" (more than "$(( $pertask/60 ))" hours)"
+	else
+	    move_ass=" Move ass!"
+	fi
+
+	printf "%s: %2d minutes left until %s and still %d tasks to do!\nYou have only %d minutes%s per task!%s\n" "$(date +'%H:%M')" $timeleft "${until#1:}" $items $pertask "$pertask_hour" "$move_ass" >> $conky_stats
+	printf "%2d" $perc_items > $conky_percitems
+	printf "%2d" $perc_time > $conky_perctime
+	printf ""
     fi
 }
