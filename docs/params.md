@@ -15,10 +15,10 @@
 | <sub>sum-10h-timers         | <sub>read  | <sub>sum_10h_timers         | <sub>timer1 timer2                                |
 | <sub>swl                    | <sub>read  | <sub>show_whats_left        | <sub>format start until start-items current-items |
 
-# counters
+## counters
 
 | <sub>parameter         | <sub>rd/wr | <sub>internal function    | <sub>params array                                                          |
-|------------------------|----------------------------------------|----------------------------------------------------------------------------|
+|------------------------|------------|---------------------------|----------------------------------------------------------------------------|
 | <sub>list-counters     | <sub>read  | <sub>list_config_counters |                                                                            |
 | <sub>add-counter       | <sub>write | <sub>add_config_counter   | <sub>uid description value threshold belabo descgood descthreshold descbad |
 | <sub>get-counter       | <sub>read  | <sub>get_counter          | <sub>uid                                                                   |
