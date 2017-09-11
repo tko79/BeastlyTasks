@@ -46,6 +46,7 @@ if [ $params_cnt -gt 0 ]; then
     params_curr=0
     for param in ${params_array[@]}; do
 	case "$param" in
+	    # name parameters
 	    "--get-name")
 		# get_config_name
 		echo $(get_config_name $configfile)
@@ -58,6 +59,8 @@ if [ $params_cnt -gt 0 ]; then
 		fi
 		exit 0
 		;;
+
+	    # misc parameters (calculate stats, ...)
 	    "--time-per-task-currtime")
 		if [ "${params_array[$params_curr+2]}" != "" ]; then
 		    # time_per_task_currtime $until $ntasks
@@ -74,11 +77,13 @@ if [ $params_cnt -gt 0 ]; then
 		;;
 	    "--swl")
 		if [ "${params_array[$params_curr+5]}" != "" ]; then
-		    # show_whats_left $starttime $until $startitems $items
+		    # show_whats_left $format $starttime $until $startitems $items
 		    printf "$(show_whats_left ${params_array[$params_curr+1]} ${params_array[$params_curr+2]} ${params_array[$params_curr+3]} ${params_array[$params_curr+4]} ${params_array[$params_curr+5]})"
 		fi
 		exit 0
 		;;
+
+	    # item parameters: counters
 	    "--list-counters")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
 		    # list_counters $format
