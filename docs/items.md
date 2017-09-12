@@ -6,11 +6,11 @@
 | <sub>counter | <sub>event counter with threshold and value description | <sub>`$uid;"$description;$value;$threshold;$belabo;$descgood;$descthreshold;$descbad"` |
 | <sub>timer   | <sub>timer to count time spent for a task               | <sub>`$uid;"$description;$value"`                                                      |
 | <sub>cal     | <sub>calender entries                                   | <sub>`$uid;"$description;$label;$date"`                                                |
-| <sub>task    | <sub>misc tasks                                         | <sub>`$uid;"$description;$label;$status;$duedate"`                                     |
-| <sub>daily   | <sub>daily tasks                                        | <sub>`$uid;"$description;$label;$status"`                                              |
-| <sub>weekly  | <sub>weekly tasks                                       | <sub>`$uid;"$description;$label;$status;$biweekly"`                                    |
-| <sub>monthly | <sub>monthly tasks                                      | <sub>`$uid;"$description;$label;$status"`                                              |
-| <sub>yearly  | <sub>yearly tasks                                       | <sub>`$uid;"$description;$label;$status;$duedate"`                                     |
+| <sub>task    | <sub>misc tasks                                         | <sub>`$uid;"$description;$label;$status;$donedate;$duedate"`                           |
+| <sub>daily   | <sub>daily tasks                                        | <sub>`$uid;"$description;$label;$status;$donedate"`                                    |
+| <sub>weekly  | <sub>weekly tasks                                       | <sub>`$uid;"$description;$label;$status;$donedate;$biweekly"`                          |
+| <sub>monthly | <sub>monthly tasks                                      | <sub>`$uid;"$description;$label;$status;$donedate"`                                    |
+| <sub>yearly  | <sub>yearly tasks                                       | <sub>`$uid;"$description;$label;$status;$donedate;$duedate"`                           |
 
 ***
 
@@ -67,7 +67,7 @@
 ### task
 
 - description: misc tasks
-- parameters and format in config: `$uid;"$description;$label;$status;$duedate"`
+- parameters and format in config: `$uid;"$description;$label;$status;$donedate;$duedate"`
 
 | <sub>parameter   | <sub>description             | <sub>format            |
 |------------------|------------------------------|------------------------|
@@ -75,49 +75,13 @@
 | <sub>description | <sub>description             | <sub>string            |
 | <sub>label       | <sub>one or more labels/tags | <sub>string            |
 | <sub>status      | <sub>status of task          | <sub>string            |
+| <sub>donedate    | <sub>done date of task       | <sub>date:(dd.mm.yyyy) |
 | <sub>duedate     | <sub>due date of task        | <sub>date:(dd.mm.yyyy) |
 
 ### daily
 
 - description: daily tasks
-- parameters and format in config: `$uid;"$description;$label;$status"`
-
-| <sub>parameter   | <sub>description             | <sub>format |
-|------------------|------------------------------|-------------|
-| <sub>uid         | <sub>unique id               | <sub>string |
-| <sub>description | <sub>description             | <sub>string |
-| <sub>label       | <sub>one or more labels/tags | <sub>string |
-| <sub>status      | <sub>status of task          | <sub>string |
-
-### weekly
-
-- description: weekly tasks
-- parameters and format in config: `$uid;"$description;$label;$status;$biweekly"`
-
-| <sub>parameter   | <sub>description             | <sub>format         |
-|------------------|------------------------------|---------------------|
-| <sub>uid         | <sub>unique id               | <sub>string         |
-| <sub>description | <sub>description             | <sub>string         |
-| <sub>label       | <sub>one or more labels/tags | <sub>string         |
-| <sub>status      | <sub>status of task          | <sub>string         |
-| <sub>biweekly    | <sub>biweekly task?          | <sub>string:{yes\|} |
-
-### monthly
-
-- description: monthly tasks
-- parameters and format in config: `$uid;"$description;$label;$status"`
-
-| <sub>parameter   | <sub>description             | <sub>format |
-|------------------|------------------------------|-------------|
-| <sub>uid         | <sub>unique id               | <sub>string |
-| <sub>description | <sub>description             | <sub>string |
-| <sub>label       | <sub>one or more labels/tags | <sub>string |
-| <sub>status      | <sub>status of task          | <sub>string |
-
-### yearly
-
-- description: yearly tasks
-- parameters and format in config: `$uid;"$description;$label;$status;$duedate"`
+- parameters and format in config: `$uid;"$description;$label;$status;$donedate"`
 
 | <sub>parameter   | <sub>description             | <sub>format            |
 |------------------|------------------------------|------------------------|
@@ -125,4 +89,45 @@
 | <sub>description | <sub>description             | <sub>string            |
 | <sub>label       | <sub>one or more labels/tags | <sub>string            |
 | <sub>status      | <sub>status of task          | <sub>string            |
+| <sub>donedate    | <sub>done date of task       | <sub>date:(dd.mm.yyyy) |
+
+### weekly
+
+- description: weekly tasks
+- parameters and format in config: `$uid;"$description;$label;$status;$donedate;$biweekly"`
+
+| <sub>parameter   | <sub>description             | <sub>format            |
+|------------------|------------------------------|------------------------|
+| <sub>uid         | <sub>unique id               | <sub>string            |
+| <sub>description | <sub>description             | <sub>string            |
+| <sub>label       | <sub>one or more labels/tags | <sub>string            |
+| <sub>status      | <sub>status of task          | <sub>string            |
+| <sub>donedate    | <sub>done date of task       | <sub>date:(dd.mm.yyyy) |
+| <sub>biweekly    | <sub>biweekly task?          | <sub>string:{yes\|}    |
+
+### monthly
+
+- description: monthly tasks
+- parameters and format in config: `$uid;"$description;$label;$status;$donedate"`
+
+| <sub>parameter   | <sub>description             | <sub>format            |
+|------------------|------------------------------|------------------------|
+| <sub>uid         | <sub>unique id               | <sub>string            |
+| <sub>description | <sub>description             | <sub>string            |
+| <sub>label       | <sub>one or more labels/tags | <sub>string            |
+| <sub>status      | <sub>status of task          | <sub>string            |
+| <sub>donedate    | <sub>done date of task       | <sub>date:(dd.mm.yyyy) |
+
+### yearly
+
+- description: yearly tasks
+- parameters and format in config: `$uid;"$description;$label;$status;$donedate;$duedate"`
+
+| <sub>parameter   | <sub>description             | <sub>format            |
+|------------------|------------------------------|------------------------|
+| <sub>uid         | <sub>unique id               | <sub>string            |
+| <sub>description | <sub>description             | <sub>string            |
+| <sub>label       | <sub>one or more labels/tags | <sub>string            |
+| <sub>status      | <sub>status of task          | <sub>string            |
+| <sub>donedate    | <sub>done date of task       | <sub>date:(dd.mm.yyyy) |
 | <sub>duedate     | <sub>due date of task        | <sub>date:(dd.mm.yyyy) |
