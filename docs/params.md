@@ -19,7 +19,7 @@
 
 | <sub>parameter         | <sub>rd/wr | <sub>internal function    | <sub>params array                                                          |
 |------------------------|------------|---------------------------|----------------------------------------------------------------------------|
-| <sub>list-counters     | <sub>read  | <sub>list_config_counters |                                                                            |
+| <sub>list-counters     | <sub>read  | <sub>list_config_counters | <sub>format                                                                |
 | <sub>add-counter       | <sub>write | <sub>add_config_counter   | <sub>uid description value threshold belabo descgood descthreshold descbad |
 | <sub>get-counter       | <sub>read  | <sub>get_counter          | <sub>uid                                                                   |
 | <sub>set-counter       | <sub>write | <sub>set_counter_param    | <sub>uid param newval                                                      |
