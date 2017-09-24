@@ -185,23 +185,23 @@ function get_counter() {
 	local red="\e[1;31m"
 	local yellow="\e[1;33m"
 	local green="\e[1;32m"
-	local white="\e[0;37m"
+	local default="\e[0m"
 
 	if [ $counter_value -lt $counter_threshold ]; then
 	    if [ "$counter_below_above" == "below" ]; then
-		counter_val_desc=$green$counter_desc_good$white
+		counter_val_desc=$green$counter_desc_good$default
 	    else
-		counter_val_desc=$red$counter_desc_bad$white
+		counter_val_desc=$red$counter_desc_bad$default
 	    fi
 	fi
 	if [ $counter_value -eq $counter_threshold ]; then
-	    counter_val_desc=$yellow$counter_desc_threshold$white
+	    counter_val_desc=$yellow$counter_desc_threshold$default
 	fi
 	if [ $counter_value -gt $counter_threshold ]; then
 	    if [ "$counter_below_above" == "below" ]; then
-		counter_val_desc=$red$counter_desc_bad$white
+		counter_val_desc=$red$counter_desc_bad$default
 	    else
-		counter_val_desc=$green$counter_desc_good$white
+		counter_val_desc=$green$counter_desc_good$default
 	    fi
 	fi
 
