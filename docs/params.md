@@ -19,12 +19,14 @@
 | <sub>time-per-task-currtime | <sub>calculate time per task of #{ntasks} {until} date                                                                      |
 | <sub>sum-10h-timers         | <sub>sumup 10h-timers {timer1} and {timer2}                                                                                 |
 | <sub>swl                    | <sub>show what's left in {format:normal\|csv\|conky} using: {start} date, {until} date, #{start-items} and #{current-items} |
+| <sub>help                   | <sub>show license and help text                                                                                             |
 
 | <sub>parameter              | <sub>rd/wr | <sub>internal function      | <sub>params array                                 |
 |-----------------------------|------------|-----------------------------|---------------------------------------------------|
 | <sub>time-per-task-currtime | <sub>read  | <sub>time_per_task_currtime | <sub>until ntasks                                 |
 | <sub>sum-10h-timers         | <sub>read  | <sub>sum_10h_timers         | <sub>timer1 timer2                                |
 | <sub>swl                    | <sub>read  | <sub>show_whats_left        | <sub>format start until start-items current-items |
+| <sub>help                   | <sub>read  | <sub>show_help              |                                                   |
 
 ## counters
 

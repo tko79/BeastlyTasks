@@ -41,6 +41,19 @@ source $btpath/config_functions.sh
 source $btpath/timer_functions.sh
 source $btpath/counter_functions.sh
 
+# function show_help
+#          show license and help text
+# param    <none>
+# return   <none>
+show_help() {
+    echo -e "$license"
+    echo -e ""
+    printf "$(cat ${btpath}/docs/help.md)\n"
+    echo -e ""
+    echo -e "Further documentation can be found in the docs/ directory!"
+    echo -e ""
+}
+
 # check script arguments
 if [ $params_cnt -gt 0 ]; then
     params_curr=0
@@ -80,6 +93,11 @@ if [ $params_cnt -gt 0 ]; then
 		    # show_whats_left $format $starttime $until $startitems $items
 		    printf "$(show_whats_left ${params_array[$params_curr+1]} ${params_array[$params_curr+2]} ${params_array[$params_curr+3]} ${params_array[$params_curr+4]} ${params_array[$params_curr+5]})"
 		fi
+		exit 0
+		;;
+	    "--help")
+		# show help text
+		show_help
 		exit 0
 		;;
 
