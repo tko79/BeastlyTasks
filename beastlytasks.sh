@@ -69,8 +69,12 @@ if [ $params_cnt -gt 0 ]; then
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
 		    # set_config_name $name
 		    set_config_name $configfile "${params_array[$params_curr+1]}"
+		    exit 0
+		else
+		    echo "Error: Wrong number of parameters for set-name!"
+		    echo "Please run beastlytasks.sh --help for details about parameter settings!"
+		    exit 1
 		fi
-		exit 0
 		;;
 
 	    # misc parameters (calculate stats, ...)
@@ -78,22 +82,34 @@ if [ $params_cnt -gt 0 ]; then
 		if [ "${params_array[$params_curr+2]}" != "" ]; then
 		    # time_per_task_currtime $until $ntasks
 		    echo $(time_per_task_currtime ${params_array[$params_curr+1]} ${params_array[$params_curr+2]})
+		    exit 0
+		else
+		    echo "Error: Wrong number of parameters for time-per-task-currtime!"
+		    echo "Please run beastlytasks.sh --help for details about parameter settings!"
+		    exit 1
 		fi
-		exit 0
 		;;
 	    "--sum-10h-timers")
 		if [ "${params_array[$params_curr+2]}" != "" ]; then
 		    # sum_10h_timers $timer1 $timer2
 		    echo $(sum_10h_timers ${params_array[$params_curr+1]} ${params_array[$params_curr+2]})
+		    exit 0
+		else
+		    echo "Error: Wrong number of parameters for sum-10h-timers!"
+		    echo "Please run beastlytasks.sh --help for details about parameter settings!"
+		    exit 1
 		fi
-		exit 0
 		;;
 	    "--swl")
 		if [ "${params_array[$params_curr+5]}" != "" ]; then
 		    # show_whats_left $format $starttime $until $startitems $items
 		    printf "$(show_whats_left ${params_array[$params_curr+1]} ${params_array[$params_curr+2]} ${params_array[$params_curr+3]} ${params_array[$params_curr+4]} ${params_array[$params_curr+5]})"
+		    exit 0
+		else
+		    echo "Error: Wrong number of parameters for swl!"
+		    echo "Please run beastlytasks.sh --help for details about parameter settings!"
+		    exit 1
 		fi
-		exit 0
 		;;
 	    "--help")
 		# show help text
@@ -106,57 +122,89 @@ if [ $params_cnt -gt 0 ]; then
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
 		    # list_counters $format
 		    printf "$(list_counters $configfile ${params_array[$params_curr+1]})\n"
+		    exit 0
+		else
+		    echo "Error: Wrong number of parameters for list-counters!"
+		    echo "Please run beastlytasks.sh --help for details about parameter settings!"
+		    exit 1
 		fi
-		exit 0
 		;;
 	    "--add-counter")
 		if [ "${params_array[$params_curr+8]}" != "" ]; then
 		    # add_config_counter $uid $description $value $threshold $belabo $descgood $descthreshold $descbad
 		    add_config_counter $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}" "${params_array[$params_curr+4]}" "${params_array[$params_curr+5]}" "${params_array[$params_curr+6]}" "${params_array[$params_curr+7]}" "${params_array[$params_curr+8]}"
+		    exit 0
+		else
+		    echo "Error: Wrong number of parameters for add-counter!"
+		    echo "Please run beastlytasks.sh --help for details about parameter settings!"
+		    exit 1
 		fi
-		exit 0
 		;;
 	    "--get-counter")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
 		    # get_counter $uid 'single'
 		    printf "$(get_counter $configfile ${params_array[$params_curr+1]} 'single')\n"
+		    exit 0
+		else
+		    echo "Error: Wrong number of parameters for get-counter!"
+		    echo "Please run beastlytasks.sh --help for details about parameter settings!"
+		    exit 1
 		fi
-		exit 0
 		;;
 	    "--set-counter")
 		if [ "${params_array[$params_curr+3]}" != "" ]; then
 		    # set_counter_param $uid $param $newval
 		    set_counter_param $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}"
+		    exit 0
+		else
+		    echo "Error: Wrong number of parameters for set-counter!"
+		    echo "Please run beastlytasks.sh --help for details about parameter settings!"
+		    exit 1
 		fi
-		exit 0
 		;;
 	    "--del-counter")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
 		    # del_config_counter $uid
 		    del_config_counter $configfile "${params_array[$params_curr+1]}"
+		    exit 0
+		else
+		    echo "Error: Wrong number of parameters for del-counter!"
+		    echo "Please run beastlytasks.sh --help for details about parameter settings!"
+		    exit 1
 		fi
-		exit 0
 		;;
 	    "--increment-counter")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
 		    # increment_counter $uid
 		    increment_counter $configfile "${params_array[$params_curr+1]}"
+		    exit 0
+		else
+		    echo "Error: Wrong number of parameters for increment-counter!"
+		    echo "Please run beastlytasks.sh --help for details about parameter settings!"
+		    exit 1
 		fi
-		exit 0
 		;;
 	    "--decrement-counter")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
 		    # decrement_counter $uid
 		    decrement_counter $configfile "${params_array[$params_curr+1]}"
+		    exit 0
+		else
+		    echo "Error: Wrong number of parameters for decrement-counter!"
+		    echo "Please run beastlytasks.sh --help for details about parameter settings!"
+		    exit 1
 		fi
-		exit 0
 		;;
 	    "--reset-counter")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
 		    # reset_counter $uid
 		    reset_counter $configfile "${params_array[$params_curr+1]}"
+		    exit 0
+		else
+		    echo "Error: Wrong number of parameters for reset-counter!"
+		    echo "Please run beastlytasks.sh --help for details about parameter settings!"
+		    exit 1
 		fi
-		exit 0
 		;;
 	esac
 	params_curr=$(( $params_curr+1 ))
