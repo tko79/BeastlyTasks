@@ -3,19 +3,33 @@
 - show_help()
 - main()
 
+
+
 # config_functions.sh
+
+## configfile
 
 - check_configfile()
 - create_configfile()
+
+## name
+
 - get_config_name()
 - set_config_name()
+
+## counters
+
 - list_config_counters()
 - add_config_counter()
 - del_config_counter()
 - get_config_counter()
 - set_config_counter()
 
+
+
 # timer_functions.sh
+
+## statistics, helpers
 
 - __sum_sub_time()
 - convert_countdown()
@@ -26,6 +40,8 @@
 - time_per_task()
 - time_per_task_currtime()
 - show_whats_left()
+
+
 
 # counter_functions.sh
 
