@@ -63,7 +63,6 @@ function set_counter_param() {
     local counter_newval=$4
 
     local counter_from_config=""
-    local retval=0
 
     counter_from_config=$(get_config_counter $configfile $counter_id)
     if [ $? == 1 ]; then
@@ -90,8 +89,7 @@ function set_counter_param() {
 	    "txtbad")      counter_desc_bad=$counter_newval ;;
 	esac
 
-	retval=$(set_config_counter $configfile $counter_id "$counter_description" $counter_value $counter_threshold "$counter_below_above" "$counter_desc_good" "$counter_desc_threshold" "$counter_desc_bad")
-	return $retval
+	return $(set_config_counter $configfile $counter_id "$counter_description" $counter_value $counter_threshold "$counter_below_above" "$counter_desc_good" "$counter_desc_threshold" "$counter_desc_bad")
     fi
 }
 
@@ -150,6 +148,8 @@ function reset_counter() {
     local configfile=$1
     local counter_id=$2
 
+    local counter_from_config=""
+
     counter_from_config=$(get_config_counter $configfile $counter_id)
     if [ $? == 1 ]; then
 	return 1
@@ -169,6 +169,8 @@ function get_counter() {
     local configfile=$1
     local counter_id=$2
     local format=$3
+
+    local counter_from_config=""
 
     counter_from_config=$(get_config_counter $configfile $counter_id)
     if [ $? == 1 ]; then

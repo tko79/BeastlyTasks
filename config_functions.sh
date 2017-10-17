@@ -158,7 +158,7 @@ function get_config_counter() {
 # param    $1: config filename
 #          $2: unique id
 #          $3: description
-#          $4: start value
+#          $4: value
 #          $5: threshold
 #          $6: below or above is bad? (format: {below|above})
 #          $7: text, when counter is good
