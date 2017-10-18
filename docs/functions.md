@@ -1,7 +1,10 @@
 # beastlytasks.sh
 
 - show_help()
-- main()
+- show_params_errormsg()
+- main:check_script_params()
+- main:check_and_create_config()
+- main:check_and_fetch_username()
 
 
 
