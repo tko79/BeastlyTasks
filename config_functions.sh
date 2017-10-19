@@ -185,3 +185,91 @@ function set_config_counter() {
 	sed -i "s/counter=$counter_id;\"${counter_from_config}\"/counter=$counter_id;\"$counter_description;$counter_value;$counter_threshold;$counter_below_above;$counter_desc_good;$counter_desc_threshold;$counter_desc_bad\"/g" $configfile
     fi
 }
+
+# function list_config_timers
+#          get timers from config
+# param    $1: config filename
+# return   echo timers from config
+function list_config_timers() {
+    local configfile=$1
+    local timers_from_config=""
+
+    timers_from_config=$(grep "timer=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
+    echo $timers_from_config
+}
+
+# function add_config_timer
+#          add timer to config
+# param    $1: config filename
+#          $2: unique id
+#          $3: description
+#          $4: start value
+# return   return 1: in case of error (timer id already existing)
+function add_config_timer() {
+    local configfile=$1
+    local timer_id=$2
+    local timer_description=$3
+    local timer_value=$4
+    local timer_from_config=""
+
+    timer_from_config=$(get_config_timer $configfile $timer_id)
+    if [ $? == 1 ]; then
+	echo "timer=$timer_id;\"$timer_description;$timer_value\"" >> $configfile
+    else
+	return 1
+    fi
+}
+
+# function del_config_timer
+#          delete timer from config
+# param    $1: config filename
+#          $2: unique id
+# return   <none>
+function del_config_timer() {
+    local configfile=$1
+    local timer_id=$2
+
+    sed -i "/timer=$timer_id;/d" $configfile
+}
+
+# function get_config_timer
+#          get timer from config
+# param    $1: config filename
+#          $2: unique id
+# return   return 1: in case of error (timer id not found)
+function get_config_timer() {
+    local configfile=$1
+    local timer_id=$2
+    local timer_from_config=""
+
+    timer_from_config=$(grep "timer=$timer_id;" $configfile)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	echo ${timer_from_config#timer=$timer_id;} | sed -e 's/\"//g'
+    fi
+}
+
+# function set_config_timer
+#          set timer to config
+# param    $1: config filename
+#          $2: unique id
+#          $3: description
+#          $4: value
+# return   return 1: in case of error (timer id not found)
+function set_config_timer() {
+    local configfile=$1
+    local timer_id=$2
+    local timer_description=$3
+    local timer_value=$4
+    local timer_from_config=""
+
+    timer_from_config=$(get_config_timer $configfile $timer_id)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	sed -i "s/timer=$timer_id;\"${timer_from_config}\"/timer=$timer_id;\"$timer_description;$timer_value\"/g" $configfile
+    fi
+}

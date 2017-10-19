@@ -206,3 +206,129 @@ function show_whats_left() {
 	printf ""
     fi
 }
+
+# function get_timer_param
+#          wrapper to get timer parameter (value, description, ...)
+# param    $1: config filename
+#          $2: unique id
+#          $3: requested timer parameter
+# return   echo: timer parameter
+#          return 1: in case of error (get_config_timer failed)
+function get_timer_param() {
+    local configfile=$1
+    local timer_id=$2
+    local timer_param=$3
+
+    local timer_from_config=""
+
+    timer_from_config=$(get_config_timer $configfile $timer_id)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	timer_from_config=${timer_from_config#timer=$timer_id;} | sed -e 's/\"//g'
+	case "$timer_param" in
+	    "description") echo $timer_from_config | awk -F';' '{ print $1 }' ;;
+	    "value")       echo $timer_from_config | awk -F';' '{ print $2 }' ;;
+	esac
+    fi
+}
+
+# function set_timer_param
+#          wrapper to set timer parameter (value, description, ...)
+# param    $1: config filename
+#          $2: unique id
+#          $3: timer parameter
+#          $4: new value for parameter
+# return   return 1: in case of error (get_config_timer failed)
+function set_timer_param() {
+    local configfile=$1
+    local timer_id=$2
+    local timer_param=$3
+    local timer_newval=$4
+
+    local timer_from_config=""
+
+    timer_from_config=$(get_config_timer $configfile $timer_id)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	timer_from_config=${timer_from_config#timer=$timer_id;} | sed -e 's/\"//g'
+
+	local timer_description=$(echo $timer_from_config | awk -F';' '{ print $1 }')
+	local timer_value=$(echo       $timer_from_config | awk -F';' '{ print $2 }')
+
+	case "$timer_param" in
+	    "description") timer_description=$timer_newval ;;
+	    "value")       timer_value=$timer_newval ;;
+	esac
+
+	return $(set_config_timer $configfile $timer_id "$timer_description" $timer_value)
+    fi
+}
+
+# function get_timer
+#          read timer value
+# param    $1: config filename
+#          $2: unique id
+#          $3: format {single|table}
+# return   printf: formatted timer text
+#          return 1: in case of error (get_config_timer failed)
+function get_timer() {
+    local configfile=$1
+    local timer_id=$2
+    local format=$3
+
+    local timer_from_config=""
+
+    timer_from_config=$(get_config_timer $configfile $timer_id)
+    if [ $? == 1 ]; then
+	return 1
+    else
+	local timer_description=$(echo $timer_from_config | awk -F';' '{ print $1 }')
+	local timer_value=$(echo       $timer_from_config | awk -F';' '{ print $2 }')
+
+	local red="\e[1;31m"
+	local yellow="\e[1;33m"
+	local green="\e[1;32m"
+	local default="\e[0m"
+
+	if [ "$format" == "single" ]; then
+	    printf "%s [%s]\n   -> %s" "$timer_id" "$timer_description" $timer_value
+	else
+	    printf "%-8s %-60s %s" "$timer_id" "$timer_description" $timer_value
+	fi
+    fi
+}
+
+# function list_timers
+#          list all available timers as a list or a table
+# param    $1: config filename
+#          $2: format {list|table}
+# return   printf: formatted list or table of timers
+#          return 1: in case of error (format parameter is not table or list)
+function list_timers() {
+    local configfile=$1
+    local format=$2
+
+    local timers_from_config=""
+
+    timers_from_config=$(list_config_timers $configfile)
+    if [ "$format" == "list" ]; then
+	printf "$timers_from_config"
+	return 0
+    fi
+    if [ "$format" == "table" ]; then
+	local timers_table=""
+	local timer_id=""
+	timers_table=$(printf "%-8s %-60s %s" "id" "description" "value\n")
+	timers_table=$timers_table"------------------------------------------------------------------------------\n"
+	for timer_id in $timers_from_config; do
+	    timers_table=$timers_table$(get_timer $configfile $timer_id 'table')"\n"
+	done
+	printf "$timers_table"
+	return 0
+    fi
+    return 1
+}

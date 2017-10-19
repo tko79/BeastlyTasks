@@ -195,6 +195,53 @@ if [ $params_cnt -gt 0 ]; then
 		    show_params_errormsg "reset-counter"
 		fi
 		;;
+
+	    # item parameters: timers
+	    "--list-timers")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # list_timers $format
+		    printf "$(list_timers $configfile ${params_array[$params_curr+1]})\n"
+		    exit 0
+		else
+		    show_params_errormsg "list-timers"
+		fi
+		;;
+	    "--add-timer")
+		if [ "${params_array[$params_curr+3]}" != "" ]; then
+		    # add_config_timer $uid $description $value
+		    add_config_timer $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}"
+		    exit 0
+		else
+		    show_params_errormsg "add-timer"
+		fi
+		;;
+	    "--get-timer")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # get_timer $uid 'single'
+		    printf "$(get_timer $configfile ${params_array[$params_curr+1]} 'single')\n"
+		    exit 0
+		else
+		    show_params_errormsg "get-timer"
+		fi
+		;;
+	    "--set-timer")
+		if [ "${params_array[$params_curr+3]}" != "" ]; then
+		    # set_timer_param $uid $param $newval
+		    set_timer_param $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}"
+		    exit 0
+		else
+		    show_params_errormsg "set-timer"
+		fi
+		;;
+	    "--del-timer")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # del_config_timer $uid
+		    del_config_timer $configfile "${params_array[$params_curr+1]}"
+		    exit 0
+		else
+		    show_params_errormsg "del-timer"
+		fi
+		;;
 	esac
 	params_curr=$(( $params_curr+1 ))
     done
