@@ -23,3 +23,11 @@ counters:
   --increment-counter UID               increment counter UID
   --decrement-counter UID               decrement counter UID
   --reset-counter UID                   reset counter UID
+
+timers:
+  --list-timers FORMAT                  list all timers in FORMAT:list|table
+  --add-timer UID DESCRIPTION VALUE     add a new timer with UID, DESCRIPTION,
+                                        VALUE
+  --get-timer UID                       get value of timer UID
+  --set-timer UID PARAM NEWVAL          set NEWVAL of PARAM for timer UID
+  --del-timer UID                       delete timer UID

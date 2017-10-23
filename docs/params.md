@@ -43,7 +43,7 @@
 
 | <sub>parameter         | <sub>rd/wr | <sub>internal function    | <sub>params array                                                          |
 |------------------------|------------|---------------------------|----------------------------------------------------------------------------|
-| <sub>list-counters     | <sub>read  | <sub>list_config_counters | <sub>format                                                                |
+| <sub>list-counters     | <sub>read  | <sub>list_counters        | <sub>format                                                                |
 | <sub>add-counter       | <sub>write | <sub>add_config_counter   | <sub>uid description value threshold belabo descgood descthreshold descbad |
 | <sub>get-counter       | <sub>read  | <sub>get_counter          | <sub>uid                                                                   |
 | <sub>set-counter       | <sub>write | <sub>set_counter_param    | <sub>uid param newval                                                      |
@@ -51,3 +51,21 @@
 | <sub>increment-counter | <sub>write | <sub>increment_counter    | <sub>uid                                                                   |
 | <sub>decrement-counter | <sub>write | <sub>decrement_counter    | <sub>uid                                                                   |
 | <sub>reset-counter     | <sub>write | <sub>reset_counter        | <sub>uid                                                                   |
+
+## timers
+
+| <sub>parameter   | <sub>description                                           |
+|------------------|------------------------------------------------------------|
+| <sub>list-timers | <sub>list all timers in {format:list\|table}               |
+| <sub>add-timer   | <sub>add a new timer with {uid}, {description} and {value} |
+| <sub>get-timer   | <sub>get value of timer {uid}                              |
+| <sub>set-timer   | <sub>set {newval} of {param} for timer {uid}               |
+| <sub>del-timer   | <sub>delete timer {uid}                                    |
+
+| <sub>parameter   | <sub>rd/wr | <sub>internal function | <sub>params array          |
+|------------------|------------|------------------------|----------------------------|
+| <sub>list-timers | <sub>read  | <sub>list_timers       | <sub>format                |
+| <sub>add-timer   | <sub>write | <sub>add_config_timer  | <sub>uid description value |
+| <sub>get-timer   | <sub>read  | <sub>get_timer         | <sub>uid                   |
+| <sub>set-timer   | <sub>write | <sub>set_timer_param   | <sub>uid param newval      |
+| <sub>del-timer   | <sub>write | <sub>del_config_timer  | <sub>uid                   |

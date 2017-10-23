@@ -28,6 +28,14 @@
 - get_config_counter()
 - set_config_counter()
 
+## timers
+
+- list_config_timers()
+- add_config_timer()
+- del_config_timer()
+- get_config_timer()
+- set_config_timer()
+
 
 
 # timer_functions.sh
@@ -43,6 +51,13 @@
 - time_per_task()
 - time_per_task_currtime()
 - show_whats_left()
+
+## timers
+
+- get_timer_param()
+- set_timer_param()
+- get_timer()
+- list_timers()
 
 
 
