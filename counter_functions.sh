@@ -171,6 +171,7 @@ function get_counter() {
     local format=$3
 
     local counter_from_config=""
+    local desc_width=$[$LIST_DESC_WIDTH-3]
 
     counter_from_config=$(get_config_counter $configfile $counter_id)
     if [ $? == 1 ]; then
@@ -188,6 +189,12 @@ function get_counter() {
 	local yellow="\e[1;33m"
 	local green="\e[1;32m"
 	local default="\e[0m"
+
+	if [ "$format" == "table" ]; then
+	    if [ ${#counter_description} -gt $desc_width ]; then
+		counter_description=${counter_description:0:$desc_width}"..."
+	    fi
+	fi
 
 	if [ $counter_value -lt $counter_threshold ]; then
 	    if [ "$counter_below_above" == "below" ]; then
@@ -210,7 +217,7 @@ function get_counter() {
 	if [ "$format" == "single" ]; then
 	    printf "%s [%s]\n   -> cnt=%d %s" "$counter_id" "$counter_description" $counter_value "$counter_val_desc"
 	else
-	    printf "%-8s %-60s %3d %s" "$counter_id" "$counter_description" $counter_value "$counter_val_desc"
+	    printf "%-8s %-"${LIST_DESC_WIDTH}"s %3d %s" "$counter_id" "$counter_description" $counter_value "$counter_val_desc"
 	fi
     fi
 }
@@ -226,6 +233,7 @@ function list_counters() {
     local format=$2
 
     local counters_from_config=""
+    local width="0"
 
     counters_from_config=$(list_config_counters $configfile)
     if [ "$format" == "list" ]; then
@@ -235,8 +243,15 @@ function list_counters() {
     if [ "$format" == "table" ]; then
 	local counters_table=""
 	local counter_id=""
-	counters_table=$(printf "%-8s %-60s %s %s" "id" "description" "cnt" "cnt-description\n")
-	counters_table=$counters_table"--------------------------------------------------------------------------------------------------------\n"
+
+	counters_table=$(printf "%-8s %-"${LIST_DESC_WIDTH}"s %s %s" "id" "description" "cnt" "cnt-description\n")
+	counters_table=$counters_table"-------------------------------------------"
+	while [ $width -lt $LIST_DESC_WIDTH ]; do
+	    counters_table=$counters_table"-"
+	    width=$[$width+1]
+	done
+	counters_table=$counters_table"\n"
+
 	for counter_id in $counters_from_config; do
 	    counters_table=$counters_table$(get_counter $configfile $counter_id 'table')"\n"
 	done

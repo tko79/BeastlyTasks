@@ -31,6 +31,8 @@ params_array=("$@")
 user=$(whoami)
 configfile="/home/"$user"/.beastlytasks"
 
+LIST_DESC_WIDTH=35
+
 if [ "$BTPATH" == "" ]; then
     btpath="."
 else
