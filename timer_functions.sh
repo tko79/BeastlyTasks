@@ -281,6 +281,7 @@ function get_timer() {
     local format=$3
 
     local timer_from_config=""
+    local desc_width=$[$LIST_DESC_WIDTH-3]
 
     timer_from_config=$(get_config_timer $configfile $timer_id)
     if [ $? == 1 ]; then
@@ -294,10 +295,16 @@ function get_timer() {
 	local green="\e[1;32m"
 	local default="\e[0m"
 
+	if [ "$format" == "table" ]; then
+            if [ ${#timer_description} -gt $desc_width ]; then
+		timer_description=${timer_description:0:$desc_width}"..."
+            fi
+	fi
+
 	if [ "$format" == "single" ]; then
 	    printf "%s [%s]\n   -> %s" "$timer_id" "$timer_description" $timer_value
 	else
-	    printf "%-8s %-60s %s" "$timer_id" "$timer_description" $timer_value
+	    printf "%-8s %-"${LIST_DESC_WIDTH}"s %s" "$timer_id" "$timer_description" $timer_value
 	fi
     fi
 }
@@ -313,6 +320,7 @@ function list_timers() {
     local format=$2
 
     local timers_from_config=""
+    local width="0"
 
     timers_from_config=$(list_config_timers $configfile)
     if [ "$format" == "list" ]; then
@@ -322,8 +330,15 @@ function list_timers() {
     if [ "$format" == "table" ]; then
 	local timers_table=""
 	local timer_id=""
-	timers_table=$(printf "%-8s %-60s %s" "id" "description" "value\n")
-	timers_table=$timers_table"------------------------------------------------------------------------------\n"
+
+	timers_table=$(printf "%-8s %-"${LIST_DESC_WIDTH}"s %s" "id" "description" "value\n")
+	timers_table=$timers_table"------------------"
+	while [ $width -lt $LIST_DESC_WIDTH ]; do
+            timers_table=$timers_table"-"
+            width=$[$width+1]
+	done
+	timers_table=$timers_table"\n"
+
 	for timer_id in $timers_from_config; do
 	    timers_table=$timers_table$(get_timer $configfile $timer_id 'table')"\n"
 	done
