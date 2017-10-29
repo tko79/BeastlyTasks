@@ -185,11 +185,6 @@ function get_counter() {
 	local counter_desc_threshold=$(echo $counter_from_config | awk -F';' '{ print $6 }')
 	local counter_desc_bad=$(echo       $counter_from_config | awk -F';' '{ print $7 }')
 
-	local red="\e[1;31m"
-	local yellow="\e[1;33m"
-	local green="\e[1;32m"
-	local default="\e[0m"
-
 	if [ "$format" == "table" ]; then
 	    if [ ${#counter_description} -gt $desc_width ]; then
 		counter_description=${counter_description:0:$desc_width}"..."
@@ -198,19 +193,19 @@ function get_counter() {
 
 	if [ $counter_value -lt $counter_threshold ]; then
 	    if [ "$counter_below_above" == "below" ]; then
-		counter_val_desc=$green$counter_desc_good$default
+		counter_val_desc=$COL_GRE$counter_desc_good$COL_DEF
 	    else
-		counter_val_desc=$red$counter_desc_bad$default
+		counter_val_desc=$COL_RED$counter_desc_bad$COL_DEF
 	    fi
 	fi
 	if [ $counter_value -eq $counter_threshold ]; then
-	    counter_val_desc=$yellow$counter_desc_threshold$default
+	    counter_val_desc=$COL_YEL$counter_desc_threshold$COL_DEF
 	fi
 	if [ $counter_value -gt $counter_threshold ]; then
 	    if [ "$counter_below_above" == "below" ]; then
-		counter_val_desc=$red$counter_desc_bad$default
+		counter_val_desc=$COL_RED$counter_desc_bad$COL_DEF
 	    else
-		counter_val_desc=$green$counter_desc_good$default
+		counter_val_desc=$COL_GRE$counter_desc_good$COL_DEF
 	    fi
 	fi
 
