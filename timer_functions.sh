@@ -331,13 +331,13 @@ function list_timers() {
 	local timers_table=""
 	local timer_id=""
 
-	timers_table=$(printf "%-8s %-"${LIST_DESC_WIDTH}"s %s" "id" "description" "value\n")
+	timers_table=$COL_WHI$(printf "%-8s %-"${LIST_DESC_WIDTH}"s %s" "id" "description" "value\n")
 	timers_table=$timers_table"------------------"
 	while [ $width -lt $LIST_DESC_WIDTH ]; do
             timers_table=$timers_table"-"
             width=$[$width+1]
 	done
-	timers_table=$timers_table"\n"
+	timers_table=$timers_table$COL_DEF"\n"
 
 	for timer_id in $timers_from_config; do
 	    timers_table=$timers_table$(get_timer $configfile $timer_id 'table')"\n"
