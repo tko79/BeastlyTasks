@@ -31,9 +31,9 @@ function create_task_image() {
     end=$3
     done=$4
 
-    template_red="/tmp/task_template_red.png"
-    template_done="/tmp/task_template_done.png"
-    outfile="/tmp/out.png"
+    local template_red=$btpath"/docs/images/task_template_red.png"
+    local template_done=$btpath"/docs/images/task_template_done.png"
+    local outfile="/tmp/out.png"
 
     convert $template_red -gravity Center -pointsize 20 -fill white \
 	-draw "text 0,-13 '"$name"'" \
