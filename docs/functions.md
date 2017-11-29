@@ -70,3 +70,9 @@
 - reset_counter()
 - get_counter()
 - list_counters()
+
+
+
+# task_functions.sh
+
+- create_task_image()
