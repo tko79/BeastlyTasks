@@ -6,11 +6,11 @@
 | <sub>counter | <sub>event counter with threshold and value description | <sub>`$uid;"$description;$value;$threshold;$belabo;$descgood;$descthreshold;$descbad"` |
 | <sub>timer   | <sub>timer to count time spent for a task               | <sub>`$uid;"$description;$value"`                                                      |
 | <sub>cal     | <sub>calender entries                                   | <sub>`$uid;"$description;$label;$date"`                                                |
-| <sub>task    | <sub>misc tasks                                         | <sub>`$uid;"$description;$label;$status;$donedate;$duedate"`                           |
-| <sub>daily   | <sub>daily tasks                                        | <sub>`$uid;"$description;$label;$status;$donedate"`                                    |
-| <sub>weekly  | <sub>weekly tasks                                       | <sub>`$uid;"$description;$label;$status;$donedate;$biweekly"`                          |
-| <sub>monthly | <sub>monthly tasks                                      | <sub>`$uid;"$description;$label;$status;$donedate"`                                    |
-| <sub>yearly  | <sub>yearly tasks                                       | <sub>`$uid;"$description;$label;$status;$donedate;$duedate"`                           |
+| <sub>task    | <sub>misc tasks                                         | <sub>`$uid;"$description;$label;$status;$createdate;$duedate;$donedate"`               |
+| <sub>daily   | <sub>daily tasks                                        | <sub>`$uid;"$description;$label;$status"`                                              |
+| <sub>weekly  | <sub>weekly tasks                                       | <sub>`$uid;"$description;$label;$status;$biweekly"`                                    |
+| <sub>monthly | <sub>monthly tasks                                      | <sub>`$uid;"$description;$label;$status"`                                              |
+| <sub>yearly  | <sub>yearly tasks                                       | <sub>`$uid;"$description;$label;$status;$duedate"`                                     |
 
 ***
 
@@ -75,8 +75,9 @@
 | <sub>description | <sub>description             | <sub>string            |
 | <sub>label       | <sub>one or more labels/tags | <sub>string            |
 | <sub>status      | <sub>status of task          | <sub>string            |
-| <sub>donedate    | <sub>done date of task       | <sub>date:(dd.mm.yyyy) |
+| <sub>createdate  | <sub>create date of task     | <sub>date:(dd.mm.yyyy) |
 | <sub>duedate     | <sub>due date of task        | <sub>date:(dd.mm.yyyy) |
+| <sub>donedate    | <sub>done date of task       | <sub>date:(dd.mm.yyyy) |
 
 ### daily
 
@@ -89,7 +90,6 @@
 | <sub>description | <sub>description             | <sub>string            |
 | <sub>label       | <sub>one or more labels/tags | <sub>string            |
 | <sub>status      | <sub>status of task          | <sub>string            |
-| <sub>donedate    | <sub>done date of task       | <sub>date:(dd.mm.yyyy) |
 
 ### weekly
 
@@ -102,7 +102,6 @@
 | <sub>description | <sub>description             | <sub>string            |
 | <sub>label       | <sub>one or more labels/tags | <sub>string            |
 | <sub>status      | <sub>status of task          | <sub>string            |
-| <sub>donedate    | <sub>done date of task       | <sub>date:(dd.mm.yyyy) |
 | <sub>biweekly    | <sub>biweekly task?          | <sub>string:{yes\|}    |
 
 ### monthly
@@ -116,7 +115,6 @@
 | <sub>description | <sub>description             | <sub>string            |
 | <sub>label       | <sub>one or more labels/tags | <sub>string            |
 | <sub>status      | <sub>status of task          | <sub>string            |
-| <sub>donedate    | <sub>done date of task       | <sub>date:(dd.mm.yyyy) |
 
 ### yearly
 
@@ -129,5 +127,4 @@
 | <sub>description | <sub>description             | <sub>string            |
 | <sub>label       | <sub>one or more labels/tags | <sub>string            |
 | <sub>status      | <sub>status of task          | <sub>string            |
-| <sub>donedate    | <sub>done date of task       | <sub>date:(dd.mm.yyyy) |
 | <sub>duedate     | <sub>due date of task        | <sub>date:(dd.mm.yyyy) |
