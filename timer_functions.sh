@@ -290,11 +290,6 @@ function get_timer() {
 	local timer_description=$(echo $timer_from_config | awk -F';' '{ print $1 }')
 	local timer_value=$(echo       $timer_from_config | awk -F';' '{ print $2 }')
 
-	local red="\e[1;31m"
-	local yellow="\e[1;33m"
-	local green="\e[1;32m"
-	local default="\e[0m"
-
 	if [ "$format" == "table" ]; then
             if [ ${#timer_description} -gt $desc_width ]; then
 		timer_description=${timer_description:0:$desc_width}"..."
