@@ -193,19 +193,19 @@ function get_counter() {
 
 	if [ $counter_value -lt $counter_threshold ]; then
 	    if [ "$counter_below_above" == "below" ]; then
-		counter_val_desc=$COL_GRE$counter_desc_good$COL_DEF
+		counter_val_desc=$COL_GREEN$counter_desc_good$COL_DEFAULT
 	    else
-		counter_val_desc=$COL_RED$counter_desc_bad$COL_DEF
+		counter_val_desc=$COL_RED$counter_desc_bad$COL_DEFAULT
 	    fi
 	fi
 	if [ $counter_value -eq $counter_threshold ]; then
-	    counter_val_desc=$COL_YEL$counter_desc_threshold$COL_DEF
+	    counter_val_desc=$COL_YELLOW$counter_desc_threshold$COL_DEFAULT
 	fi
 	if [ $counter_value -gt $counter_threshold ]; then
 	    if [ "$counter_below_above" == "below" ]; then
-		counter_val_desc=$COL_RED$counter_desc_bad$COL_DEF
+		counter_val_desc=$COL_RED$counter_desc_bad$COL_DEFAULT
 	    else
-		counter_val_desc=$COL_GRE$counter_desc_good$COL_DEF
+		counter_val_desc=$COL_GREEN$counter_desc_good$COL_DEFAULT
 	    fi
 	fi
 
@@ -239,13 +239,13 @@ function list_counters() {
 	local counters_table=""
 	local counter_id=""
 
-	counters_table=$COL_WHI$(printf "%-8s %-"${LIST_DESC_WIDTH}"s %s %s" "id" "description" "cnt" "cnt-description\n")
+	counters_table=$COL_WHITE$(printf "%-8s %-"${LIST_DESC_WIDTH}"s %s %s" "id" "description" "cnt" "cnt-description\n")
 	counters_table=$counters_table"-------------------------------------------"
 	while [ $width -lt $LIST_DESC_WIDTH ]; do
 	    counters_table=$counters_table"-"
 	    width=$[$width+1]
 	done
-	counters_table=$counters_table$COL_DEF"\n"
+	counters_table=$counters_table$COL_DEFAULT"\n"
 
 	for counter_id in $counters_from_config; do
 	    counters_table=$counters_table$(get_counter $configfile $counter_id 'table')"\n"
