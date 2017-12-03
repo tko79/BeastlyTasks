@@ -273,3 +273,107 @@ function set_config_timer() {
 	sed -i "s/timer=$timer_id;\"${timer_from_config}\"/timer=$timer_id;\"$timer_description;$timer_value\"/g" $configfile
     fi
 }
+
+# function list_config_tasks
+#          get tasks from config
+# param    $1: config filename
+# return   echo tasks from config
+function list_config_tasks() {
+    local configfile=$1
+    local tasks_from_config=""
+
+    tasks_from_config=$(grep "task=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
+    echo $tasks_from_config
+}
+
+# function add_config_task
+#          add task to config
+# param    $1: config filename
+#          $2: unique id
+#          $3: description
+#          $4: label
+#          $5: status
+#          $6: create date (format dd.mm.yyyy)
+#          $7: due date (format dd.mm.yyyy)
+#          $8: done date (format dd.mm.yyyy)
+# return   return 1: in case of error (task id already existing)
+function add_config_task() {
+    local configfile=$1
+    local task_id=$2
+    local task_description=$3
+    local task_label=$4
+    local task_status=$5
+    local task_createdate=$6
+    local task_duedate=$7
+    local task_donedate=$8
+    local task_from_config=""
+
+    task_from_config=$(get_config_task $configfile $task_id)
+    if [ $? == 1 ]; then
+	echo "task=$task_id;\"$task_description;$task_label;$task_status;$task_createdate;$task_duedate;$task_donedate\"" >> $configfile
+    else
+	return 1
+    fi
+}
+
+# function del_config_task
+#          delete task from config
+# param    $1: config filename
+#          $2: unique id
+# return   <none>
+function del_config_task() {
+    local configfile=$1
+    local task_id=$2
+
+    sed -i "/task=$task_id;/d" $configfile
+}
+
+# function get_config_task
+#          get task from config
+# param    $1: config filename
+#          $2: unique id
+# return   return 1: in case of error (task id not found)
+function get_config_task() {
+    local configfile=$1
+    local task_id=$2
+    local task_from_config=""
+
+    task_from_config=$(grep "task=$task_id;" $configfile)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	echo ${task_from_config#task=$task_id;} | sed -e 's/\"//g'
+    fi
+}
+
+# function set_config_task
+#          set task to config
+# param    $1: config filename
+#          $2: unique id
+#          $3: description
+#          $4: label
+#          $5: status
+#          $6: create date (format dd.mm.yyyy)
+#          $7: due date (format dd.mm.yyyy)
+#          $8: done date (format dd.mm.yyyy)
+# return   return 1: in case of error (task id not found)
+function set_config_task() {
+    local configfile=$1
+    local task_id=$2
+    local task_description=$3
+    local task_label=$4
+    local task_status=$5
+    local task_createdate=$6
+    local task_duedate=$7
+    local task_donedate=$8
+    local task_from_config=""
+
+    task_from_config=$(get_config_task $configfile $task_id)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	sed -i "s/task=$task_id;\"${task_from_config}\"/task=$task_id;\"$task_description;$task_label;$task_status;$task_createdate;$task_duedate;$task_donedate\"/g" $configfile
+    fi
+}

@@ -259,6 +259,53 @@ if [ $params_cnt -gt 0 ]; then
 		    show_params_errormsg "del-timer"
 		fi
 		;;
+
+	    # item parameters: tasks
+	    "--list-tasks")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # list_tasks $format
+		    printf "$(list_tasks $configfile ${params_array[$params_curr+1]})\n"
+		    exit 0
+		else
+		    show_params_errormsg "list-tasks"
+		fi
+		;;
+	    "--add-task")
+		if [ "${params_array[$params_curr+7]}" != "" ]; then
+		    # add_config_task $uid $description $task_label $task_status $task_createdate $task_duedate $task_donedate
+		    add_config_task $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}" "${params_array[$params_curr+4]}" "${params_array[$params_curr+5]}" "${params_array[$params_curr+6]}" "${params_array[$params_curr+7]}"
+		    exit 0
+		else
+		    show_params_errormsg "add-task"
+		fi
+		;;
+	    "--get-task")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # get_task $uid 'single'
+		    printf "$(get_task $configfile ${params_array[$params_curr+1]} 'single')\n"
+		    exit 0
+		else
+		    show_params_errormsg "get-task"
+		fi
+		;;
+	    "--set-task")
+		if [ "${params_array[$params_curr+3]}" != "" ]; then
+		    # set_task_param $uid $param $newval
+		    set_task_param $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}"
+		    exit 0
+		else
+		    show_params_errormsg "set-task"
+		fi
+		;;
+	    "--del-task")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # del_config_task $uid
+		    del_config_task $configfile "${params_array[$params_curr+1]}"
+		    exit 0
+		else
+		    show_params_errormsg "del-task"
+		fi
+		;;
 	esac
 	params_curr=$(( $params_curr+1 ))
     done

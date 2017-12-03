@@ -45,3 +45,155 @@ function create_task_image() {
 	composite -gravity center $template_done $outfile $outfile
     fi
 }
+
+# function get_task_param
+#          wrapper to get task parameter (description, status, ...)
+# param    $1: config filename
+#          $2: unique id
+#          $3: requested task parameter
+# return   echo: task parameter
+#          return 1: in case of error (get_config_task failed)
+function get_task_param() {
+    local configfile=$1
+    local task_id=$2
+    local task_param=$3
+
+    local task_from_config=""
+
+    task_from_config=$(get_config_task $configfile $task_id)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	task_from_config=${task_from_config#task=$task_id;} | sed -e 's/\"//g'
+	case "$task_param" in
+	    "description") echo $task_from_config | awk -F';' '{ print $1 }' ;;
+	    "label")       echo $task_from_config | awk -F';' '{ print $2 }' ;;
+	    "status")      echo $task_from_config | awk -F';' '{ print $3 }' ;;
+	    "createdate")  echo $task_from_config | awk -F';' '{ print $4 }' ;;
+	    "duedate")     echo $task_from_config | awk -F';' '{ print $5 }' ;;
+	    "donedate")    echo $task_from_config | awk -F';' '{ print $6 }' ;;
+	esac
+    fi
+}
+
+# function set_task_param
+#          wrapper to set task parameter (description, status, ...)
+# param    $1: config filename
+#          $2: unique id
+#          $3: task parameter
+#          $4: new value for parameter
+# return   return 1: in case of error (get_config_task failed)
+function set_task_param() {
+    local configfile=$1
+    local task_id=$2
+    local task_param=$3
+    local task_newval=$4
+
+    local task_from_config=""
+
+    task_from_config=$(get_config_task $configfile $task_id)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	task_from_config=${task_from_config#task=$task_id;} | sed -e 's/\"//g'
+
+	local task_description=$(echo $task_from_config | awk -F';' '{ print $1 }')
+	local task_label=$(echo       $task_from_config | awk -F';' '{ print $2 }')
+	local task_status=$(echo      $task_from_config | awk -F';' '{ print $3 }')
+	local task_createdate=$(echo  $task_from_config | awk -F';' '{ print $4 }')
+	local task_duedate=$(echo     $task_from_config | awk -F';' '{ print $5 }')
+	local task_donedate=$(echo    $task_from_config | awk -F';' '{ print $6 }')
+
+	case "$task_param" in
+	    "description") task_description=$task_newval ;;
+	    "label")       task_label=$task_newval ;;
+	    "status")      task_status=$task_newval ;;
+	    "createdate")  task_createdate=$task_newval ;;
+	    "duedate")     task_duedate=$task_newval ;;
+	    "donedate")    task_donedate=$task_newval ;;
+	esac
+
+	return $(set_config_task $configfile $task_id "$task_description" $task_label $task_status $task_createdate $task_duedate $task_donedate)
+    fi
+}
+
+# function get_task
+#          read task value
+# param    $1: config filename
+#          $2: unique id
+#          $3: format {single|table}
+# return   printf: formatted task text
+#          return 1: in case of error (get_config_task failed)
+function get_task() {
+    local configfile=$1
+    local task_id=$2
+    local format=$3
+
+    local task_from_config=""
+    local desc_width=$[$LIST_DESC_WIDTH-3]
+
+    task_from_config=$(get_config_task $configfile $task_id)
+    if [ $? == 1 ]; then
+	return 1
+    else
+	local task_description=$(echo $task_from_config | awk -F';' '{ print $1 }')
+	local task_label=$(echo       $task_from_config | awk -F';' '{ print $2 }')
+	local task_status=$(echo      $task_from_config | awk -F';' '{ print $3 }')
+	local task_createdate=$(echo  $task_from_config | awk -F';' '{ print $4 }')
+	local task_duedate=$(echo     $task_from_config | awk -F';' '{ print $5 }')
+	local task_donedate=$(echo    $task_from_config | awk -F';' '{ print $6 }')
+
+	if [ "$format" == "table" ]; then
+            if [ ${#task_description} -gt $desc_width ]; then
+		task_description=${task_description:0:$desc_width}"..."
+            fi
+	fi
+
+	if [ "$format" == "single" ]; then
+	    printf "%s [%s]\n   -> label: %s\n   -> status: %s\n   -> create-/due-/donedate: %s %s %s" "$task_id" "$task_description" "$task_label" "$task_status" "$task_createdate" "$task_duedate" "$task_donedate"
+	else
+	    printf "%-8s %-"${LIST_DESC_WIDTH}"s %-7s %-6s %-10s %-10s %-10s" $task_id "$task_description" $task_label $task_status $task_createdate $task_duedate $task_donedate
+	fi
+    fi
+}
+
+# function list_tasks
+#          list all available tasks as a list or a table
+# param    $1: config filename
+#          $2: format {list|table}
+# return   printf: formatted list or table of tasks
+#          return 1: in case of error (format parameter is not table or list)
+function list_tasks() {
+    local configfile=$1
+    local format=$2
+
+    local tasks_from_config=""
+    local width="0"
+
+    tasks_from_config=$(list_config_tasks $configfile)
+    if [ "$format" == "list" ]; then
+	printf "$tasks_from_config"
+	return 0
+    fi
+    if [ "$format" == "table" ]; then
+	local tasks_table=""
+	local task_id=""
+
+	tasks_table=$COL_WHITE$(printf "%-8s %-"${LIST_DESC_WIDTH}"s %-7s %-6s %-10s %-10s %-10s" "id" "description" "label" "status" "createdate" "duedate" "donedate\n")
+	tasks_table=$tasks_table"---------------------------------------------------------"
+	while [ $width -lt $LIST_DESC_WIDTH ]; do
+            tasks_table=$tasks_table"-"
+            width=$[$width+1]
+	done
+	tasks_table=$tasks_table$COL_DEFAULT"\n"
+
+	for task_id in $tasks_from_config; do
+	    tasks_table=$tasks_table$(get_task $configfile $task_id 'table')"\n"
+	done
+	printf "$tasks_table"
+	return 0
+    fi
+    return 1
+}
