@@ -71,3 +71,21 @@
 | <sub>get-timer   | <sub>read  | <sub>get_timer         | <sub>uid                   |
 | <sub>set-timer   | <sub>write | <sub>set_timer_param   | <sub>uid param newval      |
 | <sub>del-timer   | <sub>write | <sub>del_config_timer  | <sub>uid                   |
+
+## tasks
+
+| <sub>parameter  | <sub>description                                                                                   |
+|-----------------|----------------------------------------------------------------------------------------------------|
+| <sub>list-tasks | <sub>list all tasks in {format:list\|table}                                                        |
+| <sub>add-task   | <sub>add a new task with {uid}, {description}, {label}, {status}, {create-}, {due-} and {donedate} |
+| <sub>get-task   | <sub>get value of task {uid}                                                                       |
+| <sub>set-task   | <sub>set {newval} of {param} for task {uid}                                                        |
+| <sub>del-task   | <sub>delete task {uid}                                                                             |
+
+| <sub>parameter  | <sub>rd/wr | <sub>internal function | <sub>params array                                               |
+|-----------------|------------|------------------------|-----------------------------------------------------------------|
+| <sub>list-tasks | <sub>read  | <sub>list_tasks        | <sub>format                                                     |
+| <sub>add-task   | <sub>write | <sub>add_config_task   | <sub>uid description, label, status, create-, due- and donedate |
+| <sub>get-task   | <sub>read  | <sub>get_task          | <sub>uid                                                        |
+| <sub>set-task   | <sub>write | <sub>set_task_param    | <sub>uid param newval                                           |
+| <sub>del-task   | <sub>write | <sub>del_config_task   | <sub>uid                                                        |

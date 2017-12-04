@@ -33,3 +33,12 @@ timers:
   --get-timer UID                       get value of timer UID
   --set-timer UID PARAM NEWVAL          set NEWVAL of PARAM for timer UID
   --del-timer UID                       delete timer UID
+
+tasks:
+  --list-tasks FORMAT                   list all tasks in FORMAT:list|table
+  --add-task UID DESCRIPTION LABEL      add a new task with UID, DESCRIPTION,
+             STATUS CREATEDATE DUEDATE  LABEL, STATUS, CREATEDATE, DUEDATE and
+             DONEDATE                   DONEDATE
+  --get-task UID                        get value of task UID
+  --set-task UID PARAM NEWVAL           set NEWVAL of PARAM for task UID
+  --del-task UID                        delete task UID
