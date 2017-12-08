@@ -23,3 +23,14 @@ task visualization
 - example image docs/images/task_example.jpg can be created with an empty template and `convert` command
 - using convert to add the text: `convert task_template_red.png -gravity Center -pointsize 20 -fill white -draw "text 0,-13 'task#01'" -draw "text -60,20 'cw47/17'" -draw "text 60,20 'tbd'" /tmp/test.jpg`
 - tasks could be marked as done using another template and composite command: `composite -gravity center task_example.png task_template_done.png task_example_done.png`
+
+new:
+- tasks: date dd.mm.yyyy -> cwcw/yy
+- tasks: define labels
+- tasks: define status (done, open)
+- tasks: calc create date
+- BUG: slashes and umlauts are really really bad! (desc="kündigung", duedate="cw52/17")
+- error message: id len<=8
+- sort lists by user-defined field
+- cti: done if end!=done (remove last parameter)
+- cti: add impo template
