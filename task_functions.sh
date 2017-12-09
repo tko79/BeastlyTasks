@@ -23,13 +23,11 @@
 # param    $1: task name
 #          $2: start date (calender week)
 #          $3: end date (calender week)
-#          $4: done marker {done|open}
 # return   <none>
 function create_task_image() {
     name=$1
     start=$2
     end=$3
-    status=$4
 
     local template_red=$btpath"/docs/images/task_template_red.png"
     local template_done=$btpath"/docs/images/task_template_done.png"
@@ -41,7 +39,7 @@ function create_task_image() {
 	-draw "text 60,20 '"$end"'" \
 	$outfile
 
-    if [ "$status" == "done" ]; then
+    if [ "$end" != "open" ]; then
 	composite -gravity center $template_done $outfile $outfile
     fi
 }
