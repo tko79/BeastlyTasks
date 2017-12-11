@@ -9,8 +9,8 @@ misc:
   --swl FORMAT START UNTIL STARTITEMS   show what's left in FORMAT:normal|csv|
         CURRENTITEMS                    conky using: START date, UNTIL date,
                                         #START-ITEMS and #CURRENT-ITEMS
-  --cti NAME START END STATUS           create task image with NAME, START week,
-                                        END week and STATUS:done|open
+  --cti NAME START END (IMPO)           create task image with NAME, START week,
+                                        END week and (optional) (IMPO:impo) flag
 
 counters:
   --list-counters FORMAT                list all counters in FORMAT:list|table
