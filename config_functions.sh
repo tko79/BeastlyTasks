@@ -292,11 +292,12 @@ function list_config_tasks() {
 #          $2: unique id
 #          $3: description
 #          $4: label
-#          $5: status
+#          $5: status {open|done}
 #          $6: create date (format dd.mm.yyyy)
 #          $7: due date (format dd.mm.yyyy)
 #          $8: done date (format dd.mm.yyyy)
 # return   return 1: in case of error (task id already existing)
+#          return 2: in case of error (task status not open or done)
 function add_config_task() {
     local configfile=$1
     local task_id=$2
@@ -307,6 +308,11 @@ function add_config_task() {
     local task_duedate=$7
     local task_donedate=$8
     local task_from_config=""
+
+    if [ ! "$task_status" == "open" ] && [ ! "$task_status" == "done" ]; then
+	echo ""
+	return 2
+    fi
 
     task_from_config=$(get_config_task $configfile $task_id)
     if [ $? == 1 ]; then
@@ -353,11 +359,12 @@ function get_config_task() {
 #          $2: unique id
 #          $3: description
 #          $4: label
-#          $5: status
+#          $5: status {open|done}
 #          $6: create date (format dd.mm.yyyy)
 #          $7: due date (format dd.mm.yyyy)
 #          $8: done date (format dd.mm.yyyy)
 # return   return 1: in case of error (task id not found)
+#          return 2: in case of error (task status not open or done)
 function set_config_task() {
     local configfile=$1
     local task_id=$2
@@ -368,6 +375,11 @@ function set_config_task() {
     local task_duedate=$7
     local task_donedate=$8
     local task_from_config=""
+
+    if [ ! "$task_status" == "open" ] && [ ! "$task_status" == "done" ]; then
+	echo ""
+	return 2
+    fi
 
     task_from_config=$(get_config_task $configfile $task_id)
     if [ $? == 1 ]; then

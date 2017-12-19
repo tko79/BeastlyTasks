@@ -37,8 +37,8 @@ timers:
 tasks:
   --list-tasks FORMAT                   list all tasks in FORMAT:list|table
   --add-task UID DESCRIPTION LABEL      add a new task with UID, DESCRIPTION,
-             STATUS CREATEDATE DUEDATE  LABEL, STATUS, CREATEDATE, DUEDATE and
-             DONEDATE                   DONEDATE
+             STATUS CREATEDATE DUEDATE  LABEL, STATUS:open|done, CREATEDATE,
+             DONEDATE                   DUEDATE and DONEDATE
   --get-task UID                        get value of task UID
   --set-task UID PARAM NEWVAL           set NEWVAL of PARAM for task UID
   --del-task UID                        delete task UID

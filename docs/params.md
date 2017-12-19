@@ -74,13 +74,13 @@
 
 ## tasks
 
-| <sub>parameter  | <sub>description                                                                                   |
-|-----------------|----------------------------------------------------------------------------------------------------|
-| <sub>list-tasks | <sub>list all tasks in {format:list\|table}                                                        |
-| <sub>add-task   | <sub>add a new task with {uid}, {description}, {label}, {status}, {create-}, {due-} and {donedate} |
-| <sub>get-task   | <sub>get value of task {uid}                                                                       |
-| <sub>set-task   | <sub>set {newval} of {param} for task {uid}                                                        |
-| <sub>del-task   | <sub>delete task {uid}                                                                             |
+| <sub>parameter  | <sub>description                                                                                              |
+|-----------------|---------------------------------------------------------------------------------------------------------------|
+| <sub>list-tasks | <sub>list all tasks in {format:list\|table}                                                                   |
+| <sub>add-task   | <sub>add a new task with {uid}, {description}, {label}, {status:open\|done}, {create-}, {due-} and {donedate} |
+| <sub>get-task   | <sub>get value of task {uid}                                                                                  |
+| <sub>set-task   | <sub>set {newval} of {param} for task {uid}                                                                   |
+| <sub>del-task   | <sub>delete task {uid}                                                                                        |
 
 | <sub>parameter  | <sub>rd/wr | <sub>internal function | <sub>params array                                               |
 |-----------------|------------|------------------------|-----------------------------------------------------------------|

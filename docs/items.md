@@ -69,62 +69,62 @@
 - description: misc tasks
 - parameters and format in config: `$uid;"$description;$label;$status;$donedate;$duedate"`
 
-| <sub>parameter   | <sub>description             | <sub>format            |
-|------------------|------------------------------|------------------------|
-| <sub>uid         | <sub>unique id               | <sub>string            |
-| <sub>description | <sub>description             | <sub>string            |
-| <sub>label       | <sub>one or more labels/tags | <sub>string            |
-| <sub>status      | <sub>status of task          | <sub>string            |
-| <sub>createdate  | <sub>create date of task     | <sub>date:(dd.mm.yyyy) |
-| <sub>duedate     | <sub>due date of task        | <sub>date:(dd.mm.yyyy) |
-| <sub>donedate    | <sub>done date of task       | <sub>date:(dd.mm.yyyy) |
+| <sub>parameter   | <sub>description             | <sub>format              |
+|------------------|------------------------------|--------------------------|
+| <sub>uid         | <sub>unique id               | <sub>string              |
+| <sub>description | <sub>description             | <sub>string              |
+| <sub>label       | <sub>one or more labels/tags | <sub>string              |
+| <sub>status      | <sub>status of task          | <sub>string:{open\|done} |
+| <sub>createdate  | <sub>create date of task     | <sub>date:(dd.mm.yyyy)   |
+| <sub>duedate     | <sub>due date of task        | <sub>date:(dd.mm.yyyy)   |
+| <sub>donedate    | <sub>done date of task       | <sub>date:(dd.mm.yyyy)   |
 
 ### daily
 
 - description: daily tasks
 - parameters and format in config: `$uid;"$description;$label;$status;$donedate"`
 
-| <sub>parameter   | <sub>description             | <sub>format            |
-|------------------|------------------------------|------------------------|
-| <sub>uid         | <sub>unique id               | <sub>string            |
-| <sub>description | <sub>description             | <sub>string            |
-| <sub>label       | <sub>one or more labels/tags | <sub>string            |
-| <sub>status      | <sub>status of task          | <sub>string            |
+| <sub>parameter   | <sub>description             | <sub>format              |
+|------------------|------------------------------|--------------------------|
+| <sub>uid         | <sub>unique id               | <sub>string              |
+| <sub>description | <sub>description             | <sub>string              |
+| <sub>label       | <sub>one or more labels/tags | <sub>string              |
+| <sub>status      | <sub>status of task          | <sub>string:{open\|done} |
 
 ### weekly
 
 - description: weekly tasks
 - parameters and format in config: `$uid;"$description;$label;$status;$donedate;$biweekly"`
 
-| <sub>parameter   | <sub>description             | <sub>format            |
-|------------------|------------------------------|------------------------|
-| <sub>uid         | <sub>unique id               | <sub>string            |
-| <sub>description | <sub>description             | <sub>string            |
-| <sub>label       | <sub>one or more labels/tags | <sub>string            |
-| <sub>status      | <sub>status of task          | <sub>string            |
-| <sub>biweekly    | <sub>biweekly task?          | <sub>string:{yes\|}    |
+| <sub>parameter   | <sub>description             | <sub>format              |
+|------------------|------------------------------|--------------------------|
+| <sub>uid         | <sub>unique id               | <sub>string              |
+| <sub>description | <sub>description             | <sub>string              |
+| <sub>label       | <sub>one or more labels/tags | <sub>string              |
+| <sub>status      | <sub>status of task          | <sub>string:{open\|done} |
+| <sub>biweekly    | <sub>biweekly task?          | <sub>string:{yes\|}      |
 
 ### monthly
 
 - description: monthly tasks
 - parameters and format in config: `$uid;"$description;$label;$status;$donedate"`
 
-| <sub>parameter   | <sub>description             | <sub>format            |
-|------------------|------------------------------|------------------------|
-| <sub>uid         | <sub>unique id               | <sub>string            |
-| <sub>description | <sub>description             | <sub>string            |
-| <sub>label       | <sub>one or more labels/tags | <sub>string            |
-| <sub>status      | <sub>status of task          | <sub>string            |
+| <sub>parameter   | <sub>description             | <sub>format              |
+|------------------|------------------------------|--------------------------|
+| <sub>uid         | <sub>unique id               | <sub>string              |
+| <sub>description | <sub>description             | <sub>string              |
+| <sub>label       | <sub>one or more labels/tags | <sub>string              |
+| <sub>status      | <sub>status of task          | <sub>string:{open\|done} |
 
 ### yearly
 
 - description: yearly tasks
 - parameters and format in config: `$uid;"$description;$label;$status;$donedate;$duedate"`
 
-| <sub>parameter   | <sub>description             | <sub>format            |
-|------------------|------------------------------|------------------------|
-| <sub>uid         | <sub>unique id               | <sub>string            |
-| <sub>description | <sub>description             | <sub>string            |
-| <sub>label       | <sub>one or more labels/tags | <sub>string            |
-| <sub>status      | <sub>status of task          | <sub>string            |
-| <sub>duedate     | <sub>due date of task        | <sub>date:(dd.mm.yyyy) |
+| <sub>parameter   | <sub>description             | <sub>format              |
+|------------------|------------------------------|--------------------------|
+| <sub>uid         | <sub>unique id               | <sub>string              |
+| <sub>description | <sub>description             | <sub>string              |
+| <sub>label       | <sub>one or more labels/tags | <sub>string              |
+| <sub>status      | <sub>status of task          | <sub>string:{open\|done} |
+| <sub>duedate     | <sub>due date of task        | <sub>date:(dd.mm.yyyy)   |
