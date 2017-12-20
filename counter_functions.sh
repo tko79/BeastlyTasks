@@ -36,7 +36,7 @@ function get_counter_param() {
 	echo ""
 	return 1
     else
-	counter_from_config=${counter_from_config#counter=$counter_id;} | sed -e 's/\"//g'
+	counter_from_config=${counter_from_config#counter=$counter_id;} | sed -e 's#\"##g'
 	case "$counter_param" in
 	    "description") echo $counter_from_config | awk -F';' '{ print $1 }' ;;
 	    "value")       echo $counter_from_config | awk -F';' '{ print $2 }' ;;
@@ -69,7 +69,7 @@ function set_counter_param() {
 	echo ""
 	return 1
     else
-	counter_from_config=${counter_from_config#counter=$counter_id;} | sed -e 's/\"//g'
+	counter_from_config=${counter_from_config#counter=$counter_id;} | sed -e 's#\"##g'
 
 	local counter_description=$(echo    $counter_from_config | awk -F';' '{ print $1 }')
 	local counter_value=$(echo          $counter_from_config | awk -F';' '{ print $2 }')

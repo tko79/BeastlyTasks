@@ -226,7 +226,7 @@ function get_timer_param() {
 	echo ""
 	return 1
     else
-	timer_from_config=${timer_from_config#timer=$timer_id;} | sed -e 's/\"//g'
+	timer_from_config=${timer_from_config#timer=$timer_id;} | sed -e 's#\"##g'
 	case "$timer_param" in
 	    "description") echo $timer_from_config | awk -F';' '{ print $1 }' ;;
 	    "value")       echo $timer_from_config | awk -F';' '{ print $2 }' ;;
@@ -254,7 +254,7 @@ function set_timer_param() {
 	echo ""
 	return 1
     else
-	timer_from_config=${timer_from_config#timer=$timer_id;} | sed -e 's/\"//g'
+	timer_from_config=${timer_from_config#timer=$timer_id;} | sed -e 's#\"##g'
 
 	local timer_description=$(echo $timer_from_config | awk -F';' '{ print $1 }')
 	local timer_value=$(echo       $timer_from_config | awk -F';' '{ print $2 }')

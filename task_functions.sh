@@ -69,7 +69,7 @@ function get_task_param() {
 	echo ""
 	return 1
     else
-	task_from_config=${task_from_config#task=$task_id;} | sed -e 's/\"//g'
+	task_from_config=${task_from_config#task=$task_id;} | sed -e 's#\"##g'
 	case "$task_param" in
 	    "description") echo $task_from_config | awk -F';' '{ print $1 }' ;;
 	    "label")       echo $task_from_config | awk -F';' '{ print $2 }' ;;
@@ -101,7 +101,7 @@ function set_task_param() {
 	echo ""
 	return 1
     else
-	task_from_config=${task_from_config#task=$task_id;} | sed -e 's/\"//g'
+	task_from_config=${task_from_config#task=$task_id;} | sed -e 's#\"##g'
 
 	local task_description=$(echo $task_from_config | awk -F';' '{ print $1 }')
 	local task_label=$(echo       $task_from_config | awk -F';' '{ print $2 }')

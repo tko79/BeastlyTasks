@@ -56,7 +56,7 @@ function get_config_name() {
 	echo ""
 	return 1
     else
-	echo ${name#name=} | sed -e 's/\"//g'
+	echo ${name#name=} | sed -e 's#\"##g'
     fi
 }
 
@@ -74,7 +74,7 @@ function set_config_name() {
     if [ $? == 1 ]; then
 	echo "name=\""$name"\"" >> $configfile
     else
-	sed -i "s/name=\"${name_from_config}\"/name=\"${name}\"/g" $configfile
+	sed -i "s#name=\"${name_from_config}\"#name=\"${name}\"#g" $configfile
     fi
 }
 
@@ -149,7 +149,7 @@ function get_config_counter() {
 	echo ""
 	return 1
     else
-	echo ${counter_from_config#counter=$counter_id;} | sed -e 's/\"//g'
+	echo ${counter_from_config#counter=$counter_id;} | sed -e 's#\"##g'
     fi
 }
 
@@ -182,7 +182,7 @@ function set_config_counter() {
 	echo ""
 	return 1
     else
-	sed -i "s/counter=$counter_id;\"${counter_from_config}\"/counter=$counter_id;\"$counter_description;$counter_value;$counter_threshold;$counter_below_above;$counter_desc_good;$counter_desc_threshold;$counter_desc_bad\"/g" $configfile
+	sed -i "s#counter=$counter_id;\"${counter_from_config}\"#counter=$counter_id;\"$counter_description;$counter_value;$counter_threshold;$counter_below_above;$counter_desc_good;$counter_desc_threshold;$counter_desc_bad\"#g" $configfile
     fi
 }
 
@@ -247,7 +247,7 @@ function get_config_timer() {
 	echo ""
 	return 1
     else
-	echo ${timer_from_config#timer=$timer_id;} | sed -e 's/\"//g'
+	echo ${timer_from_config#timer=$timer_id;} | sed -e 's#\"##g'
     fi
 }
 
@@ -270,7 +270,7 @@ function set_config_timer() {
 	echo ""
 	return 1
     else
-	sed -i "s/timer=$timer_id;\"${timer_from_config}\"/timer=$timer_id;\"$timer_description;$timer_value\"/g" $configfile
+	sed -i "s#timer=$timer_id;\"${timer_from_config}\"#timer=$timer_id;\"$timer_description;$timer_value\"#g" $configfile
     fi
 }
 
@@ -349,7 +349,7 @@ function get_config_task() {
 	echo ""
 	return 1
     else
-	echo ${task_from_config#task=$task_id;} | sed -e 's/\"//g'
+	echo ${task_from_config#task=$task_id;} | sed -e 's#\"##g'
     fi
 }
 
@@ -386,6 +386,6 @@ function set_config_task() {
 	echo ""
 	return 1
     else
-	sed -i "s/task=$task_id;\"${task_from_config}\"/task=$task_id;\"$task_description;$task_label;$task_status;$task_createdate;$task_duedate;$task_donedate\"/g" $configfile
+	sed -i "s#task=$task_id;\"${task_from_config}\"#task=$task_id;\"$task_description;$task_label;$task_status;$task_createdate;$task_duedate;$task_donedate\"#g" $configfile
     fi
 }
