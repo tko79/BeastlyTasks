@@ -158,7 +158,7 @@ function get_task() {
 	if [ "$format" == "single" ]; then
 	    printf "%s [%s]\n   -> label: %s\n   -> status: %s\n   -> create-/due-/donedate: %s %s %s" "$task_id" "$task_description" "$task_label" "$task_status" "$task_createdate" "$task_duedate" "$task_donedate"
 	else
-	    printf "%-8s %-"${LIST_DESC_WIDTH}"s %-7s %-6s %-10s %-10s %-10s" $task_id "$task_description" $task_label $task_status $task_createdate $task_duedate $task_donedate
+	    printf "%-8s %-"${LIST_DESC_WIDTH}"s %-7s %-6s %-7s %-7s %-7s" $task_id "$task_description" $task_label $task_status $task_createdate $task_duedate $task_donedate
 	fi
     fi
 }
@@ -185,8 +185,8 @@ function list_tasks() {
 	local tasks_table=""
 	local task_id=""
 
-	tasks_table=$COL_WHITE$(printf "%-8s %-"${LIST_DESC_WIDTH}"s %-7s %-6s %-10s %-10s %-10s" "id" "description" "label" "status" "createdate" "duedate" "donedate\n")
-	tasks_table=$tasks_table"---------------------------------------------------------"
+	tasks_table=$COL_WHITE$(printf "%-8s %-"${LIST_DESC_WIDTH}"s %-7s %-6s %-7s %-7s %-6s" "id" "description" "label" "status" "created" "due" "done\n")
+	tasks_table=$tasks_table"------------------------------------------------"
 	while [ $width -lt $LIST_DESC_WIDTH ]; do
             tasks_table=$tasks_table"-"
             width=$[$width+1]
