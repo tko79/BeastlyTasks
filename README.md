@@ -29,6 +29,10 @@ Please also make use of the environment variable `BTPATH`
 beastlytasks.sh. With this option BeastlyTasks can be executed from anywhere
 and not only from the project path.
 
+Running beastlytasks.sh in debug mode can be done with following command:
+
+    bash -x ./beastlytasks.sh
+
 ***
 
 # License
