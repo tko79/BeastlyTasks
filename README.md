@@ -38,8 +38,8 @@ Running beastlytasks.sh in debug mode can be done with following command:
 # Bash Configuration
 
 Here is a possible bash configuration which adds the `BTPATH` environment
-variable and two aliases to execute beastlytasks.sh in normal mode and in debug
-mode:
+variable and two aliases `bt` and `btdbg` to execute beastlytasks.sh in normal
+mode and in debug mode:
 
     export BTPATH="<absolute-path-to-BeastlyTasks>"
     alias bt="$BTPATH/beastlytasks.sh"
