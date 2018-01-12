@@ -56,9 +56,16 @@ source $btpath/task_functions.sh
 show_help() {
     echo -e "$license"
     echo -e ""
+    echo -e "Organize your tasks and daily work!"
+    echo -e "BeastlyTasks helps you to organize your daily to yearly work, from tickling your"
+    echo -e "turtle every day to your annual tax declaration."
+    echo -e ""
+    echo -e "Parameters:"
+    echo -e ""
     printf "$(cat ${btpath}/docs/help.md)\n"
     echo -e ""
-    echo -e "Further documentation can be found in the docs/ directory!"
+    echo -e "Further documentation can be found in the docs/ directory or visit the project"
+    echo -e "page at https://github.com/tko79/BeastlyTasks !"
     echo -e ""
 }
 
