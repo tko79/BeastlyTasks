@@ -18,3 +18,4 @@ misc
 - configurable dashboard
 - calculate some statistics
 - config format: yaml/xml
+- useful command to check length of output: wc -mcL
