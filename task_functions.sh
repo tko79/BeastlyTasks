@@ -73,10 +73,11 @@ function get_task_param() {
 	case "$task_param" in
 	    "description") echo $task_from_config | awk -F';' '{ print $1 }' ;;
 	    "label")       echo $task_from_config | awk -F';' '{ print $2 }' ;;
-	    "status")      echo $task_from_config | awk -F';' '{ print $3 }' ;;
-	    "createdate")  echo $task_from_config | awk -F';' '{ print $4 }' ;;
-	    "duedate")     echo $task_from_config | awk -F';' '{ print $5 }' ;;
-	    "donedate")    echo $task_from_config | awk -F';' '{ print $6 }' ;;
+	    "priority")    echo $task_from_config | awk -F';' '{ print $3 }' ;;
+	    "status")      echo $task_from_config | awk -F';' '{ print $4 }' ;;
+	    "createdate")  echo $task_from_config | awk -F';' '{ print $5 }' ;;
+	    "duedate")     echo $task_from_config | awk -F';' '{ print $6 }' ;;
+	    "donedate")    echo $task_from_config | awk -F';' '{ print $7 }' ;;
 	esac
     fi
 }
@@ -105,21 +106,23 @@ function set_task_param() {
 
 	local task_description=$(echo $task_from_config | awk -F';' '{ print $1 }')
 	local task_label=$(echo       $task_from_config | awk -F';' '{ print $2 }')
-	local task_status=$(echo      $task_from_config | awk -F';' '{ print $3 }')
-	local task_createdate=$(echo  $task_from_config | awk -F';' '{ print $4 }')
-	local task_duedate=$(echo     $task_from_config | awk -F';' '{ print $5 }')
-	local task_donedate=$(echo    $task_from_config | awk -F';' '{ print $6 }')
+	local task_priority=$(echo    $task_from_config | awk -F';' '{ print $3 }')
+	local task_status=$(echo      $task_from_config | awk -F';' '{ print $4 }')
+	local task_createdate=$(echo  $task_from_config | awk -F';' '{ print $5 }')
+	local task_duedate=$(echo     $task_from_config | awk -F';' '{ print $6 }')
+	local task_donedate=$(echo    $task_from_config | awk -F';' '{ print $7 }')
 
 	case "$task_param" in
 	    "description") task_description=$task_newval ;;
 	    "label")       task_label=$task_newval ;;
+	    "priority")    task_priority=$task_newval ;;
 	    "status")      task_status=$task_newval ;;
 	    "createdate")  task_createdate=$task_newval ;;
 	    "duedate")     task_duedate=$task_newval ;;
 	    "donedate")    task_donedate=$task_newval ;;
 	esac
 
-	return $(set_config_task $configfile $task_id "$task_description" $task_label $task_status $task_createdate $task_duedate $task_donedate)
+	return $(set_config_task $configfile $task_id "$task_description" $task_label $task_priority $task_status $task_createdate $task_duedate $task_donedate)
     fi
 }
 
@@ -144,10 +147,11 @@ function get_task() {
     else
 	local task_description=$(echo $task_from_config | awk -F';' '{ print $1 }')
 	local task_label=$(echo       $task_from_config | awk -F';' '{ print $2 }')
-	local task_status=$(echo      $task_from_config | awk -F';' '{ print $3 }')
-	local task_createdate=$(echo  $task_from_config | awk -F';' '{ print $4 }')
-	local task_duedate=$(echo     $task_from_config | awk -F';' '{ print $5 }')
-	local task_donedate=$(echo    $task_from_config | awk -F';' '{ print $6 }')
+	local task_priority=$(echo    $task_from_config | awk -F';' '{ print $3 }')
+	local task_status=$(echo      $task_from_config | awk -F';' '{ print $4 }')
+	local task_createdate=$(echo  $task_from_config | awk -F';' '{ print $5 }')
+	local task_duedate=$(echo     $task_from_config | awk -F';' '{ print $6 }')
+	local task_donedate=$(echo    $task_from_config | awk -F';' '{ print $7 }')
 
 	if [ "$format" == "table" ]; then
             if [ ${#task_description} -gt $desc_width ]; then
@@ -156,9 +160,9 @@ function get_task() {
 	fi
 
 	if [ "$format" == "single" ]; then
-	    printf "%s [%s]\n   -> label: %s\n   -> status: %s\n   -> create-/due-/donedate: %s %s %s" "$task_id" "$task_description" "$task_label" "$task_status" "$task_createdate" "$task_duedate" "$task_donedate"
+	    printf "%s [%s]\n   -> label: %s\n   -> priority: %s\n   -> status: %s\n   -> create-/due-/donedate: %s %s %s" "$task_id" "$task_description" "$task_label" "$task_priority" "$task_status" "$task_createdate" "$task_duedate" "$task_donedate"
 	else
-	    printf "%-8s %-"${LIST_DESC_WIDTH}"s %-7s %-6s %-7s %-7s %-7s" $task_id "$task_description" $task_label $task_status $task_createdate $task_duedate $task_donedate
+	    printf "%-8s %-"${LIST_DESC_WIDTH}"s %-7s %-8s %-6s %-7s %-7s %-7s" $task_id "$task_description" $task_label $task_priority $task_status $task_createdate $task_duedate $task_donedate
 	fi
     fi
 }
@@ -185,8 +189,8 @@ function list_tasks() {
 	local tasks_table=""
 	local task_id=""
 
-	tasks_table=$COL_WHITE$(printf "%-8s %-"${LIST_DESC_WIDTH}"s %-7s %-6s %-7s %-7s %-6s" "id" "description" "label" "status" "created" "due" "done\n")
-	tasks_table=$tasks_table"------------------------------------------------"
+	tasks_table=$COL_WHITE$(printf "%-8s %-"${LIST_DESC_WIDTH}"s %-7s %-8s %-6s %-7s %-7s %-6s" "id" "description" "label" "priority" "status" "created" "due" "done\n")
+	tasks_table=$tasks_table"---------------------------------------------------------"
 	while [ $width -lt $LIST_DESC_WIDTH ]; do
             tasks_table=$tasks_table"-"
             width=$[$width+1]

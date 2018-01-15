@@ -292,10 +292,11 @@ function list_config_tasks() {
 #          $2: unique id
 #          $3: description
 #          $4: label
-#          $5: status {open|done}
-#          $6: create date (format cwcw/yy)
-#          $7: due date (format cwcw/yy)
-#          $8: done date (format cwcw/yy)
+#          $5: priority {0-5}
+#          $6: status {open|done}
+#          $7: create date (format cwcw/yy)
+#          $8: due date (format cwcw/yy)
+#          $9: done date (format cwcw/yy)
 # return   return 1: in case of error (task id already existing)
 #          return 2: in case of error (task status not open or done)
 function add_config_task() {
@@ -303,10 +304,11 @@ function add_config_task() {
     local task_id=$2
     local task_description=$3
     local task_label=$4
-    local task_status=$5
-    local task_createdate=$6
-    local task_duedate=$7
-    local task_donedate=$8
+    local task_priority=$5
+    local task_status=$6
+    local task_createdate=$7
+    local task_duedate=$8
+    local task_donedate=$9
     local task_from_config=""
 
     if [ ! "$task_status" == "open" ] && [ ! "$task_status" == "done" ]; then
@@ -316,7 +318,7 @@ function add_config_task() {
 
     task_from_config=$(get_config_task $configfile $task_id)
     if [ $? == 1 ]; then
-	echo "task=$task_id;\"$task_description;$task_label;$task_status;$task_createdate;$task_duedate;$task_donedate\"" >> $configfile
+	echo "task=$task_id;\"$task_description;$task_label;$task_priority;$task_status;$task_createdate;$task_duedate;$task_donedate\"" >> $configfile
     else
 	return 1
     fi
@@ -359,10 +361,11 @@ function get_config_task() {
 #          $2: unique id
 #          $3: description
 #          $4: label
-#          $5: status {open|done}
-#          $6: create date (format cwcw/yy)
-#          $7: due date (format cwcw/yy)
-#          $8: done date (format cwcw/yy)
+#          $5: priority {0-5}
+#          $6: status {open|done}
+#          $7: create date (format cwcw/yy)
+#          $8: due date (format cwcw/yy)
+#          $9: done date (format cwcw/yy)
 # return   return 1: in case of error (task id not found)
 #          return 2: in case of error (task status not open or done)
 function set_config_task() {
@@ -370,10 +373,11 @@ function set_config_task() {
     local task_id=$2
     local task_description=$3
     local task_label=$4
-    local task_status=$5
-    local task_createdate=$6
-    local task_duedate=$7
-    local task_donedate=$8
+    local task_priority=$5
+    local task_status=$6
+    local task_createdate=$7
+    local task_duedate=$8
+    local task_donedate=$9
     local task_from_config=""
 
     if [ ! "$task_status" == "open" ] && [ ! "$task_status" == "done" ]; then
@@ -386,6 +390,6 @@ function set_config_task() {
 	echo ""
 	return 1
     else
-	sed -i "s#task=$task_id;\"${task_from_config}\"#task=$task_id;\"$task_description;$task_label;$task_status;$task_createdate;$task_duedate;$task_donedate\"#g" $configfile
+	sed -i "s#task=$task_id;\"${task_from_config}\"#task=$task_id;\"$task_description;$task_label;$task_priority;$task_status;$task_createdate;$task_duedate;$task_donedate\"#g" $configfile
     fi
 }

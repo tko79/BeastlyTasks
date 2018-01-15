@@ -278,9 +278,9 @@ if [ $params_cnt -gt 0 ]; then
 		fi
 		;;
 	    "--add-task")
-		if [ "${params_array[$params_curr+7]}" != "" ]; then
-		    # add_config_task $uid $description $task_label $task_status $task_createdate $task_duedate $task_donedate
-		    add_config_task $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}" "${params_array[$params_curr+4]}" "${params_array[$params_curr+5]}" "${params_array[$params_curr+6]}" "${params_array[$params_curr+7]}"
+		if [ "${params_array[$params_curr+8]}" != "" ]; then
+		    # add_config_task $uid $description $label $priority $status $createdate $duedate $donedate
+		    add_config_task $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}" "${params_array[$params_curr+4]}" "${params_array[$params_curr+5]}" "${params_array[$params_curr+6]}" "${params_array[$params_curr+7]}" "${params_array[$params_curr+8]}"
 		    exit 0
 		else
 		    show_params_errormsg "add-task"
