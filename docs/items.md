@@ -6,7 +6,7 @@
 | <sub>counter | <sub>event counter with threshold and value description | <sub>`$uid;"$description;$value;$threshold;$belabo;$descgood;$descthreshold;$descbad"` |
 | <sub>timer   | <sub>timer to count time spent for a task               | <sub>`$uid;"$description;$value"`                                                      |
 | <sub>cal     | <sub>calender entries                                   | <sub>`$uid;"$description;$label;$date"`                                                |
-| <sub>task    | <sub>misc tasks                                         | <sub>`$uid;"$description;$label;$status;$createdate;$duedate;$donedate"`               |
+| <sub>task    | <sub>misc tasks                                         | <sub>`$uid;"$description;$label;$priority;$status;$createdate;$duedate;$donedate"`     |
 | <sub>daily   | <sub>daily tasks                                        | <sub>`$uid;"$description;$label;$status"`                                              |
 | <sub>weekly  | <sub>weekly tasks                                       | <sub>`$uid;"$description;$label;$status;$biweekly"`                                    |
 | <sub>monthly | <sub>monthly tasks                                      | <sub>`$uid;"$description;$label;$status"`                                              |
@@ -67,13 +67,14 @@
 ### task
 
 - description: misc tasks
-- parameters and format in config: `$uid;"$description;$label;$status;$donedate;$duedate"`
+- parameters and format in config: `$uid;"$description;$label;$priority;$status;$donedate;$duedate"`
 
 | <sub>parameter   | <sub>description             | <sub>format              |
 |------------------|------------------------------|--------------------------|
 | <sub>uid         | <sub>unique id               | <sub>string              |
 | <sub>description | <sub>description             | <sub>string              |
 | <sub>label       | <sub>one or more labels/tags | <sub>string              |
+| <sub>priority    | <sub>prio of the task        | <sub>number:{0-5}        |
 | <sub>status      | <sub>status of task          | <sub>string:{open\|done} |
 | <sub>createdate  | <sub>create date of task     | <sub>date:(cwcw/yy)      |
 | <sub>duedate     | <sub>due date of task        | <sub>date:(cwcw/yy)      |
