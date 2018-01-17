@@ -153,6 +153,8 @@ function get_task() {
 	local task_duedate=$(echo     $task_from_config | awk -F';' '{ print $6 }')
 	local task_donedate=$(echo    $task_from_config | awk -F';' '{ print $7 }')
 
+	local prio_text=""
+
 	if [ "$format" == "table" ]; then
             if [ ${#task_description} -gt $desc_width ]; then
 		task_description=${task_description:0:$desc_width}"..."
@@ -160,9 +162,25 @@ function get_task() {
 	fi
 
 	if [ "$format" == "single" ]; then
-	    printf "%s [%s]\n   -> label: %s\n   -> priority: %s\n   -> status: %s\n   -> create-/due-/donedate: %s %s %s" "$task_id" "$task_description" "$task_label" "$task_priority" "$task_status" "$task_createdate" "$task_duedate" "$task_donedate"
+	    case $task_priority in
+		0) prio_text="0 - undefined" ;;
+		1) prio_text="1 - nice to have" ;;
+		2) prio_text="2 - normal" ;;
+		3) prio_text="3 - important" ;;
+		4) prio_text="4 - move ass" ;;
+		5) prio_text="5 - blocking" ;;
+	    esac
+	    printf "%s [%s]\n   -> label: %s\n   -> priority: %s\n   -> status: %s\n   -> create-/due-/donedate: %s %s %s" "$task_id" "$task_description" "$task_label" "$prio_text" "$task_status" "$task_createdate" "$task_duedate" "$task_donedate"
 	else
-	    printf "%-8s %-"${LIST_DESC_WIDTH}"s %-7s %-8s %-6s %-7s %-7s %-7s" $task_id "$task_description" $task_label $task_priority $task_status $task_createdate $task_duedate $task_donedate
+	    case $task_priority in
+		0) prio_text="0" ;;
+		1) prio_text="1 *" ;;
+		2) prio_text="2 **" ;;
+		3) prio_text="3 ***" ;;
+		4) prio_text="4 ****" ;;
+		5) prio_text="5 *****" ;;
+	    esac
+	    printf "%-8s %-"${LIST_DESC_WIDTH}"s %-7s %-8s %-6s %-7s %-7s %-7s" $task_id "$task_description" $task_label "$prio_text" $task_status $task_createdate $task_duedate $task_donedate
 	fi
     fi
 }
