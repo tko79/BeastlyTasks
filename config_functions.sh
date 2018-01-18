@@ -17,6 +17,29 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# function __sort_config
+#          sort the entries in the config file and add sections
+# param    $1: config filename
+# return   <none>
+__sort_config() {
+    local configfile=$1
+    local tmpfile="/tmp/bt"
+
+    echo "[generic]"                    > $tmpfile
+    grep 'name=\"' $configfile         >> $tmpfile
+    echo ""                            >> $tmpfile
+    echo "[counter]"                   >> $tmpfile
+    grep 'counter=' $configfile | sort >> $tmpfile
+    echo ""                            >> $tmpfile
+    echo "[timer]"                     >> $tmpfile
+    grep 'timer=' $configfile | sort   >> $tmpfile
+    echo ""                            >> $tmpfile
+    echo "[tasks]"                     >> $tmpfile
+    grep 'task=' $configfile | sort    >> $tmpfile
+
+    mv -f $tmpfile $configfile
+}
+
 # function check_configfile
 #          check if a config file exists
 # param    $1: config filename
