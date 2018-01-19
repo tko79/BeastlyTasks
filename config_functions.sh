@@ -99,6 +99,8 @@ function set_config_name() {
     else
 	sed -i "s#name=\"${name_from_config}\"#name=\"${name}\"#g" $configfile
     fi
+
+    __sort_config $configfile
 }
 
 # function list_config_counters
@@ -143,6 +145,8 @@ function add_config_counter() {
     else
 	return 1
     fi
+
+    __sort_config $configfile
 }
 
 # function del_config_counter
@@ -241,6 +245,8 @@ function add_config_timer() {
     else
 	return 1
     fi
+
+    __sort_config $configfile
 }
 
 # function del_config_timer
@@ -345,6 +351,8 @@ function add_config_task() {
     else
 	return 1
     fi
+
+    __sort_config $configfile
 }
 
 # function del_config_task
