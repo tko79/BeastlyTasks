@@ -7,8 +7,9 @@ misc:
                                         UNTIL date
   --sum-10h-timers TIMER1 TIMER2        sumup 10h-timers TIMER1 and TIMER2
   --swl FORMAT START UNTIL STARTITEMS   show what's left in FORMAT:normal|csv|
-        CURRENTITEMS                    conky using: START date, UNTIL date,
-                                        #START-ITEMS and #CURRENT-ITEMS
+        CURRENTITEMS                    conky using: START date:d:hh:mm, UNTIL
+                                        date:d:hh:mm, #START-ITEMS and
+                                        #CURRENT-ITEMS
   --cti NAME START END (IMPO)           create task image with NAME, START week,
                                         END week and (optional) (IMPO:impo) flag
 

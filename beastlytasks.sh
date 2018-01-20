@@ -64,7 +64,7 @@ show_help() {
     echo -e ""
     printf "$(cat ${btpath}/docs/help.md)\n"
     echo -e ""
-    echo -e "Further documentation can be found in the docs/ directory or visit the project"
+    echo -e "Further documentation can be found in the docs/ directory or on the project"
     echo -e "page at https://github.com/tko79/BeastlyTasks !"
     echo -e ""
 }
