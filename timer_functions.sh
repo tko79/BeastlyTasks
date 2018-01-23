@@ -299,7 +299,10 @@ function get_timer() {
 	if [ "$format" == "single" ]; then
 	    printf "%s [%s]\n   -> %s" "$timer_id" "$timer_description" $timer_value
 	else
-	    printf "%-8s %-"${LIST_DESC_WIDTH}"s %s" "$timer_id" "$timer_description" $timer_value
+	    local dlb=$(echo $timer_description | wc -c)
+	    local dlc=$(echo $timer_description | wc -m)
+	    desc_width=$[$LIST_DESC_WIDTH+$dlb-$dlc]
+	    printf "%-8s %-"$desc_width"s %s" "$timer_id" "$timer_description" $timer_value
 	fi
     fi
 }
