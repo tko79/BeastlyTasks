@@ -212,7 +212,10 @@ function get_counter() {
 	if [ "$format" == "single" ]; then
 	    printf "%s [%s]\n   -> cnt=%d %s" "$counter_id" "$counter_description" $counter_value "$counter_val_desc"
 	else
-	    printf "%-8s %-"${LIST_DESC_WIDTH}"s %3d %s" "$counter_id" "$counter_description" $counter_value "$counter_val_desc"
+	    local dlb=$(echo $counter_description | wc -c)
+	    local dlc=$(echo $counter_description | wc -m)
+	    desc_width=$[$LIST_DESC_WIDTH+$dlb-$dlc]
+	    printf "%-8s %-"$desc_width"s %3d %s" "$counter_id" "$counter_description" $counter_value "$counter_val_desc"
 	fi
     fi
 }
