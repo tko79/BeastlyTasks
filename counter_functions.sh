@@ -210,7 +210,7 @@ function get_counter() {
 	fi
 
 	if [ "$format" == "single" ]; then
-	    printf "%s [%s]\n   -> cnt=%d %s" "$counter_id" "$counter_description" $counter_value "$counter_val_desc"
+	    printf "%s [%s]\n   -> cnt=%d %s\n   -> good %s %d\n   -> good: %s\n   -> threshold: %s\n   -> bad: %s" $counter_id "$counter_description" $counter_value "$counter_val_desc" $counter_below_above $counter_threshold "$counter_desc_good" "$counter_desc_threshold" "$counter_desc_bad"
 	else
 	    local dlb=$(echo $counter_description | wc -c)
 	    local dlc=$(echo $counter_description | wc -m)
