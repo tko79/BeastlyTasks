@@ -171,7 +171,7 @@ function get_counter() {
     local format=$3
 
     local counter_from_config=""
-    local desc_width=$[$LIST_DESC_WIDTH-3]
+    local desc_width=$(($LIST_DESC_WIDTH-3))
 
     counter_from_config=$(get_config_counter $configfile $counter_id)
     if [ $? == 1 ]; then
@@ -214,7 +214,7 @@ function get_counter() {
 	else
 	    local dlb=$(echo $counter_description | wc -c)
 	    local dlc=$(echo $counter_description | wc -m)
-	    desc_width=$[$LIST_DESC_WIDTH+$dlb-$dlc]
+	    desc_width=$(($LIST_DESC_WIDTH+$dlb-$dlc))
 	    printf "%-8s %-"$desc_width"s %3d %s" "$counter_id" "$counter_description" $counter_value "$counter_val_desc"
 	fi
     fi
@@ -246,7 +246,7 @@ function list_counters() {
 	counters_table=$counters_table"-------------------------------------------"
 	while [ $width -lt $LIST_DESC_WIDTH ]; do
 	    counters_table=$counters_table"-"
-	    width=$[$width+1]
+	    width=$(($width+1))
 	done
 	counters_table=$counters_table$COL_DEFAULT"\n"
 

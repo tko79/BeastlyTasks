@@ -139,7 +139,7 @@ function get_task() {
     local format=$3
 
     local task_from_config=""
-    local desc_width=$[$LIST_DESC_WIDTH-3]
+    local desc_width=$(($LIST_DESC_WIDTH-3))
 
     task_from_config=$(get_config_task $configfile $task_id)
     if [ $? == 1 ]; then
@@ -174,7 +174,7 @@ function get_task() {
 	else
 	    local dlb=$(echo $task_description | wc -c)
 	    local dlc=$(echo $task_description | wc -m)
-	    desc_width=$[$LIST_DESC_WIDTH+$dlb-$dlc]
+	    desc_width=$(($LIST_DESC_WIDTH+$dlb-$dlc))
 	    case $task_priority in
 		0) prio_text="0" ;;
 		1) prio_text="1 *" ;;
@@ -214,7 +214,7 @@ function list_tasks() {
 	tasks_table=$tasks_table"---------------------------------------------------------"
 	while [ $width -lt $LIST_DESC_WIDTH ]; do
             tasks_table=$tasks_table"-"
-            width=$[$width+1]
+            width=$(($width+1))
 	done
 	tasks_table=$tasks_table$COL_DEFAULT"\n"
 

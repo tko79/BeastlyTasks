@@ -281,7 +281,7 @@ function get_timer() {
     local format=$3
 
     local timer_from_config=""
-    local desc_width=$[$LIST_DESC_WIDTH-3]
+    local desc_width=$(($LIST_DESC_WIDTH-3))
 
     timer_from_config=$(get_config_timer $configfile $timer_id)
     if [ $? == 1 ]; then
@@ -301,7 +301,7 @@ function get_timer() {
 	else
 	    local dlb=$(echo $timer_description | wc -c)
 	    local dlc=$(echo $timer_description | wc -m)
-	    desc_width=$[$LIST_DESC_WIDTH+$dlb-$dlc]
+	    desc_width=$(($LIST_DESC_WIDTH+$dlb-$dlc))
 	    printf "%-8s %-"$desc_width"s %s" "$timer_id" "$timer_description" $timer_value
 	fi
     fi
@@ -333,7 +333,7 @@ function list_timers() {
 	timers_table=$timers_table"------------------"
 	while [ $width -lt $LIST_DESC_WIDTH ]; do
             timers_table=$timers_table"-"
-            width=$[$width+1]
+            width=$(($width+1))
 	done
 	timers_table=$timers_table$COL_DEFAULT"\n"
 
