@@ -76,9 +76,9 @@
 | <sub>label       | <sub>one or more labels/tags | <sub>string              |
 | <sub>priority    | <sub>prio of the task        | <sub>number:{0-5}        |
 | <sub>status      | <sub>status of task          | <sub>string:{open\|done} |
-| <sub>createdate  | <sub>create date of task     | <sub>date:(cwcw/yy)      |
-| <sub>duedate     | <sub>due date of task        | <sub>date:(cwcw/yy)      |
-| <sub>donedate    | <sub>done date of task       | <sub>date:(cwcw/yy)      |
+| <sub>createdate  | <sub>create date of task     | <sub>date:(cw/yy)        |
+| <sub>duedate     | <sub>due date of task        | <sub>date:(cw/yy)        |
+| <sub>donedate    | <sub>done date of task       | <sub>date:(cw/yy)        |
 
 ### daily
 
@@ -128,4 +128,4 @@
 | <sub>description | <sub>description             | <sub>string              |
 | <sub>label       | <sub>one or more labels/tags | <sub>string              |
 | <sub>status      | <sub>status of task          | <sub>string:{open\|done} |
-| <sub>duedate     | <sub>due date of task        | <sub>date:(cwcw/yy)      |
+| <sub>duedate     | <sub>due date of task        | <sub>date:(cw/yy)        |

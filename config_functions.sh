@@ -323,9 +323,9 @@ function list_config_tasks() {
 #          $4: label
 #          $5: priority {0-5}
 #          $6: status {open|done}
-#          $7: create date (format cwcw/yy)
-#          $8: due date (format cwcw/yy)
-#          $9: done date (format cwcw/yy)
+#          $7: create date (format cw/yy)
+#          $8: due date (format cw/yy)
+#          $9: done date (format cw/yy)
 # return   return 1: in case of error (task id already existing)
 #          return 2: in case of error (task status not open or done)
 function add_config_task() {
@@ -394,9 +394,9 @@ function get_config_task() {
 #          $4: label
 #          $5: priority {0-5}
 #          $6: status {open|done}
-#          $7: create date (format cwcw/yy)
-#          $8: due date (format cwcw/yy)
-#          $9: done date (format cwcw/yy)
+#          $7: create date (format cw/yy)
+#          $8: due date (format cw/yy)
+#          $9: done date (format cw/yy)
 # return   return 1: in case of error (task id not found)
 #          return 2: in case of error (task status not open or done)
 function set_config_task() {
