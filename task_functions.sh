@@ -89,6 +89,7 @@ function get_task_param() {
 #          $3: task parameter
 #          $4: new value for parameter
 # return   return 1: in case of error (get_config_task failed)
+#          return 2: in case of error (wrong create-/due-/donedate format)
 function set_task_param() {
     local configfile=$1
     local task_id=$2
@@ -111,6 +112,14 @@ function set_task_param() {
 	local task_createdate=$(echo  $task_from_config | awk -F';' '{ print $5 }')
 	local task_duedate=$(echo     $task_from_config | awk -F';' '{ print $6 }')
 	local task_donedate=$(echo    $task_from_config | awk -F';' '{ print $7 }')
+
+	case "$task_param" in
+	    "createdate" | "duedate" | "donedate")
+		if [[ ! $task_newval == [0-9][0-9]"/"[0-9][0-9] ]]; then
+		    return 2
+		fi
+	    ;;
+	esac
 
 	case "$task_param" in
 	    "description") task_description=$task_newval ;;
