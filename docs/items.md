@@ -30,27 +30,27 @@
 - description: event counter with threshold and value description
 - parameters and format in config: `$uid;"$description;$value;$threshold;$belabo;$descgood;$descthreshold;$descbad"`
 
-| <sub>parameter     | <sub>description            | <sub>format                |
-|--------------------|-----------------------------|----------------------------|
-| <sub>uid           | <sub>unique id              | <sub>string                |
-| <sub>description   | <sub>description            | <sub>string                |
-| <sub>value         | <sub>current value          | <sub>number                |
-| <sub>threshold     | <sub>threshold value        | <sub>number                |
-| <sub>belabo        | <sub>below or above is good | <sub>string:{below\|above} |
-| <sub>descgood      | <sub>description good       | <sub>string                |
-| <sub>descthreshold | <sub>description threshold  | <sub>string                |
-| <sub>descbad       | <sub>description bad        | <sub>string                |
+| <sub>parameter     | <sub>description             | <sub>format                |
+|--------------------|------------------------------|----------------------------|
+| <sub>uid           | <sub>unique id (10 char max) | <sub>string                |
+| <sub>description   | <sub>description             | <sub>string                |
+| <sub>value         | <sub>current value           | <sub>number                |
+| <sub>threshold     | <sub>threshold value         | <sub>number                |
+| <sub>belabo        | <sub>below or above is good  | <sub>string:{below\|above} |
+| <sub>descgood      | <sub>description good        | <sub>string                |
+| <sub>descthreshold | <sub>description threshold   | <sub>string                |
+| <sub>descbad       | <sub>description bad         | <sub>string                |
 
 ### timer
 
 - description: timer to count time spent for a task
 - parameters and format in config: `$uid;"$description;$value"`
 
-| <sub>parameter   | <sub>description   | <sub>format          |
-|------------------|--------------------|----------------------|
-| <sub>uid         | <sub>unique id     | <sub>string          |
-| <sub>description | <sub>description   | <sub>string          |
-| <sub>value       | <sub>current value | <sub>time:(hh:mm:ss) |
+| <sub>parameter   | <sub>description             | <sub>format          |
+|------------------|------------------------------|----------------------|
+| <sub>uid         | <sub>unique id (10 char max) | <sub>string          |
+| <sub>description | <sub>description             | <sub>string          |
+| <sub>value       | <sub>current value           | <sub>time:(hh:mm:ss) |
 
 ### cal
 
@@ -59,7 +59,7 @@
 
 | <sub>parameter   | <sub>description             | <sub>format            |
 |------------------|------------------------------|------------------------|
-| <sub>uid         | <sub>unique id               | <sub>string            |
+| <sub>uid         | <sub>unique id (10 char max) | <sub>string            |
 | <sub>description | <sub>description             | <sub>string            |
 | <sub>label       | <sub>one or more labels/tags | <sub>string            |
 | <sub>date        | <sub>date of entry           | <sub>date:(dd.mm.yyyy) |
@@ -71,7 +71,7 @@
 
 | <sub>parameter   | <sub>description             | <sub>format              |
 |------------------|------------------------------|--------------------------|
-| <sub>uid         | <sub>unique id               | <sub>string              |
+| <sub>uid         | <sub>unique id (10 char max) | <sub>string              |
 | <sub>description | <sub>description             | <sub>string              |
 | <sub>label       | <sub>one or more labels/tags | <sub>string              |
 | <sub>priority    | <sub>prio of the task        | <sub>number:{0-5}        |
@@ -87,7 +87,7 @@
 
 | <sub>parameter   | <sub>description             | <sub>format              |
 |------------------|------------------------------|--------------------------|
-| <sub>uid         | <sub>unique id               | <sub>string              |
+| <sub>uid         | <sub>unique id (10 char max) | <sub>string              |
 | <sub>description | <sub>description             | <sub>string              |
 | <sub>label       | <sub>one or more labels/tags | <sub>string              |
 | <sub>status      | <sub>status of task          | <sub>string:{open\|done} |
@@ -99,7 +99,7 @@
 
 | <sub>parameter   | <sub>description             | <sub>format              |
 |------------------|------------------------------|--------------------------|
-| <sub>uid         | <sub>unique id               | <sub>string              |
+| <sub>uid         | <sub>unique id (10 char max) | <sub>string              |
 | <sub>description | <sub>description             | <sub>string              |
 | <sub>label       | <sub>one or more labels/tags | <sub>string              |
 | <sub>status      | <sub>status of task          | <sub>string:{open\|done} |
@@ -112,7 +112,7 @@
 
 | <sub>parameter   | <sub>description             | <sub>format              |
 |------------------|------------------------------|--------------------------|
-| <sub>uid         | <sub>unique id               | <sub>string              |
+| <sub>uid         | <sub>unique id (10 char max) | <sub>string              |
 | <sub>description | <sub>description             | <sub>string              |
 | <sub>label       | <sub>one or more labels/tags | <sub>string              |
 | <sub>status      | <sub>status of task          | <sub>string:{open\|done} |
@@ -124,7 +124,7 @@
 
 | <sub>parameter   | <sub>description             | <sub>format              |
 |------------------|------------------------------|--------------------------|
-| <sub>uid         | <sub>unique id               | <sub>string              |
+| <sub>uid         | <sub>unique id (10 char max) | <sub>string              |
 | <sub>description | <sub>description             | <sub>string              |
 | <sub>label       | <sub>one or more labels/tags | <sub>string              |
 | <sub>status      | <sub>status of task          | <sub>string:{open\|done} |
