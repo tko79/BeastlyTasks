@@ -192,7 +192,7 @@ function get_task() {
 		4) prio_text="4 ****" ;;
 		5) prio_text="5 *****" ;;
 	    esac
-	    printf "%-8s %-"$desc_width"s %-7s %-8s %-6s %-7s %-7s %-7s" $task_id "$task_description" $task_label "$prio_text" $task_status $task_createdate $task_duedate $task_donedate
+	    printf "%-10s %-"$desc_width"s %-7s %-8s %-6s %-7s %-7s %-7s" $task_id "$task_description" $task_label "$prio_text" $task_status $task_createdate $task_duedate $task_donedate
 	fi
     fi
 }
@@ -219,8 +219,8 @@ function list_tasks() {
 	local tasks_table=""
 	local task_id=""
 
-	tasks_table=$COL_WHITE$(printf "%-8s %-"${LIST_DESC_WIDTH}"s %-7s %-8s %-6s %-7s %-7s %-6s" "id" "description" "label" "priority" "status" "created" "due" "done\n")
-	tasks_table=$tasks_table"---------------------------------------------------------"
+	tasks_table=$COL_WHITE$(printf "%-10s %-"${LIST_DESC_WIDTH}"s %-7s %-8s %-6s %-7s %-7s %-6s" "id" "description" "label" "priority" "status" "created" "due" "done\n")
+	tasks_table=$tasks_table"-----------------------------------------------------------"
 	while [ $width -lt $LIST_DESC_WIDTH ]; do
             tasks_table=$tasks_table"-"
             width=$(($width+1))

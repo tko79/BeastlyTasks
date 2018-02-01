@@ -302,7 +302,7 @@ function get_timer() {
 	    local dlb=$(echo $timer_description | wc -c)
 	    local dlc=$(echo $timer_description | wc -m)
 	    desc_width=$(($LIST_DESC_WIDTH+$dlb-$dlc))
-	    printf "%-8s %-"$desc_width"s %s" "$timer_id" "$timer_description" $timer_value
+	    printf "%-10s %-"$desc_width"s %s" "$timer_id" "$timer_description" $timer_value
 	fi
     fi
 }
@@ -329,8 +329,8 @@ function list_timers() {
 	local timers_table=""
 	local timer_id=""
 
-	timers_table=$COL_WHITE$(printf "%-8s %-"${LIST_DESC_WIDTH}"s %s" "id" "description" "value\n")
-	timers_table=$timers_table"------------------"
+	timers_table=$COL_WHITE$(printf "%-10s %-"${LIST_DESC_WIDTH}"s %s" "id" "description" "value\n")
+	timers_table=$timers_table"--------------------"
 	while [ $width -lt $LIST_DESC_WIDTH ]; do
             timers_table=$timers_table"-"
             width=$(($width+1))
