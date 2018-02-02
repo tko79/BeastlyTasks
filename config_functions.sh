@@ -127,6 +127,7 @@ function list_config_counters() {
 #          $8: text, when counter equals threshold value
 #          $9: text, when counter is bad
 # return   return 1: in case of error (counter id already existing)
+#          return 2: in case of error (counter id too long)
 function add_config_counter() {
     local configfile=$1
     local counter_id=$2
@@ -138,6 +139,10 @@ function add_config_counter() {
     local counter_desc_threshold=$8
     local counter_desc_bad=$9
     local counter_from_config=""
+
+    if [ ${#counter_id} -gt 10 ]; then
+       return 2
+    fi
 
     counter_from_config=$(get_config_counter $configfile $counter_id)
     if [ $? == 1 ]; then
@@ -232,12 +237,17 @@ function list_config_timers() {
 #          $3: description
 #          $4: start value
 # return   return 1: in case of error (timer id already existing)
+#          return 2: in case of error (timer id too long)
 function add_config_timer() {
     local configfile=$1
     local timer_id=$2
     local timer_description=$3
     local timer_value=$4
     local timer_from_config=""
+
+    if [ ${#timer_id} -gt 10 ]; then
+	return 2
+    fi
 
     timer_from_config=$(get_config_timer $configfile $timer_id)
     if [ $? == 1 ]; then
@@ -329,6 +339,7 @@ function list_config_tasks() {
 # return   return 1: in case of error (task id already existing)
 #          return 2: in case of error (task status not open or done)
 #          return 3: in case of error (wrong create-/due-/donedate format)
+#          return 4: in case of error (task id too long)
 function add_config_task() {
     local configfile=$1
     local task_id=$2
@@ -356,6 +367,10 @@ function add_config_task() {
     if [[ ! $task_donedate == [0-9][0-9]"/"[0-9][0-9] ]]; then
 	echo ""
 	return 3
+    fi
+
+    if [ ${#task_id} -gt 10 ]; then
+	return 4
     fi
 
     task_from_config=$(get_config_task $configfile $task_id)
