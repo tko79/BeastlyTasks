@@ -34,6 +34,9 @@ __sort_config() {
     echo "[timer]"                     >> $tmpfile
     grep 'timer=' $configfile | sort   >> $tmpfile
     echo ""                            >> $tmpfile
+    echo "[cal]"                       >> $tmpfile
+    grep 'cal=' $configfile | sort     >> $tmpfile
+    echo ""                            >> $tmpfile
     echo "[tasks]"                     >> $tmpfile
     grep 'task=' $configfile | sort    >> $tmpfile
 
@@ -310,6 +313,111 @@ function set_config_timer() {
 	return 1
     else
 	sed -i "s#timer=$timer_id;\"${timer_from_config}\"#timer=$timer_id;\"$timer_description;$timer_value\"#g" $configfile
+    fi
+}
+
+# function list_config_cal
+#          get cal from config
+# param    $1: config filename
+# return   echo cal from config
+function list_config_cal() {
+    local configfile=$1
+    local cal_from_config=""
+
+    cal_from_config=$(grep "cal=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
+    echo $cal_from_config
+}
+
+# function add_config_cal
+#          add cal to config
+# param    $1: config filename
+#          $2: unique id
+#          $3: description
+#          $4: label
+#          $5: date (format dd.mm.yyyy)
+# return   return 1: in case of error (cal id already existing)
+#          return 2: in case of error (wrong date format)
+#          return 3: in case of error (cal id too long)
+function add_config_cal() {
+    local configfile=$1
+    local cal_id=$2
+    local cal_description=$3
+    local cal_label=$4
+    local cal_date=$5
+    local cal_from_config=""
+
+    if [[ ! $cal_date == [0-9][0-9]"."[0-9][0-9]".2"[0-9][0-9][0-9] ]]; then
+	echo ""
+	return 2
+    fi
+
+    if [ ${#cal_id} -gt 10 ]; then
+	return 3
+    fi
+
+    cal_from_config=$(get_config_cal $configfile $cal_id)
+    if [ $? == 1 ]; then
+	echo "cal=$cal_id;\"$cal_description;$cal_label;$cal_date\"" >> $configfile
+    else
+	return 1
+    fi
+
+    __sort_config $configfile
+}
+
+# function del_config_cal
+#          delete cal from config
+# param    $1: config filename
+#          $2: unique id
+# return   <none>
+function del_config_cal() {
+    local configfile=$1
+    local cal_id=$2
+
+    sed -i "/cal=$cal_id;/d" $configfile
+}
+
+# function get_config_cal
+#          get cal from config
+# param    $1: config filename
+#          $2: unique id
+# return   return 1: in case of error (cal id not found)
+function get_config_cal() {
+    local configfile=$1
+    local cal_id=$2
+    local cal_from_config=""
+
+    cal_from_config=$(grep "cal=$cal_id;" $configfile)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	echo ${cal_from_config#cal=$cal_id;} | sed -e 's#\"##g'
+    fi
+}
+
+# function set_config_cal
+#          set cal to config
+# param    $1: config filename
+#          $2: unique id
+#          $3: description
+#          $4: label
+#          $5: date (format dd.mm.yyyy)
+# return   return 1: in case of error (cal id not found)
+function set_config_cal() {
+    local configfile=$1
+    local cal_id=$2
+    local cal_description=$3
+    local cal_label=$4
+    local cal_date=$5
+    local cal_from_config=""
+
+    cal_from_config=$(get_config_cal $configfile $cal_id)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	sed -i "s#cal=$cal_id;\"${cal_from_config}\"#cal=$cal_id;\"$cal_description;$cal_label;$cal_date\"#g" $configfile
     fi
 }
 
