@@ -47,6 +47,7 @@ fi
 source $btpath/config_functions.sh
 source $btpath/timer_functions.sh
 source $btpath/counter_functions.sh
+source $btpath/cal_functions.sh
 source $btpath/task_functions.sh
 
 # function show_help
