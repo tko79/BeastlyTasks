@@ -346,7 +346,7 @@ function add_config_cal() {
     local cal_date=$5
     local cal_from_config=""
 
-    if [[ ! $cal_date == [0-9][0-9]"."[0-9][0-9]".2"[0-9][0-9][0-9] ]]; then
+    if [[ ! $cal_date == [0-9][0-9]"."[0-9][0-9]".20"[0-9][0-9] ]]; then
 	echo ""
 	return 2
     fi

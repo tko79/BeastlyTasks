@@ -74,7 +74,7 @@ function set_cal_param() {
 
 	case "$cal_param" in
 	    "date")
-		if [[ ! $cal_newval == [0-9][0-9]"."[0-9][0-9]".2"[0-9][0-9][0-9] ]]; then
+		if [[ ! $cal_newval == [0-9][0-9]"."[0-9][0-9]".20"[0-9][0-9] ]]; then
 		    return 2
 		fi
 	    ;;
