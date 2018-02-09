@@ -268,6 +268,53 @@ if [ $params_cnt -gt 0 ]; then
 		fi
 		;;
 
+	    # item parameters: cal
+	    "--list-cal")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # list_cal $format
+		    printf "$(list_cal $configfile ${params_array[$params_curr+1]})\n"
+		    exit 0
+		else
+		    show_params_errormsg "list-cal"
+		fi
+		;;
+	    "--add-cal")
+		if [ "${params_array[$params_curr+4]}" != "" ]; then
+		    # add_config_cal $uid $description $label $date
+		    add_config_cal $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}" "${params_array[$params_curr+4]}"
+		    exit 0
+		else
+		    show_params_errormsg "add-cal"
+		fi
+		;;
+	    "--get-cal")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # get_cal $uid 'single'
+		    printf "$(get_cal $configfile ${params_array[$params_curr+1]} 'single')\n"
+		    exit 0
+		else
+		    show_params_errormsg "get-cal"
+		fi
+		;;
+	    "--set-cal")
+		if [ "${params_array[$params_curr+3]}" != "" ]; then
+		    # set_cal_param $uid $param $newval
+		    set_cal_param $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}"
+		    exit 0
+		else
+		    show_params_errormsg "set-cal"
+		fi
+		;;
+	    "--del-cal")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # del_config_cal $uid
+		    del_config_cal $configfile "${params_array[$params_curr+1]}"
+		    exit 0
+		else
+		    show_params_errormsg "del-cal"
+		fi
+		;;
+
 	    # item parameters: tasks
 	    "--list-tasks")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
