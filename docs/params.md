@@ -72,6 +72,24 @@
 | <sub>set-timer   | <sub>write | <sub>set_timer_param   | <sub>uid param newval      |
 | <sub>del-timer   | <sub>write | <sub>del_config_timer  | <sub>uid                   |
 
+## cal
+
+| <sub>parameter | <sub>description                                                 |
+|----------------|------------------------------------------------------------------|
+| <sub>list-cal  | <sub>list all cal in {format:list\|table}                        |
+| <sub>add-cal   | <sub>add a new cal with {uid}, {description}, {label} and {date} |
+| <sub>get-cal   | <sub>get value of cal {uid}                                      |
+| <sub>set-cal   | <sub>set {newval} of {param} for cal {uid}                       |
+| <sub>del-cal   | <sub>delete cal {uid}                                            |
+
+| <sub>parameter | <sub>rd/wr | <sub>internal function | <sub>params array               |
+|----------------|------------|------------------------|---------------------------------|
+| <sub>list-cal  | <sub>read  | <sub>list_cal          | <sub>format                     |
+| <sub>add-cal   | <sub>write | <sub>add_config_cal    | <sub>uid description label date |
+| <sub>get-cal   | <sub>read  | <sub>get_cal           | <sub>uid                        |
+| <sub>set-cal   | <sub>write | <sub>set_cal_param     | <sub>uid param newval           |
+| <sub>del-cal   | <sub>write | <sub>del_config_cal    | <sub>uid                        |
+
 ## tasks
 
 | <sub>parameter  | <sub>description                                                                                                              |

@@ -38,6 +38,15 @@ timers:
                                         for timer UID
   --del-timer UID                       delete timer UID
 
+calendar:
+  --list-cal FORMAT                     list all cal in FORMAT:list|table
+  --add-cal UID DESCRIPTION LABEL DATE  add a new cal with UID, DESCRIPTION,
+                                        LABEL and DATE
+  --get-cal UID                         get value of cal UID
+  --set-cal UID PARAM NEWVAL            set NEWVAL of PARAM:description|label|
+                                        date for cal UID
+  --del-cal UID                         delete cal UID
+
 tasks:
   --list-tasks FORMAT                   list all tasks in FORMAT:list|table
   --add-task UID DESCRIPTION LABEL      add a new task with UID, DESCRIPTION,
