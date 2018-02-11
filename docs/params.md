@@ -100,10 +100,10 @@
 | <sub>set-task   | <sub>set {newval} of {param} for task {uid}                                                                                   |
 | <sub>del-task   | <sub>delete task {uid}                                                                                                        |
 
-| <sub>parameter  | <sub>rd/wr | <sub>internal function | <sub>params array                                                         |
-|-----------------|------------|------------------------|---------------------------------------------------------------------------|
-| <sub>list-tasks | <sub>read  | <sub>list_tasks        | <sub>format                                                               |
-| <sub>add-task   | <sub>write | <sub>add_config_task   | <sub>uid description, label, priority, status, create-, due- and donedate |
-| <sub>get-task   | <sub>read  | <sub>get_task          | <sub>uid                                                                  |
-| <sub>set-task   | <sub>write | <sub>set_task_param    | <sub>uid param newval                                                     |
-| <sub>del-task   | <sub>write | <sub>del_config_task   | <sub>uid                                                                  |
+| <sub>parameter  | <sub>rd/wr | <sub>internal function | <sub>params array                                                      |
+|-----------------|------------|------------------------|------------------------------------------------------------------------|
+| <sub>list-tasks | <sub>read  | <sub>list_tasks        | <sub>format                                                            |
+| <sub>add-task   | <sub>write | <sub>add_config_task   | <sub>uid description label priority status createdate duedate donedate |
+| <sub>get-task   | <sub>read  | <sub>get_task          | <sub>uid                                                               |
+| <sub>set-task   | <sub>write | <sub>set_task_param    | <sub>uid param newval                                                  |
+| <sub>del-task   | <sub>write | <sub>del_config_task   | <sub>uid                                                               |
