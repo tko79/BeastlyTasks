@@ -20,3 +20,4 @@ misc
 - config format: yaml/xml
 - useful command to check length of output: wc -mcL
 - WEEKOFFSET=$[ $(date +"%V") % 2 ]
+- get day of year from date: date -d "01/01/2018+365days" +%j
