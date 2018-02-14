@@ -17,6 +17,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+function show_cal() {
+    echo "calender"
+}
+
 # function get_cal_param
 #          wrapper to get cal parameter (description, status, ...)
 # param    $1: config filename

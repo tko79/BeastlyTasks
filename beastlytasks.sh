@@ -141,6 +141,11 @@ if [ $params_cnt -gt 0 ]; then
 		    show_params_errormsg "cti"
 		fi
 		;;
+	    "--show-cal")
+		# show calendar
+		echo $(show_cal $configfile)
+		exit 0
+		;;
 	    "--help")
 		# show help text
 		show_help
