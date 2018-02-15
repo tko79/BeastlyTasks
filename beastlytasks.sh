@@ -143,7 +143,7 @@ if [ $params_cnt -gt 0 ]; then
 		;;
 	    "--show-cal")
 		# show calendar
-		echo $(show_cal $configfile)
+		printf "$(show_cal $configfile)"
 		exit 0
 		;;
 	    "--help")

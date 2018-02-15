@@ -18,7 +18,33 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 function show_cal() {
-    echo "calender"
+    local year="2018"
+    local cnt_days=""
+    local day=""
+    local cal=""
+    local week=""
+
+    # do we have a leapyear or a normal year?
+    if [ $(date -d "01/01/"${year}"+365days" +"%j") -eq 355 ]; then
+	let cnt_days=366
+    else
+	let cnt_days=365
+    fi
+
+    let day=0
+    let week=0
+
+    while [ $day -lt $cnt_days ]; do
+	if [ $(date -d "01/01/"${year}"+"$day"days" +"%V") -gt $week ]; then
+	    week=$(($week+1))
+	    cal=$cal"\n"$(printf "cw%02d/%d:" $week $year)"\n"
+	fi
+
+	cal=$cal$(date -d "01/01/"$year"+"$day"days" +"%d.%m.%Y")"\n"
+	day=$(($day+1))
+    done
+
+    printf "%s" $cal
 }
 
 # function get_cal_param
