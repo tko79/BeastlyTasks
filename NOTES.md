@@ -19,5 +19,4 @@ misc
 - calculate some statistics
 - config format: yaml/xml
 - useful command to check length of output: wc -mcL
-- WEEKOFFSET=$[ $(date +"%V") % 2 ]
-- get day of year from date: date -d "01/01/2018+365days" +%j
+- regular expressions (start of line, \s, @(searchstring), ...): ^\s@
