@@ -37,7 +37,7 @@ function show_cal() {
     while [ $day -lt $cnt_days ]; do
 	if [ $(date -d "01/01/"${year}"+"$day"days" +"%V") -gt $week ]; then
 	    week=$(($week+1))
-	    cal=$cal"\n"$(printf "cw%02d/%d:" $week $year)"\n"
+	    cal=$cal"\n"$COL_WHITE$(printf "cw%02d/%d:" $week $year)$COL_DEFAULT"\n"
 	fi
 
 	cal=$cal$(date -d "01/01/"$year"+"$day"days" +"%d.%m.%Y")"\n"
