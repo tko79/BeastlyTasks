@@ -18,29 +18,42 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 function show_cal() {
-    local year="2018"
-    local cnt_days=""
-    local day=""
-    local cal=""
-    local week=""
+    local opt=$2
 
-    # do we have a leapyear or a normal year?
-    if [ $(date -d "01/01/"${year}"+365days" +"%j") -eq 355 ]; then
-	let cnt_days=366
-    else
-	let cnt_days=365
-    fi
+    local cnt_days=""
+    local cal=""
+    local day=""
+    local week=""
+    local year=""
+    local startdate=""
 
     let day=0
     let week=0
+    let year=$opt
+
+    # check option (next or year, print 90 days or given year)
+    if [ "$opt" == "next" ]; then
+	startdate=$(date "+%m/%d/%Y")
+	let cnt_days=90
+    else
+	# do we have a leapyear or a normal year?
+	if [ $(date -d ${startdate}"+365days" +"%j") -eq 355 ]; then
+	    let cnt_days=366
+	else
+	    let cnt_days=365
+	fi
+	startdate="01/01/"$year
+    fi
 
     while [ $day -lt $cnt_days ]; do
-	if [ $(date -d "01/01/"${year}"+"$day"days" +"%V") -gt $week ]; then
-	    week=$(($week+1))
+	if [ $(date -d ${startdate}"+"$day"days" +"%V") -ne $week ]; then
+	    local helper=$(date -d ${startdate}"+"$day"days" +"%V")
+	    week=${helper#0}
+	    year=$(date -d ${startdate}"+"$day"days" +"%Y")
 	    cal=$cal"\n"$COL_WHITE$(printf "cw%02d/%d:" $week $year)$COL_DEFAULT"\n"
 	fi
 
-	cal=$cal$(date -d "01/01/"$year"+"$day"days" +"%d.%m.%Y")"\n"
+	cal=$cal$(date -d ${startdate}"+"$day"days" +"%d.%m.%Y")"\n"
 	day=$(($day+1))
     done
 

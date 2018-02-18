@@ -142,9 +142,13 @@ if [ $params_cnt -gt 0 ]; then
 		fi
 		;;
 	    "--show-cal")
-		# show calendar
-		printf "$(show_cal $configfile)"
-		exit 0
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # show calendar
+		    printf "$(show_cal $configfile ${params_array[$params_curr+1]})"
+		    exit 0
+		else
+		    show_params_errormsg "show-cal"
+		fi
 		;;
 	    "--help")
 		# show help text
