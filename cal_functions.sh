@@ -17,6 +17,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+# function show_cal
+#          show calendar
+# param    $1: config filename
+#          $2: print option {next|<year>}
+# return   printf: calendar (either next 90 days or the given year)
 function show_cal() {
     local opt=$2
 
