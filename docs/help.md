@@ -12,6 +12,8 @@ misc:
                                         #CURRENT-ITEMS
   --cti NAME START END (IMPO)           create task image with NAME, START week,
                                         END week and (optional) (IMPO:impo) flag
+  --show-cal OPTION                     show calendar with OPTION:next|<year>
+                                        (next 90 days or complete year)
 
 counters:
   --list-counters FORMAT                list all counters in FORMAT:list|table
