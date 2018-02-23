@@ -37,6 +37,8 @@ COL_YELLOW="\e[1;33m" # bold yellow
 COL_GREEN="\e[1;32m"  # bold green
 COL_DEFAULT="\e[0m"   # system default
 LIST_DESC_WIDTH=35
+CAL_SHOW_NEXT=45
+
 
 if [ "$BTPATH" == "" ]; then
     btpath="."

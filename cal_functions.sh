@@ -21,7 +21,7 @@
 #          show calendar
 # param    $1: config filename
 #          $2: print option {next|<year>}
-# return   printf: calendar (either next 90 days or the given year)
+# return   printf: calendar (either next 45 days or the given year)
 function show_cal() {
     local opt=$2
 
@@ -36,10 +36,10 @@ function show_cal() {
     let week=0
     let year=$opt
 
-    # check option (next or year, print 90 days or given year)
+    # check option (next or year, print 45 days or given year)
     if [ "$opt" == "next" ]; then
 	startdate=$(date "+%m/%d/%Y")
-	let cnt_days=90
+	let cnt_days=$CAL_SHOW_NEXT
     else
 	# do we have a leapyear or a normal year?
 	if [ $(date -d ${startdate}"+365days" +"%j") -eq 355 ]; then
