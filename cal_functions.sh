@@ -58,11 +58,12 @@ function show_cal() {
 	    cal=$cal"\n"$COL_WHITE$(printf "cw%02d/%d:" $week $year)$COL_DEFAULT"\n"
 	fi
 
-	cal=$cal$(date -d ${startdate}"+"$day"days" +"%d.%m.%Y")"\n"
+	cal=$cal$(date -d ${startdate}"+"$day"days" +"%d.%m.%Y")
+	cal=$cal"\n"
 	day=$(($day+1))
     done
 
-    printf "%s" $cal
+    printf "%s" "$cal"
 }
 
 # function get_cal_param
