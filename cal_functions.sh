@@ -23,6 +23,7 @@
 #          $2: print option {next|<year>}
 # return   printf: calendar (either next 45 days or the given year)
 function show_cal() {
+    local configfile=$1
     local opt=$2
 
     local cnt_days=""
@@ -31,6 +32,8 @@ function show_cal() {
     local week=""
     local year=""
     local startdate=""
+
+    local cal_entries="$(grep cal $configfile)"
 
     let day=0
     let week=0
@@ -59,6 +62,11 @@ function show_cal() {
 	fi
 
 	cal=$cal$(date -d ${startdate}"+"$day"days" +"%d.%m.%Y")
+
+	cal_entries_of_day=$(echo "$cal_entries" | grep $(date -d ${startdate}"+"$day"days" +"%d.%m.%Y") | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
+	if [ ${#cal_entries_of_day} -gt 0 ]; then
+	    cal=$(printf "%s $COL_WHITE%s$COL_DEFAULT" "$cal" "$(echo $cal_entries_of_day | sed -e 's#\n# #g')")
+	fi
 	cal=$cal"\n"
 	day=$(($day+1))
     done
