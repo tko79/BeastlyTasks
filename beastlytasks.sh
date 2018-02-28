@@ -39,6 +39,8 @@ COL_DEFAULT="\e[0m"   # system default
 LIST_DESC_WIDTH=35
 CAL_SHOW_NEXT=45
 
+COL_WHITE_U="\e[4;1;37m"  # bold white
+
 
 if [ "$BTPATH" == "" ]; then
     btpath="."
@@ -406,6 +408,9 @@ echo " done."
 
 echo "Hello "$name"! Welcome to BeastlyTasks!"
 echo ""
+
+echo -e $COL_WHITE_U"overview"$COL_DEFAULT
+echo ""
 echo -n "counters: "
 printf "$(list_counters $configfile list)\n"
 echo -n "timers:   "
@@ -415,10 +420,22 @@ printf "$(list_cal $configfile list)\n"
 echo -n "tasks:    "
 printf "$(list_tasks $configfile list)\n"
 echo ""
+
+echo -e $COL_WHITE_U"counters"$COL_DEFAULT
+echo ""
 printf "$(list_counters $configfile table)\n"
+echo ""
+
+echo -e $COL_WHITE_U"timers"$COL_DEFAULT
 echo ""
 printf "$(list_timers $configfile table)\n"
 echo ""
+
+echo -e $COL_WHITE_U"calendar"$COL_DEFAULT
+echo ""
 printf "$(list_cal $configfile table)\n"
+echo ""
+
+echo -e $COL_WHITE_U"tasks"$COL_DEFAULT
 echo ""
 printf "$(list_tasks $configfile table)\n"
