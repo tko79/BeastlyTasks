@@ -11,6 +11,7 @@
 | <sub>weekly  | <sub>weekly tasks                                       | <sub>`$uid;"$description;$label;$status;$biweekly"`                                    |
 | <sub>monthly | <sub>monthly tasks                                      | <sub>`$uid;"$description;$label;$status"`                                              |
 | <sub>yearly  | <sub>yearly tasks                                       | <sub>`$uid;"$description;$label;$status;$duedate"`                                     |
+| <sub>label   | <sub>label definitions for cal and task labelling       | <sub>`$uid;"$description;$color"`                                                      |
 
 ***
 
@@ -129,3 +130,14 @@
 | <sub>label       | <sub>one or more labels/tags | <sub>string              |
 | <sub>status      | <sub>status of task          | <sub>string:{open\|done} |
 | <sub>duedate     | <sub>due date of task        | <sub>date:(cw/yy)        |
+
+### label
+
+- description: label definitions for cal and task labelling
+- parameters and format in config: `$uid;"$description;$color"`
+
+| <sub>parameter     | <sub>description             | <sub>format                |
+|--------------------|------------------------------|----------------------------|
+| <sub>uid           | <sub>unique id (10 char max) | <sub>string                |
+| <sub>description   | <sub>description             | <sub>string                |
+| <sub>color         | <sub>label color             | <sub>string                |
