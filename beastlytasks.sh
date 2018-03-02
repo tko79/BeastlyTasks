@@ -53,6 +53,7 @@ source $btpath/timer_functions.sh
 source $btpath/counter_functions.sh
 source $btpath/cal_functions.sh
 source $btpath/task_functions.sh
+source $btpath/label_functions.sh
 
 # function show_help
 #          show license and help text
