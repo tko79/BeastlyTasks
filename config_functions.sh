@@ -560,3 +560,97 @@ function set_config_task() {
 	sed -i "s#task=$task_id;\"${task_from_config}\"#task=$task_id;\"$task_description;$task_label;$task_priority;$task_status;$task_createdate;$task_duedate;$task_donedate\"#g" $configfile
     fi
 }
+
+# function list_config_labels
+#          get labels from config
+# param    $1: config filename
+# return   echo labels from config
+function list_config_labels() {
+    local configfile=$1
+    local labels_from_config=""
+
+    labels_from_config=$(grep "task=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
+    echo $labels_from_config
+}
+
+# function add_config_label
+#          add label to config
+# param    $1: config filename
+#          $2: unique id
+#          $3: description
+#          $4: color
+# return   return 1: in case of error (label id already existing)
+#          return 2: in case of error (label id too long)
+function add_config_label() {
+    local configfile=$1
+    local label_id=$2
+    local label_description=$3
+    local label_color=$4
+
+    if [ ${#label_id} -gt 10 ]; then
+       return 2
+    fi
+
+    label_from_config=$(get_config_label $configfile $label_id)
+    if [ $? == 1 ]; then
+	echo "label=$label_id;\"$label_description;$label_color\"" >> $configfile
+    else
+	return 1
+    fi
+
+    __sort_config $configfile
+}
+
+# function del_config_label
+#          delete label from config
+# param    $1: config filename
+#          $2: unique id
+# return   <none>
+function del_config_label() {
+    local configfile=$1
+    local label_id=$2
+
+    sed -i "/label=$label_id;/d" $configfile
+}
+
+# function get_config_label
+#          get label from config
+# param    $1: config filename
+#          $2: unique id
+# return   return 1: in case of error (label id not found)
+function get_config_label() {
+    local configfile=$1
+    local label_id=$2
+    local label_from_config=""
+
+    label_from_config=$(grep "label=$label_id;" $configfile)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	echo ${label_from_config#label=$label_id;} | sed -e 's#\"##g'
+    fi
+}
+
+# function set_config_label
+#          set label to config
+# param    $1: config filename
+#          $2: unique id
+#          $3: description
+#          $4: color
+# return   return 1: in case of error (label id not found)
+#          return 2: in case of error (label status not open or done)
+function set_config_label() {
+    local configfile=$1
+    local label_id=$2
+    local label_description=$3
+    local label_color=$4
+
+    label_from_config=$(get_config_label $configfile $label_id)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	sed -i "s#label=$label_id;\"${label_from_config}\"#label=$label_id;\"$label_description;$label_color\"#g" $configfile
+    fi
+}
