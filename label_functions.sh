@@ -117,20 +117,20 @@ function get_label() {
     fi
 }
 
-# function list_label
+# function list_labels
 #          list all available label entries as a list or a table
 # param    $1: config filename
 #          $2: format {list|table}
 # return   printf: formatted list or table of label
 #          return 1: in case of error (format parameter is not table or list)
-function list_label() {
+function list_labels() {
     local configfile=$1
     local format=$2
 
     local label_from_config=""
     local width="0"
 
-    label_from_config=$(list_config_label $configfile)
+    label_from_config=$(list_config_labels $configfile)
     if [ "$format" == "list" ]; then
 	printf "$label_from_config"
 	return 0

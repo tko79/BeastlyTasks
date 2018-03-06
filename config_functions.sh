@@ -28,6 +28,9 @@ __sort_config() {
     echo "[generic]"                    > $tmpfile
     grep 'name=\"' $configfile         >> $tmpfile
     echo ""                            >> $tmpfile
+    echo "[label]"                     >> $tmpfile
+    grep 'label=' $configfile | sort   >> $tmpfile
+    echo ""                            >> $tmpfile
     echo "[counter]"                   >> $tmpfile
     grep 'counter=' $configfile | sort >> $tmpfile
     echo ""                            >> $tmpfile
@@ -569,7 +572,7 @@ function list_config_labels() {
     local configfile=$1
     local labels_from_config=""
 
-    labels_from_config=$(grep "task=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
+    labels_from_config=$(grep "label=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
     echo $labels_from_config
 }
 
