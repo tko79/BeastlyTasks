@@ -375,6 +375,53 @@ if [ $params_cnt -gt 0 ]; then
 		    show_params_errormsg "del-task"
 		fi
 		;;
+
+	    # item parameters: labels
+	    "--list-labels")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # list_labels $format
+		    printf "$(list_labels $configfile ${params_array[$params_curr+1]})\n"
+		    exit 0
+		else
+		    show_params_errormsg "list-labels"
+		fi
+		;;
+	    "--add-label")
+		if [ "${params_array[$params_curr+3]}" != "" ]; then
+		    # add_config_label $uid $description $color
+		    add_config_label $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}"
+		    exit 0
+		else
+		    show_params_errormsg "add-label"
+		fi
+		;;
+	    "--get-label")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # get_label $uid 'single'
+		    printf "$(get_label $configfile ${params_array[$params_curr+1]} 'single')\n"
+		    exit 0
+		else
+		    show_params_errormsg "get-label"
+		fi
+		;;
+	    "--set-label")
+		if [ "${params_array[$params_curr+3]}" != "" ]; then
+		    # set_label_param $uid $param $newval
+		    set_label_param $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}"
+		    exit 0
+		else
+		    show_params_errormsg "set-label"
+		fi
+		;;
+	    "--del-label")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # del_config_label $uid
+		    del_config_label $configfile "${params_array[$params_curr+1]}"
+		    exit 0
+		else
+		    show_params_errormsg "del-label"
+		fi
+		;;
 	esac
 	params_curr=$(( $params_curr+1 ))
     done
