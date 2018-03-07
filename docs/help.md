@@ -59,3 +59,12 @@ tasks:
                                         priority|status|createdate|duedate|
                                         donedate for task UID
   --del-task UID                        delete task UID
+
+labels:
+  --list-labels FORMAT                   list all labels in FORMAT:list|table
+  --add-label UID DESCRIPTION COLOR      add a new label with UID, DESCRIPTION
+                                         and COLOR
+  --get-label UID                        get value of label UID
+  --set-label UID PARAM NEWVAL           set NEWVAL of PARAM:description|color
+                                         for label UID
+  --del-label UID                        delete label UID
