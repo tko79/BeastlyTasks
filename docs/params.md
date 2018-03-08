@@ -109,3 +109,21 @@
 | <sub>get-task   | <sub>read  | <sub>get_task          | <sub>uid                                                               |
 | <sub>set-task   | <sub>write | <sub>set_task_param    | <sub>uid param newval                                                  |
 | <sub>del-task   | <sub>write | <sub>del_config_task   | <sub>uid                                                               |
+
+## labels
+
+| <sub>parameter   | <sub>description                                           |
+|------------------|------------------------------------------------------------|
+| <sub>list-labels | <sub>list all labels in {format:list\|table}               |
+| <sub>add-label   | <sub>add a new label with {uid}, {description} and {color} |
+| <sub>get-label   | <sub>get value of label {uid}                              |
+| <sub>set-label   | <sub>set {newval} of {param} for label {uid}               |
+| <sub>del-label   | <sub>delete label {uid}                                    |
+
+| <sub>parameter   | <sub>rd/wr | <sub>internal function | <sub>params array          |
+|------------------|------------|------------------------|----------------------------|
+| <sub>list-labels | <sub>read  | <sub>list_labels       | <sub>format                |
+| <sub>add-label   | <sub>write | <sub>add_config_label  | <sub>uid description color |
+| <sub>get-label   | <sub>read  | <sub>get_label         | <sub>uid                   |
+| <sub>set-label   | <sub>write | <sub>set_label_param   | <sub>uid param newval      |
+| <sub>del-label   | <sub>write | <sub>del_config_label  | <sub>uid                   |
