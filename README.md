@@ -24,6 +24,10 @@ can be used to read and write your user name:
     ./beastlytasks.sh --get-name
     My Name !
 
+A short help documentation is also available:
+
+    ./beastlytasks.sh --help
+
 Please also make use of the environment variable `BTPATH`
 (`export BTPATH=<absolute-path-to-BeastlyTasks>`) to define the path to
 beastlytasks.sh. With this option BeastlyTasks can be executed from anywhere
