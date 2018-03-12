@@ -17,6 +17,5 @@ user interfaces / modes
 misc
 - configurable dashboard
 - calculate some statistics
-- config format: yaml/xml
 - useful command to check length of output: wc -mcL
 - regular expressions (start of line, \s, @(searchstring), ...): ^\s@
