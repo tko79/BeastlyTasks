@@ -31,16 +31,17 @@ params_array=("$@")
 user=$(whoami)
 configfile="/home/"$user"/.beastlytasks"
 
-COL_WHITE="\e[1;37m"  # bold white
-COL_RED="\e[1;31m"    # bold red
-COL_YELLOW="\e[1;33m" # bold yellow
-COL_GREEN="\e[1;32m"  # bold green
-COL_DEFAULT="\e[0m"   # system default
+# color defines
+COL_WHITE="\e[1;37m"     # bold white
+COL_RED="\e[1;31m"       # bold red
+COL_YELLOW="\e[1;33m"    # bold yellow
+COL_GREEN="\e[1;32m"     # bold green
+COL_WHITE_U="\e[4;1;37m" # bold white
+COL_DEFAULT="\e[0m"      # system default
+
+# defaults
 LIST_DESC_WIDTH=35
 CAL_SHOW_NEXT=45
-
-COL_WHITE_U="\e[4;1;37m"  # bold white
-
 
 if [ "$BTPATH" == "" ]; then
     btpath="."
