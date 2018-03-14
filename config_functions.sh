@@ -251,7 +251,7 @@ function add_config_timer() {
     local timer_value=$4
     local timer_from_config=""
 
-    if [ ${#timer_id} -gt 10 ]; then
+    if [ ${#timer_id} -gt $ID_LENGTH ]; then
 	return 2
     fi
 
@@ -354,7 +354,7 @@ function add_config_cal() {
 	return 2
     fi
 
-    if [ ${#cal_id} -gt 10 ]; then
+    if [ ${#cal_id} -gt $ID_LENGTH ]; then
 	return 3
     fi
 
@@ -480,7 +480,7 @@ function add_config_task() {
 	return 3
     fi
 
-    if [ ${#task_id} -gt 10 ]; then
+    if [ ${#task_id} -gt $ID_LENGTH ]; then
 	return 4
     fi
 
@@ -590,7 +590,7 @@ function add_config_label() {
     local label_description=$3
     local label_color=$4
 
-    if [ ${#label_id} -gt 10 ]; then
+    if [ ${#label_id} -gt $ID_LENGTH ]; then
        return 2
     fi
 
