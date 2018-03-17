@@ -564,6 +564,117 @@ function set_config_task() {
     fi
 }
 
+# function list_config_tasks_dly
+#          get tasks_dly from config
+# param    $1: config filename
+# return   echo tasks_dly from config
+function list_config_tasks_dly() {
+    local configfile=$1
+    local tasks_dly_from_config=""
+
+    tasks_dly_from_config=$(grep "task=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
+    echo $tasks_dly_from_config
+}
+
+# function add_config_task_dly
+#          add task_dly to config
+# param    $1: config filename
+#          $2: unique id
+#          $3: description
+#          $4: label
+#          $5: status {open|done}
+# return   return 1: in case of error (task_dly id already existing)
+#          return 2: in case of error (task_dly status not open or done)
+#          return 3: in case of error (task_dly id too long)
+function add_config_task_dly() {
+    local configfile=$1
+    local task_dly_id=$2
+    local task_dly_description=$3
+    local task_dly_label=$4
+    local task_dly_status=$5
+    local task_dly_from_config=""
+
+    if [ ! "$task_dly_status" == "open" ] && [ ! "$task_dly_status" == "done" ]; then
+	echo ""
+	return 2
+    fi
+
+    if [ ${#task_dly_id} -gt $ID_LENGTH ]; then
+	return 3
+    fi
+
+    task_dly_from_config=$(get_config_task_dly $configfile $task_dly_id)
+    if [ $? == 1 ]; then
+	echo "task_dly=$task_dly_id;\"$task_dly_description;$task_dly_label;$task_dly_status\"" >> $configfile
+    else
+	return 1
+    fi
+
+    __sort_config $configfile
+}
+
+# function del_config_task_dly
+#          delete task_dly from config
+# param    $1: config filename
+#          $2: unique id
+# return   <none>
+function del_config_task_dly() {
+    local configfile=$1
+    local task_dly_id=$2
+
+    sed -i "/task_dly=$task_dly_id;/d" $configfile
+}
+
+# function get_config_task_dly
+#          get task_dly from config
+# param    $1: config filename
+#          $2: unique id
+# return   return 1: in case of error (task_dly id not found)
+function get_config_task_dly() {
+    local configfile=$1
+    local task_dly_id=$2
+    local task_dly_from_config=""
+
+    task_dly_from_config=$(grep "task_dly=$task_dly_id;" $configfile)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	echo ${task_dly_from_config#task_dly=$task_dly_id;} | sed -e 's#\"##g'
+    fi
+}
+
+# function set_config_task_dly
+#          set task_dly to config
+# param    $1: config filename
+#          $2: unique id
+#          $3: description
+#          $4: label
+#          $5: status {open|done}
+# return   return 1: in case of error (task_dly id not found)
+#          return 2: in case of error (task_dly status not open or done)
+function set_config_task_dly() {
+    local configfile=$1
+    local task_dly_id=$2
+    local task_dly_description=$3
+    local task_dly_label=$4
+    local task_dly_status=$5
+    local task_dly_from_config=""
+
+    if [ ! "$task_dly_status" == "open" ] && [ ! "$task_dly_status" == "done" ]; then
+	echo ""
+	return 2
+    fi
+
+    task_dly_from_config=$(get_config_task_dly $configfile $task_dly_id)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	sed -i "s#task_dly=$task_dly_id;\"${task_dly_from_config}\"#task_dly=$task_dly_id;\"$task_dly_description;$task_dly_label;$task_dly_status\"#g" $configfile
+    fi
+}
+
 # function list_config_labels
 #          get labels from config
 # param    $1: config filename
