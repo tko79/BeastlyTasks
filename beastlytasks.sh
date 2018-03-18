@@ -379,6 +379,53 @@ if [ $params_cnt -gt 0 ]; then
 		fi
 		;;
 
+	    # item parameters: tasks_dly
+	    "--list-tasks-dly")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # list_tasks_dly $format
+		    printf "$(list_tasks_dly $configfile ${params_array[$params_curr+1]})\n"
+		    exit 0
+		else
+		    show_params_errormsg "list-tasks-dly"
+		fi
+		;;
+	    "--add-task-dly")
+		if [ "${params_array[$params_curr+8]}" != "" ]; then
+		    # add_config_task_dly $uid $description $label $priority $status $createdate $duedate $donedate
+		    add_config_task_dly $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}" "${params_array[$params_curr+4]}" "${params_array[$params_curr+5]}" "${params_array[$params_curr+6]}" "${params_array[$params_curr+7]}" "${params_array[$params_curr+8]}"
+		    exit 0
+		else
+		    show_params_errormsg "add-task-dly"
+		fi
+		;;
+	    "--get-task-dly")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # get_task_dly $uid 'single'
+		    printf "$(get_task_dly $configfile ${params_array[$params_curr+1]} 'single')\n"
+		    exit 0
+		else
+		    show_params_errormsg "get-task-dly"
+		fi
+		;;
+	    "--set-task-dly")
+		if [ "${params_array[$params_curr+3]}" != "" ]; then
+		    # set_task_dly_param $uid $param $newval
+		    set_task_dly_param $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}"
+		    exit 0
+		else
+		    show_params_errormsg "set-task-dly"
+		fi
+		;;
+	    "--del-task-dly")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # del_config_task_dly $uid
+		    del_config_task_dly $configfile "${params_array[$params_curr+1]}"
+		    exit 0
+		else
+		    show_params_errormsg "del-task-dly"
+		fi
+		;;
+
 	    # item parameters: labels
 	    "--list-labels")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
