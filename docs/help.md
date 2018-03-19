@@ -60,6 +60,16 @@ tasks:
                                         donedate for task UID
   --del-task UID                        delete task UID
 
+daily tasks:
+  --list-tasks-dly FORMAT               list all daily tasks in FORMAT:list|
+                                        table
+  --add-task-dly UID DESCRIPTION LABEL  add a new daily task with UID,
+                 STATUS                 DESCRIPTION, LABEL and STATUS:open|done
+  --get-task-dly UID                    get value of daily task UID
+  --set-task-dly UID PARAM NEWVAL       set NEWVAL of PARAM:description|label|
+                                        status for daily task UID
+  --del-task-dly UID                    delete daily task UID
+
 labels:
   --list-labels FORMAT                   list all labels in FORMAT:list|table
   --add-label UID DESCRIPTION COLOR      add a new label with UID, DESCRIPTION
