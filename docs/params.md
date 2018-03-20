@@ -110,6 +110,24 @@
 | <sub>set-task   | <sub>write | <sub>set_task_param    | <sub>uid param newval                                                  |
 | <sub>del-task   | <sub>write | <sub>del_config_task   | <sub>uid                                                               |
 
+## daily tasks
+
+| <sub>parameter      | <sub>description                                                                     |
+|---------------------|--------------------------------------------------------------------------------------|
+| <sub>list-tasks-dly | <sub>list all daily tasks in {format:list\|table}                                    |
+| <sub>add-task-dly   | <sub>add a new daily task with {uid}, {description}, {label} and {status:open\|done} |
+| <sub>get-task-dly   | <sub>get value of daily task {uid}                                                   |
+| <sub>set-task-dly   | <sub>set {newval} of {param} for daily task {uid}                                    |
+| <sub>del-task-dly   | <sub>delete task {uid}                                                               |
+
+| <sub>parameter      | <sub>rd/wr | <sub>internal function   | <sub>params array                 |
+|---------------------|------------|--------------------------|-----------------------------------|
+| <sub>list-tasks-dly | <sub>read  | <sub>list_tasks_dly      | <sub>format                       |
+| <sub>add-task-dly   | <sub>write | <sub>add_config_task_dly | <sub>uid description label status |
+| <sub>get-task-dly   | <sub>read  | <sub>get_task_dly        | <sub>uid                          |
+| <sub>set-task-dly   | <sub>write | <sub>set_task_dly_param  | <sub>uid param newval             |
+| <sub>del-task-dly   | <sub>write | <sub>del_config_task_dly | <sub>uid                          |
+
 ## labels
 
 | <sub>parameter   | <sub>description                                           |
