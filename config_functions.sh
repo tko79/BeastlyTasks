@@ -572,7 +572,7 @@ function list_config_tasks_dly() {
     local configfile=$1
     local tasks_dly_from_config=""
 
-    tasks_dly_from_config=$(grep "task=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
+    tasks_dly_from_config=$(grep "task_dly=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
     echo $tasks_dly_from_config
 }
 

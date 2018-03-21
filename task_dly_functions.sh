@@ -154,7 +154,7 @@ function list_tasks_dly() {
 	tasks_dly_table=$tasks_dly_table$COL_DEFAULT"\n"
 
 	for tasks_dly_id in $tasks_dly_from_config; do
-	    tasks_dly_table=$tasks_dly_table$(get_tasks_dly $configfile $tasks_dly_id 'table')"\n"
+	    tasks_dly_table=$tasks_dly_table$(get_task_dly $configfile $tasks_dly_id 'table')"\n"
 	done
 	printf "$tasks_dly_table"
 	return 0
