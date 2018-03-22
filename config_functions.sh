@@ -25,23 +25,26 @@ __sort_config() {
     local configfile=$1
     local tmpfile="/tmp/bt"
 
-    echo "[generic]"                    > $tmpfile
-    grep 'name=\"' $configfile         >> $tmpfile
-    echo ""                            >> $tmpfile
-    echo "[label]"                     >> $tmpfile
-    grep 'label=' $configfile | sort   >> $tmpfile
-    echo ""                            >> $tmpfile
-    echo "[counter]"                   >> $tmpfile
-    grep 'counter=' $configfile | sort >> $tmpfile
-    echo ""                            >> $tmpfile
-    echo "[timer]"                     >> $tmpfile
-    grep 'timer=' $configfile | sort   >> $tmpfile
-    echo ""                            >> $tmpfile
-    echo "[cal]"                       >> $tmpfile
-    grep 'cal=' $configfile | sort     >> $tmpfile
-    echo ""                            >> $tmpfile
-    echo "[tasks]"                     >> $tmpfile
-    grep 'task=' $configfile | sort    >> $tmpfile
+    echo "[generic]"                     > $tmpfile
+    grep 'name=\"' $configfile          >> $tmpfile
+    echo ""                             >> $tmpfile
+    echo "[label]"                      >> $tmpfile
+    grep 'label=' $configfile | sort    >> $tmpfile
+    echo ""                             >> $tmpfile
+    echo "[counter]"                    >> $tmpfile
+    grep 'counter=' $configfile | sort  >> $tmpfile
+    echo ""                             >> $tmpfile
+    echo "[timer]"                      >> $tmpfile
+    grep 'timer=' $configfile | sort    >> $tmpfile
+    echo ""                             >> $tmpfile
+    echo "[cal]"                        >> $tmpfile
+    grep 'cal=' $configfile | sort      >> $tmpfile
+    echo ""                             >> $tmpfile
+    echo "[tasks]"                      >> $tmpfile
+    grep 'task=' $configfile | sort     >> $tmpfile
+    echo ""                             >> $tmpfile
+    echo "[tasks-dly]"                  >> $tmpfile
+    grep 'task_dly=' $configfile | sort >> $tmpfile
 
     mv -f $tmpfile $configfile
 }
