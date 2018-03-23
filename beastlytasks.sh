@@ -509,14 +509,16 @@ echo ""
 
 echo -e $COL_WHITE_U"overview"$COL_DEFAULT
 echo ""
-echo -n "counters: "
+echo -n "counters:    "
 printf "$(list_counters $configfile list)\n"
-echo -n "timers:   "
+echo -n "timers:      "
 printf "$(list_timers $configfile list)\n"
-echo -n "cal:      "
+echo -n "calendar:    "
 printf "$(list_cal $configfile list)\n"
-echo -n "tasks:    "
+echo -n "tasks:       "
 printf "$(list_tasks $configfile list)\n"
+echo -n "daily tasks: "
+printf "$(list_tasks_dly $configfile list)\n"
 echo ""
 
 echo -e $COL_WHITE_U"counters"$COL_DEFAULT
@@ -537,3 +539,8 @@ echo ""
 echo -e $COL_WHITE_U"tasks"$COL_DEFAULT
 echo ""
 printf "$(list_tasks $configfile table)\n"
+echo ""
+
+echo -e $COL_WHITE_U"tasks_dly"$COL_DEFAULT
+echo ""
+printf "$(list_tasks_dly $configfile table)\n"
