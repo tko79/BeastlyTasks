@@ -45,6 +45,9 @@ __sort_config() {
     echo ""                             >> $tmpfile
     echo "[tasks-dly]"                  >> $tmpfile
     grep 'task_dly=' $configfile | sort >> $tmpfile
+    echo ""                             >> $tmpfile
+    echo "[tasks-wly]"                  >> $tmpfile
+    grep 'task_wly=' $configfile | sort >> $tmpfile
 
     mv -f $tmpfile $configfile
 }
@@ -675,6 +678,121 @@ function set_config_task_dly() {
 	return 1
     else
 	sed -i "s#task_dly=$task_dly_id;\"${task_dly_from_config}\"#task_dly=$task_dly_id;\"$task_dly_description;$task_dly_label;$task_dly_status\"#g" $configfile
+    fi
+}
+
+# function list_config_tasks_wly
+#          get tasks_wly from config
+# param    $1: config filename
+# return   echo tasks_wly from config
+function list_config_tasks_wly() {
+    local configfile=$1
+    local tasks_wly_from_config=""
+
+    tasks_wly_from_config=$(grep "task_wly=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
+    echo $tasks_wly_from_config
+}
+
+# function add_config_task_wly
+#          add task_wly to config
+# param    $1: config filename
+#          $2: unique id
+#          $3: description
+#          $4: label
+#          $5: status {open|done}
+#          $6: biweekly {yes|}
+# return   return 1: in case of error (task_wly id already existing)
+#          return 2: in case of error (task_wly status not open or done)
+#          return 3: in case of error (task_wly id too long)
+function add_config_task_wly() {
+    local configfile=$1
+    local task_wly_id=$2
+    local task_wly_description=$3
+    local task_wly_label=$4
+    local task_wly_status=$5
+    local task_wly_biweekly=$6
+    local task_wly_from_config=""
+
+    if [ ! "$task_wly_status" == "open" ] && [ ! "$task_wly_status" == "done" ]; then
+	echo ""
+	return 2
+    fi
+
+    if [ ${#task_wly_id} -gt $ID_LENGTH ]; then
+	return 3
+    fi
+
+    task_wly_from_config=$(get_config_task_wly $configfile $task_wly_id)
+    if [ $? == 1 ]; then
+	echo "task_wly=$task_wly_id;\"$task_wly_description;$task_wly_label;$task_wly_status;$task_wly_biweekly\"" >> $configfile
+    else
+	return 1
+    fi
+
+    __sort_config $configfile
+}
+
+# function del_config_task_wly
+#          delete task_wly from config
+# param    $1: config filename
+#          $2: unique id
+# return   <none>
+function del_config_task_wly() {
+    local configfile=$1
+    local task_wly_id=$2
+
+    sed -i "/task_wly=$task_wly_id;/d" $configfile
+}
+
+# function get_config_task_wly
+#          get task_wly from config
+# param    $1: config filename
+#          $2: unique id
+# return   return 1: in case of error (task_wly id not found)
+function get_config_task_wly() {
+    local configfile=$1
+    local task_wly_id=$2
+    local task_wly_from_config=""
+
+    task_wly_from_config=$(grep "task_wly=$task_wly_id;" $configfile)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	echo ${task_wly_from_config#task_wly=$task_wly_id;} | sed -e 's#\"##g'
+    fi
+}
+
+# function set_config_task_wly
+#          set task_wly to config
+# param    $1: config filename
+#          $2: unique id
+#          $3: description
+#          $4: label
+#          $5: status {open|done}
+#          $6: biweekly {yes|}
+# return   return 1: in case of error (task_wly id not found)
+#          return 2: in case of error (task_wly status not open or done)
+function set_config_task_wly() {
+    local configfile=$1
+    local task_wly_id=$2
+    local task_wly_description=$3
+    local task_wly_label=$4
+    local task_wly_status=$5
+    local task_wly_biweekly=$6
+    local task_wly_from_config=""
+
+    if [ ! "$task_wly_status" == "open" ] && [ ! "$task_wly_status" == "done" ]; then
+	echo ""
+	return 2
+    fi
+
+    task_wly_from_config=$(get_config_task_wly $configfile $task_wly_id)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	sed -i "s#task_wly=$task_wly_id;\"${task_wly_from_config}\"#task_wly=$task_wly_id;\"$task_wly_description;$task_wly_label;$task_wly_status;$task_wly_biweekly\"#g" $configfile
     fi
 }
 
