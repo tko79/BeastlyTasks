@@ -152,7 +152,7 @@ function add_config_counter() {
     local counter_desc_bad=$9
     local counter_from_config=""
 
-    if [ ${#counter_id} -gt 10 ]; then
+    if [ ${#counter_id} -gt $ID_LENGTH ]; then
        return 2
     fi
 
