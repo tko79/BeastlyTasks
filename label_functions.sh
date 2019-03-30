@@ -112,7 +112,7 @@ function get_label() {
 	    local dlb=$(echo $label_description | wc -c)
 	    local dlc=$(echo $label_description | wc -m)
 	    desc_width=$(($LIST_DESC_WIDTH+$dlb-$dlc))
-	    printf "%-10s %-"$desc_width"s %s" $label_id "$label_description" $label_color
+	    printf "%-"${ID_LENGTH}"s %-"$desc_width"s %s" $label_id "$label_description" $label_color
 	fi
     fi
 }
@@ -139,9 +139,9 @@ function list_labels() {
 	local label_table=""
 	local label_id=""
 
-	label_table=$COL_WHITE$(printf "%-10s %-"${LIST_DESC_WIDTH}"s %s" "id" "description" "label\n")
-	label_table=$label_table"------------------------------"
-	while [ $width -lt $LIST_DESC_WIDTH ]; do
+	label_table=$COL_WHITE$(printf "%-"${ID_LENGTH}"s %-"${LIST_DESC_WIDTH}"s %s" "id" "description" "label\n")
+	table_width=$(($ID_LENGTH+$LIST_DESC_WIDTH+8))
+	while [ $width -lt $table_width ]; do
             label_table=$label_table"-"
             width=$(($width+1))
 	done

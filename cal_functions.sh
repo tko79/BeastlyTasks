@@ -182,7 +182,7 @@ function get_cal() {
 	    local dlb=$(echo $cal_description | wc -c)
 	    local dlc=$(echo $cal_description | wc -m)
 	    desc_width=$(($LIST_DESC_WIDTH+$dlb-$dlc))
-	    printf "%-10s %-"$desc_width"s %-7s %-10s" $cal_id "$cal_description" $cal_label $cal_date
+	    printf "%-"${ID_LENGTH}"s %-"$desc_width"s %-7s %-10s" $cal_id "$cal_description" $cal_label $cal_date
 	fi
     fi
 }
@@ -209,9 +209,9 @@ function list_cal() {
 	local cal_table=""
 	local cal_id=""
 
-	cal_table=$COL_WHITE$(printf "%-10s %-"${LIST_DESC_WIDTH}"s %-7s %-4s" "id" "description" "label" "date\n")
-	cal_table=$cal_table"------------------------------"
-	while [ $width -lt $LIST_DESC_WIDTH ]; do
+	cal_table=$COL_WHITE$(printf "%-"${ID_LENGTH}"s %-"${LIST_DESC_WIDTH}"s %-7s %-4s" "id" "description" "label" "date\n")
+	table_width=$(($ID_LENGTH+$LIST_DESC_WIDTH+20))
+	while [ $width -lt $table_width ]; do
             cal_table=$cal_table"-"
             width=$(($width+1))
 	done

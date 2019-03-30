@@ -122,7 +122,7 @@ function get_task_wly() {
 	    local dlb=$(echo $task_wly_description | wc -c)
 	    local dlc=$(echo $task_wly_description | wc -m)
 	    desc_width=$(($LIST_DESC_WIDTH+$dlb-$dlc))
-	    printf "%-10s %-"$desc_width"s %-7s %-6s %3s" $task_wly_id "$task_wly_description" $task_wly_label $task_wly_status $task_wly_biweekly
+	    printf "%-"${ID_LENGTH}"s %-"$desc_width"s %-7s %-6s %3s" $task_wly_id "$task_wly_description" $task_wly_label $task_wly_status $task_wly_biweekly
 	fi
     fi
 }
@@ -149,9 +149,9 @@ function list_tasks_wly() {
 	local tasks_wly_table=""
 	local tasks_wly_id=""
 
-	tasks_wly_table=$COL_WHITE$(printf "%-10s %-"${LIST_DESC_WIDTH}"s %-7s %-6s %8" "id" "description" "label"  "status" "biweekly\n")
-	tasks_wly_table=$tasks_wly_table"-------------------------------------------------------------------"
-	while [ $width -lt $LIST_DESC_WIDTH ]; do
+	tasks_wly_table=$COL_WHITE$(printf "%-"${ID_LENGTH}"s %-"${LIST_DESC_WIDTH}"s %-7s %-6s %8" "id" "description" "label"  "status" "biweekly\n")
+	table_width=$(($ID_LENGTH+$LIST_DESC_WIDTH+25))
+	while [ $width -lt $table_width ]; do
             tasks_wly_table=$tasks_wly_table"-"
             width=$(($width+1))
 	done

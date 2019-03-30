@@ -216,7 +216,7 @@ function get_counter() {
 	    local dlb=$(echo $counter_description | wc -c)
 	    local dlc=$(echo $counter_description | wc -m)
 	    desc_width=$(($LIST_DESC_WIDTH+$dlb-$dlc))
-	    printf "%-10s %-"$desc_width"s %4d %4d %s" "$counter_id" "$counter_description" $counter_value $counter_threshold "$counter_val_desc"
+	    printf "%-"${ID_LENGTH}"s %-"$desc_width"s %4d %4d %s" "$counter_id" "$counter_description" $counter_value $counter_threshold "$counter_val_desc"
 	fi
     fi
 }
@@ -243,9 +243,9 @@ function list_counters() {
 	local counters_table=""
 	local counter_id=""
 
-	counters_table=$COL_WHITE$(printf "%-10s %-"${LIST_DESC_WIDTH}"s %s %s %s" "id" "description" " val" " thr" "description\n")
-	counters_table=$counters_table"-------------------------------------------------"
-	while [ $width -lt $LIST_DESC_WIDTH ]; do
+	counters_table=$COL_WHITE$(printf "%-"${ID_LENGTH}"s %-"${LIST_DESC_WIDTH}"s %s %s %s" "id" "description" " val" " thr" "description\n")
+	table_width=$(($ID_LENGTH+$LIST_DESC_WIDTH+39))
+	while [ $width -lt $table_width ]; do
 	    counters_table=$counters_table"-"
 	    width=$(($width+1))
 	done

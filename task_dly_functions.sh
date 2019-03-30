@@ -118,7 +118,7 @@ function get_task_dly() {
 	    local dlb=$(echo $task_dly_description | wc -c)
 	    local dlc=$(echo $task_dly_description | wc -m)
 	    desc_width=$(($LIST_DESC_WIDTH+$dlb-$dlc))
-	    printf "%-10s %-"$desc_width"s %-7s %-6s" $task_dly_id "$task_dly_description" $task_dly_label $task_dly_status
+	    printf "%-"${ID_LENGTH}"s %-"$desc_width"s %-7s %-6s" $task_dly_id "$task_dly_description" $task_dly_label $task_dly_status
 	fi
     fi
 }
@@ -145,9 +145,9 @@ function list_tasks_dly() {
 	local tasks_dly_table=""
 	local tasks_dly_id=""
 
-	tasks_dly_table=$COL_WHITE$(printf "%-10s %-"${LIST_DESC_WIDTH}"s %-7s %-6s" "id" "description" "label" "status\n")
-	tasks_dly_table=$tasks_dly_table"-----------------------------------------------------------"
-	while [ $width -lt $LIST_DESC_WIDTH ]; do
+	tasks_dly_table=$COL_WHITE$(printf "%-"${ID_LENGTH}"s %-"${LIST_DESC_WIDTH}"s %-7s %-6s" "id" "description" "label" "status\n")
+	table_width=$(($ID_LENGTH+$LIST_DESC_WIDTH+16))
+	while [ $width -lt $table_width ]; do
             tasks_dly_table=$tasks_dly_table"-"
             width=$(($width+1))
 	done
