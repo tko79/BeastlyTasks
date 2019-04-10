@@ -78,6 +78,19 @@ show_help() {
     echo -e ""
 }
 
+# function show_command_errormsg
+#          show error msg in case of unknown command and exit
+# param    $1: command
+# return   <none>
+show_command_errormsg() {
+    local command=$1
+
+    echo "Error: command '"$command"' not known!"
+    echo "Please run beastlytasks.sh --help for details about parameter settings!"
+
+    exit 1
+}
+
 # function show_params_errormsg
 #          show error msg in case of invalid number of arguments and exit
 # param    $1: parameter description
@@ -471,6 +484,9 @@ if [ $params_cnt -gt 0 ]; then
 		else
 		    show_params_errormsg "del-label"
 		fi
+		;;
+	    *)
+		show_command_errormsg $param
 		;;
 	esac
 	params_curr=$(( $params_curr+1 ))
