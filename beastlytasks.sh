@@ -78,6 +78,50 @@ show_help() {
     echo -e ""
 }
 
+# function show_all
+#          show all items
+# param    <none>
+# return   <none>
+show_all() {
+    echo -e $COL_WHITE_U"overview"$COL_DEFAULT
+    echo ""
+    echo -n "counters:    "
+    printf "$(list_counters $configfile list)\n"
+    echo -n "timers:      "
+    printf "$(list_timers $configfile list)\n"
+    echo -n "calendar:    "
+    printf "$(list_cal $configfile list)\n"
+    echo -n "tasks:       "
+    printf "$(list_tasks $configfile list)\n"
+    echo -n "daily tasks: "
+    printf "$(list_tasks_dly $configfile list)\n"
+    echo ""
+
+    echo -e $COL_WHITE_U"counters"$COL_DEFAULT
+    echo ""
+    printf "$(list_counters $configfile table)\n"
+    echo ""
+
+    echo -e $COL_WHITE_U"timers"$COL_DEFAULT
+    echo ""
+    printf "$(list_timers $configfile table)\n"
+    echo ""
+
+    echo -e $COL_WHITE_U"calendar"$COL_DEFAULT
+    echo ""
+    printf "$(list_cal $configfile table)\n"
+    echo ""
+
+    echo -e $COL_WHITE_U"tasks"$COL_DEFAULT
+    echo ""
+    printf "$(list_tasks $configfile table)\n"
+    echo ""
+
+    echo -e $COL_WHITE_U"tasks_dly"$COL_DEFAULT
+    echo ""
+    printf "$(list_tasks_dly $configfile table)\n"
+}
+
 # function show_command_errormsg
 #          show error msg in case of unknown command and exit
 # param    $1: command
@@ -170,6 +214,11 @@ if [ $params_cnt -gt 0 ]; then
 		else
 		    show_params_errormsg "show-cal"
 		fi
+		;;
+	    "--show-all")
+		# show all entries
+		show_all
+		exit 0
 		;;
 	    "--help")
 		# show help text
@@ -522,41 +571,3 @@ echo " done."
 
 echo "Hello "$name"! Welcome to BeastlyTasks!"
 echo ""
-
-echo -e $COL_WHITE_U"overview"$COL_DEFAULT
-echo ""
-echo -n "counters:    "
-printf "$(list_counters $configfile list)\n"
-echo -n "timers:      "
-printf "$(list_timers $configfile list)\n"
-echo -n "calendar:    "
-printf "$(list_cal $configfile list)\n"
-echo -n "tasks:       "
-printf "$(list_tasks $configfile list)\n"
-echo -n "daily tasks: "
-printf "$(list_tasks_dly $configfile list)\n"
-echo ""
-
-echo -e $COL_WHITE_U"counters"$COL_DEFAULT
-echo ""
-printf "$(list_counters $configfile table)\n"
-echo ""
-
-echo -e $COL_WHITE_U"timers"$COL_DEFAULT
-echo ""
-printf "$(list_timers $configfile table)\n"
-echo ""
-
-echo -e $COL_WHITE_U"calendar"$COL_DEFAULT
-echo ""
-printf "$(list_cal $configfile table)\n"
-echo ""
-
-echo -e $COL_WHITE_U"tasks"$COL_DEFAULT
-echo ""
-printf "$(list_tasks $configfile table)\n"
-echo ""
-
-echo -e $COL_WHITE_U"tasks_dly"$COL_DEFAULT
-echo ""
-printf "$(list_tasks_dly $configfile table)\n"
