@@ -17,6 +17,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+source $btpath/generic_functions.sh
+
 # function __sum_sub_time
 #          sum up or substract two time values
 # param    $1: time1 (format hh:mm:ss)
