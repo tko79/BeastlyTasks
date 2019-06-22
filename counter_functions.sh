@@ -245,7 +245,7 @@ function list_counters() {
 	local counters_table=""
 	local counter_id=""
 
-	counters_table=$COL_WHITE$(printf "%-"${ID_LENGTH}"s %-"${LIST_DESC_WIDTH}"s %s %s %s" "id" "description" " val" " thr" "description\n")
+	counters_table=$COL_WHITE$(printf "%-"${ID_LENGTH}"s %-"${LIST_DESC_WIDTH}"s %s %s %s" "id" "description" " val" " thr" "status\n")
 	table_width=$(($ID_LENGTH+$LIST_DESC_WIDTH+39))
 	while [ $width -lt $table_width ]; do
 	    counters_table=$counters_table"-"
