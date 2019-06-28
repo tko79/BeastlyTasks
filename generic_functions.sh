@@ -16,3 +16,19 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# function __calc_column_width
+#          Calculate the column width. Depending on 1- and 2-byte characters
+#          (umlauts, ...) the actual width of a column differs from the number
+#          of characters (e.g. testö: 5 characters with 6 byte).
+# param    $1: column content
+#          $2: expected column width
+# return   column width in characters
+function __calc_column_width() {
+    local content=$1
+    local expected_width=$2
+    local length_bytes=$(echo $content | wc -c)
+    local length_chars=$(echo $content | wc -m)
+
+    echo $(($expected_width+$length_bytes-$length_chars))
+}
