@@ -215,9 +215,7 @@ function get_counter() {
 	    local moveass=$(($counter_threshold-$counter_value))
 	    printf "%s [%s]\n   -> value=%d %s\n   -> good %s %d (%s to go)\n   -> good: %s\n   -> threshold: %s\n   -> bad: %s" $counter_id "$counter_description" $counter_value "$counter_val_desc" $counter_below_above $counter_threshold ${moveass#-} "$counter_desc_good" "$counter_desc_threshold" "$counter_desc_bad"
 	else
-	    local dlb=$(echo $counter_description | wc -c)
-	    local dlc=$(echo $counter_description | wc -m)
-	    desc_width=$(($LIST_DESC_WIDTH+$dlb-$dlc))
+	    desc_width=$(__calc_column_width "$counter_description" $LIST_DESC_WIDTH)
 	    printf "%-"${ID_LENGTH}"s %-"$desc_width"s %4d %4d %s" "$counter_id" "$counter_description" $counter_value $counter_threshold "$counter_val_desc"
 	fi
     fi

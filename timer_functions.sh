@@ -301,9 +301,7 @@ function get_timer() {
 	if [ "$format" == "single" ]; then
 	    printf "%s [%s]\n   -> %s" "$timer_id" "$timer_description" $timer_value
 	else
-	    local dlb=$(echo $timer_description | wc -c)
-	    local dlc=$(echo $timer_description | wc -m)
-	    desc_width=$(($LIST_DESC_WIDTH+$dlb-$dlc))
+	    desc_width=$(__calc_column_width "$timer_description" $LIST_DESC_WIDTH)
 	    printf "%-"${ID_LENGTH}"s %-"$desc_width"s %s" "$timer_id" "$timer_description" $timer_value
 	fi
     fi

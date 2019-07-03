@@ -111,9 +111,7 @@ function get_label() {
 	if [ "$format" == "single" ]; then
 	    printf "%s [%s]\n   -> color: %s" "$label_id" "$label_description" "$label_color"
 	else
-	    local dlb=$(echo $label_description | wc -c)
-	    local dlc=$(echo $label_description | wc -m)
-	    desc_width=$(($LIST_DESC_WIDTH+$dlb-$dlc))
+	    desc_width=$(__calc_column_width "$label_description" $LIST_DESC_WIDTH)
 	    printf "%-"${ID_LENGTH}"s %-"$desc_width"s %s" $label_id "$label_description" $label_color
 	fi
     fi

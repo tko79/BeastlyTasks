@@ -117,9 +117,7 @@ function get_task_dly() {
 	if [ "$format" == "single" ]; then
 	    printf "%s [%s]\n   -> label: %s\n   -> status: %s\n" "$task_dly_id" "$task_dly_description" "$task_dly_label" "$task_dly_status"
 	else
-	    local dlb=$(echo $task_dly_description | wc -c)
-	    local dlc=$(echo $task_dly_description | wc -m)
-	    desc_width=$(($LIST_DESC_WIDTH+$dlb-$dlc))
+	    desc_width=$(__calc_column_width "$task_dly_description" $LIST_DESC_WIDTH)
 	    printf "%-"${ID_LENGTH}"s %-"$desc_width"s %-7s %-6s" $task_dly_id "$task_dly_description" $task_dly_label $task_dly_status
 	fi
     fi

@@ -181,9 +181,7 @@ function get_cal() {
 	if [ "$format" == "single" ]; then
 	    printf "%s [%s]\n   -> label: %s\n   -> date: %s" "$cal_id" "$cal_description" "$cal_label" "$cal_date"
 	else
-	    local dlb=$(echo $cal_description | wc -c)
-	    local dlc=$(echo $cal_description | wc -m)
-	    desc_width=$(($LIST_DESC_WIDTH+$dlb-$dlc))
+	    desc_width=$(__calc_column_width "$cal_description" $LIST_DESC_WIDTH)
 	    printf "%-"${ID_LENGTH}"s %-"$desc_width"s %-7s %-10s" $cal_id "$cal_description" $cal_label $cal_date
 	fi
     fi

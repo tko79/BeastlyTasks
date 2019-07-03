@@ -183,9 +183,7 @@ function get_task() {
 	    esac
 	    printf "%s [%s]\n   -> label: %s\n   -> priority: %s\n   -> status: %s\n   -> create-/due-/donedate: %s %s %s" "$task_id" "$task_description" "$task_label" "$prio_text" "$task_status" "$task_createdate" "$task_duedate" "$task_donedate"
 	else
-	    local dlb=$(echo $task_description | wc -c)
-	    local dlc=$(echo $task_description | wc -m)
-	    desc_width=$(($LIST_DESC_WIDTH+$dlb-$dlc))
+	    desc_width=$(__calc_column_width "$task_description" $LIST_DESC_WIDTH)
 	    case $task_priority in
 		0) prio_text="0" ;;
 		1) prio_text="1 *" ;;
