@@ -302,7 +302,8 @@ function get_timer() {
 	    printf "%s [%s]\n   -> %s" "$timer_id" "$timer_description" $timer_value
 	else
 	    desc_width=$(__calc_column_width "$timer_description" $LIST_DESC_WIDTH)
-	    printf "%-"${ID_LENGTH}"s %-"$desc_width"s %s" "$timer_id" "$timer_description" $timer_value
+	    id_width=$(__calc_column_width "$timer_id" $ID_LENGTH)
+	    printf "%-"$id_width"s %-"$desc_width"s %s" "$timer_id" "$timer_description" $timer_value
 	fi
     fi
 }

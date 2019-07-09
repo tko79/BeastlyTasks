@@ -112,7 +112,8 @@ function get_label() {
 	    printf "%s [%s]\n   -> color: %s" "$label_id" "$label_description" "$label_color"
 	else
 	    desc_width=$(__calc_column_width "$label_description" $LIST_DESC_WIDTH)
-	    printf "%-"${ID_LENGTH}"s %-"$desc_width"s %s" $label_id "$label_description" $label_color
+	    id_width=$(__calc_column_width "$label_id" $ID_LENGTH)
+	    printf "%-"$id_width"s %-"$desc_width"s %s" "$label_id" "$label_description" $label_color
 	fi
     fi
 }

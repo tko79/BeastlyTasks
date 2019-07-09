@@ -182,7 +182,8 @@ function get_cal() {
 	    printf "%s [%s]\n   -> label: %s\n   -> date: %s" "$cal_id" "$cal_description" "$cal_label" "$cal_date"
 	else
 	    desc_width=$(__calc_column_width "$cal_description" $LIST_DESC_WIDTH)
-	    printf "%-"${ID_LENGTH}"s %-"$desc_width"s %-7s %-10s" $cal_id "$cal_description" $cal_label $cal_date
+	    id_width=$(__calc_column_width "$cal_id" $ID_LENGTH)
+	    printf "%-"$id_width"s %-"$desc_width"s %-7s %-10s" "$cal_id" "$cal_description" $cal_label $cal_date
 	fi
     fi
 }

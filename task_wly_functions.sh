@@ -122,7 +122,8 @@ function get_task_wly() {
 	    printf "%s [%s]\n   -> label: %s\n   -> status: %s   -> biweekly: %s\n" "$task_wly_id" "$task_wly_description" "$task_wly_label" "$task_wly_status" "$task_wly_biweekly"
 	else
 	    desc_width=$(__calc_column_width "$task_wly_description" $LIST_DESC_WIDTH)
-	    printf "%-"${ID_LENGTH}"s %-"$desc_width"s %-7s %-6s %3s" $task_wly_id "$task_wly_description" $task_wly_label $task_wly_status $task_wly_biweekly
+	    id_width=$(__calc_column_width "$task_wly_id" $ID_LENGTH)
+	    printf "%-"$id_width"s %-"$desc_width"s %-7s %-6s %3s" "$task_wly_id" "$task_wly_description" $task_wly_label $task_wly_status $task_wly_biweekly
 	fi
     fi
 }

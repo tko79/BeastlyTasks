@@ -118,7 +118,8 @@ function get_task_dly() {
 	    printf "%s [%s]\n   -> label: %s\n   -> status: %s\n" "$task_dly_id" "$task_dly_description" "$task_dly_label" "$task_dly_status"
 	else
 	    desc_width=$(__calc_column_width "$task_dly_description" $LIST_DESC_WIDTH)
-	    printf "%-"${ID_LENGTH}"s %-"$desc_width"s %-7s %-6s" $task_dly_id "$task_dly_description" $task_dly_label $task_dly_status
+	    id_width=$(__calc_column_width "$task_dly_id" $ID_LENGTH)
+	    printf "%-"$id_width"s %-"$desc_width"s %-7s %-6s" "$task_dly_id" "$task_dly_description" $task_dly_label $task_dly_status
 	fi
     fi
 }

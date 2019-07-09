@@ -184,6 +184,7 @@ function get_task() {
 	    printf "%s [%s]\n   -> label: %s\n   -> priority: %s\n   -> status: %s\n   -> create-/due-/donedate: %s %s %s" "$task_id" "$task_description" "$task_label" "$prio_text" "$task_status" "$task_createdate" "$task_duedate" "$task_donedate"
 	else
 	    desc_width=$(__calc_column_width "$task_description" $LIST_DESC_WIDTH)
+	    id_width=$(__calc_column_width "$task_id" $ID_LENGTH)
 	    case $task_priority in
 		0) prio_text="0" ;;
 		1) prio_text="1 *" ;;
@@ -192,7 +193,7 @@ function get_task() {
 		4) prio_text="4 ****" ;;
 		5) prio_text="5 *****" ;;
 	    esac
-	    printf "%-"${ID_LENGTH}"s %-"$desc_width"s %-7s %-8s %-6s %-7s %-7s %-7s" $task_id "$task_description" $task_label "$prio_text" $task_status $task_createdate $task_duedate $task_donedate
+	    printf "%-"$id_width"s %-"$desc_width"s %-7s %-8s %-6s %-7s %-7s %-7s" "$task_id" "$task_description" $task_label "$prio_text" $task_status $task_createdate $task_duedate $task_donedate
 	fi
     fi
 }
