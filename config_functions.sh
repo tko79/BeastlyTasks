@@ -115,6 +115,27 @@ function set_config_name() {
     __sort_config $configfile
 }
 
+# function get_config_item
+#          get item from config
+# param    $1: config filename
+#          $2: item type
+#          $3: unique id
+# return   return 1: in case of error (item id not found)
+function get_config_item() {
+    local configfile=$1
+    local item_type=$2
+    local item_id=$3
+    local item_from_config=""
+
+    item_from_config=$(grep "${item_type}=${item_id};" $configfile)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	echo "${item_from_config#${item_type}=${item_id};}" | sed -e 's#\"##g'
+    fi
+}
+
 # function list_config_counters
 #          get counters from config
 # param    $1: config filename
