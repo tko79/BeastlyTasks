@@ -511,7 +511,7 @@ function add_config_task() {
 	return 4
     fi
 
-    task_from_config=$(get_config_task $configfile $task_id)
+    task_from_config=$(get_config_item $configfile "task" $task_id)
     if [ $? == 1 ]; then
 	echo "task=$task_id;\"$task_description;$task_label;$task_priority;$task_status;$task_createdate;$task_duedate;$task_donedate\"" >> $configfile
     else
@@ -531,25 +531,6 @@ function del_config_task() {
     local task_id=$2
 
     sed -i "/task=$task_id;/d" $configfile
-}
-
-# function get_config_task
-#          get task from config
-# param    $1: config filename
-#          $2: unique id
-# return   return 1: in case of error (task id not found)
-function get_config_task() {
-    local configfile=$1
-    local task_id=$2
-    local task_from_config=""
-
-    task_from_config=$(grep "task=$task_id;" $configfile)
-    if [ $? == 1 ]; then
-	echo ""
-	return 1
-    else
-	echo ${task_from_config#task=$task_id;} | sed -e 's#\"##g'
-    fi
 }
 
 # function set_config_task
@@ -582,7 +563,7 @@ function set_config_task() {
 	return 2
     fi
 
-    task_from_config=$(get_config_task $configfile $task_id)
+    task_from_config=$(get_config_item $configfile "task" $task_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1

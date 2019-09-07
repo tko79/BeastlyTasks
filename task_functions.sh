@@ -58,7 +58,7 @@ function create_task_image() {
 #          $2: unique id
 #          $3: requested task parameter
 # return   echo: task parameter
-#          return 1: in case of error (get_config_task failed)
+#          return 1: in case of error (get_config_item failed)
 function get_task_param() {
     local configfile=$1
     local task_id=$2
@@ -66,7 +66,7 @@ function get_task_param() {
 
     local task_from_config=""
 
-    task_from_config=$(get_config_task $configfile $task_id)
+    task_from_config=$(get_config_item $configfile "task" $task_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1
@@ -90,7 +90,7 @@ function get_task_param() {
 #          $2: unique id
 #          $3: task parameter
 #          $4: new value for parameter
-# return   return 1: in case of error (get_config_task failed)
+# return   return 1: in case of error (get_config_item failed)
 #          return 2: in case of error (wrong create-/due-/donedate format)
 function set_task_param() {
     local configfile=$1
@@ -100,7 +100,7 @@ function set_task_param() {
 
     local task_from_config=""
 
-    task_from_config=$(get_config_task $configfile $task_id)
+    task_from_config=$(get_config_item $configfile "task" $task_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1
@@ -143,7 +143,7 @@ function set_task_param() {
 #          $2: unique id
 #          $3: format {single|table}
 # return   printf: formatted task text
-#          return 1: in case of error (get_config_task failed)
+#          return 1: in case of error (get_config_item failed)
 function get_task() {
     local configfile=$1
     local task_id=$2
@@ -152,7 +152,7 @@ function get_task() {
     local task_from_config=""
     local desc_width=$(($LIST_DESC_WIDTH-3))
 
-    task_from_config=$(get_config_task $configfile $task_id)
+    task_from_config=$(get_config_item $configfile "task" $task_id)
     if [ $? == 1 ]; then
 	return 1
     else
