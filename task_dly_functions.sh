@@ -25,7 +25,7 @@ source $btpath/generic_functions.sh
 #          $2: unique id
 #          $3: requested task_dly parameter
 # return   echo: task_dly parameter
-#          return 1: in case of error (get_config_task_dly failed)
+#          return 1: in case of error (get_config_item failed)
 function get_task_dly_param() {
     local configfile=$1
     local task_dly_id=$2
@@ -33,7 +33,7 @@ function get_task_dly_param() {
 
     local task_dly_from_config=""
 
-    task_dly_from_config=$(get_config_task_dly $configfile $task_dly_id)
+    task_dly_from_config=$(get_config_item $configfile "task_dly" $task_dly_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1
@@ -53,7 +53,7 @@ function get_task_dly_param() {
 #          $2: unique id
 #          $3: task_dly parameter
 #          $4: new value for parameter
-# return   return 1: in case of error (get_config_task_dly failed)
+# return   return 1: in case of error (get_config_item failed)
 function set_task_dly_param() {
     local configfile=$1
     local task_dly_id=$2
@@ -62,7 +62,7 @@ function set_task_dly_param() {
 
     local task_dly_from_config=""
 
-    task_dly_from_config=$(get_config_task_dly $configfile $task_dly_id)
+    task_dly_from_config=$(get_config_item $configfile "task_dly" $task_dly_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1
@@ -89,7 +89,7 @@ function set_task_dly_param() {
 #          $2: unique id
 #          $3: format {single|table}
 # return   printf: formatted task_dly text
-#          return 1: in case of error (get_config_task_dly failed)
+#          return 1: in case of error (get_config_item failed)
 function get_task_dly() {
     local configfile=$1
     local task_dly_id=$2
@@ -98,7 +98,7 @@ function get_task_dly() {
     local task_dly_from_config=""
     local desc_width=$(($LIST_DESC_WIDTH-3))
 
-    task_dly_from_config=$(get_config_task_dly $configfile $task_dly_id)
+    task_dly_from_config=$(get_config_item $configfile "task_dly" $task_dly_id)
     if [ $? == 1 ]; then
 	return 1
     else
