@@ -705,7 +705,7 @@ function add_config_task_wly() {
 	return 3
     fi
 
-    task_wly_from_config=$(get_config_task_wly $configfile $task_wly_id)
+    task_wly_from_config=$(get_config_item $configfile "task_wly" $task_wly_id)
     if [ $? == 1 ]; then
 	echo "task_wly=$task_wly_id;\"$task_wly_description;$task_wly_label;$task_wly_status;$task_wly_biweekly\"" >> $configfile
     else
@@ -725,25 +725,6 @@ function del_config_task_wly() {
     local task_wly_id=$2
 
     sed -i "/task_wly=$task_wly_id;/d" $configfile
-}
-
-# function get_config_task_wly
-#          get task_wly from config
-# param    $1: config filename
-#          $2: unique id
-# return   return 1: in case of error (task_wly id not found)
-function get_config_task_wly() {
-    local configfile=$1
-    local task_wly_id=$2
-    local task_wly_from_config=""
-
-    task_wly_from_config=$(grep "task_wly=$task_wly_id;" $configfile)
-    if [ $? == 1 ]; then
-	echo ""
-	return 1
-    else
-	echo ${task_wly_from_config#task_wly=$task_wly_id;} | sed -e 's#\"##g'
-    fi
 }
 
 # function set_config_task_wly
@@ -770,7 +751,7 @@ function set_config_task_wly() {
 	return 2
     fi
 
-    task_wly_from_config=$(get_config_task_wly $configfile $task_wly_id)
+    task_wly_from_config=$(get_config_item $configfile "task_wly" $task_wly_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1
