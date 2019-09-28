@@ -177,7 +177,7 @@ function add_config_counter() {
        return 2
     fi
 
-    counter_from_config=$(get_config_counter $configfile $counter_id)
+    counter_from_config=$(get_config_item $configfile "counter" $counter_id)
     if [ $? == 1 ]; then
 	echo "counter=$counter_id;\"$counter_description;$counter_value;$counter_threshold;$counter_below_above;$counter_desc_good;$counter_desc_threshold;$counter_desc_bad\"" >> $configfile
     else
@@ -197,25 +197,6 @@ function del_config_counter() {
     local counter_id=$2
 
     sed -i "/counter=$counter_id;/d" $configfile
-}
-
-# function get_config_counter
-#          get counter from config
-# param    $1: config filename
-#          $2: unique id
-# return   return 1: in case of error (counter id not found)
-function get_config_counter() {
-    local configfile=$1
-    local counter_id=$2
-    local counter_from_config=""
-
-    counter_from_config=$(grep "counter=$counter_id;" $configfile)
-    if [ $? == 1 ]; then
-	echo ""
-	return 1
-    else
-	echo ${counter_from_config#counter=$counter_id;} | sed -e 's#\"##g'
-    fi
 }
 
 # function set_config_counter
@@ -242,7 +223,7 @@ function set_config_counter() {
     local counter_desc_bad=$9
     local counter_from_config=""
 
-    counter_from_config=$(get_config_counter $configfile $counter_id)
+    counter_from_config=$(get_config_item $configfile "counter" $counter_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1

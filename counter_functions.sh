@@ -25,7 +25,7 @@ source $btpath/generic_functions.sh
 #          $2: unique id
 #          $3: requested counter parameter
 # return   echo: counter parameter
-#          return 1: in case of error (get_config_counter failed)
+#          return 1: in case of error (get_config_item failed)
 function get_counter_param() {
     local configfile=$1
     local counter_id=$2
@@ -33,7 +33,7 @@ function get_counter_param() {
 
     local counter_from_config=""
 
-    counter_from_config=$(get_config_counter $configfile $counter_id)
+    counter_from_config=$(get_config_item $configfile "counter" $counter_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1
@@ -57,7 +57,7 @@ function get_counter_param() {
 #          $2: unique id
 #          $3: counter parameter
 #          $4: new value for parameter
-# return   return 1: in case of error (get_config_counter failed)
+# return   return 1: in case of error (get_config_item failed)
 function set_counter_param() {
     local configfile=$1
     local counter_id=$2
@@ -66,7 +66,7 @@ function set_counter_param() {
 
     local counter_from_config=""
 
-    counter_from_config=$(get_config_counter $configfile $counter_id)
+    counter_from_config=$(get_config_item $configfile "counter" $counter_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1
@@ -145,14 +145,14 @@ function decrement_counter() {
 #          reset counter value to zero
 # param    $1: config filename
 #          $2: unique id
-# return   return 1: in case of error (get_config_counter failed)
+# return   return 1: in case of error (get_config_item failed)
 function reset_counter() {
     local configfile=$1
     local counter_id=$2
 
     local counter_from_config=""
 
-    counter_from_config=$(get_config_counter $configfile $counter_id)
+    counter_from_config=$(get_config_item $configfile "counter" $counter_id)
     if [ $? == 1 ]; then
 	return 1
     else
@@ -166,7 +166,7 @@ function reset_counter() {
 #          $2: unique id
 #          $3: format {single|table}
 # return   printf: formatted counter text
-#          return 1: in case of error (get_config_counter failed)
+#          return 1: in case of error (get_config_item failed)
 function get_counter() {
     local configfile=$1
     local counter_id=$2
@@ -175,7 +175,7 @@ function get_counter() {
     local counter_from_config=""
     local desc_width=$(($LIST_DESC_WIDTH-3))
 
-    counter_from_config=$(get_config_counter $configfile $counter_id)
+    counter_from_config=$(get_config_item $configfile "counter" $counter_id)
     if [ $? == 1 ]; then
 	return 1
     else
