@@ -771,7 +771,7 @@ function add_config_label() {
        return 2
     fi
 
-    label_from_config=$(get_config_label $configfile $label_id)
+    label_from_config=$(get_config_item $configfile "label" $label_id)
     if [ $? == 1 ]; then
 	echo "label=$label_id;\"$label_description;$label_color\"" >> $configfile
     else
@@ -793,25 +793,6 @@ function del_config_label() {
     sed -i "/label=$label_id;/d" $configfile
 }
 
-# function get_config_label
-#          get label from config
-# param    $1: config filename
-#          $2: unique id
-# return   return 1: in case of error (label id not found)
-function get_config_label() {
-    local configfile=$1
-    local label_id=$2
-    local label_from_config=""
-
-    label_from_config=$(grep "label=$label_id;" $configfile)
-    if [ $? == 1 ]; then
-	echo ""
-	return 1
-    else
-	echo ${label_from_config#label=$label_id;} | sed -e 's#\"##g'
-    fi
-}
-
 # function set_config_label
 #          set label to config
 # param    $1: config filename
@@ -826,7 +807,7 @@ function set_config_label() {
     local label_description=$3
     local label_color=$4
 
-    label_from_config=$(get_config_label $configfile $label_id)
+    label_from_config=$(get_config_item $configfile "label" $label_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1

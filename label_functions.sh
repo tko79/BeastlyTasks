@@ -25,7 +25,7 @@ source $btpath/generic_functions.sh
 #          $2: unique id
 #          $3: requested label parameter
 # return   echo: label parameter
-#          return 1: in case of error (get_config_label failed)
+#          return 1: in case of error (get_config_item failed)
 function get_label_param() {
     local configfile=$1
     local label_id=$2
@@ -33,7 +33,7 @@ function get_label_param() {
 
     local label_from_config=""
 
-    label_from_config=$(get_config_label $configfile $label_id)
+    label_from_config=$(get_config_item $configfile "label" $label_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1
@@ -52,7 +52,7 @@ function get_label_param() {
 #          $2: unique id
 #          $3: label parameter
 #          $4: new value for parameter
-# return   return 1: in case of error (get_config_label failed)
+# return   return 1: in case of error (get_config_item failed)
 function set_label_param() {
     local configfile=$1
     local label_id=$2
@@ -61,7 +61,7 @@ function set_label_param() {
 
     local label_from_config=""
 
-    label_from_config=$(get_config_label $configfile $label_id)
+    label_from_config=$(get_config_item $configfile "label" $label_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1
@@ -86,7 +86,7 @@ function set_label_param() {
 #          $2: unique id
 #          $3: format {single|table}
 # return   printf: formatted label text
-#          return 1: in case of error (get_config_label failed)
+#          return 1: in case of error (get_config_item failed)
 function get_label() {
     local configfile=$1
     local label_id=$2
@@ -95,7 +95,7 @@ function get_label() {
     local label_from_config=""
     local desc_width=$(($LIST_DESC_WIDTH-3))
 
-    label_from_config=$(get_config_label $configfile $label_id)
+    label_from_config=$(get_config_item $configfile "label" $label_id)
     if [ $? == 1 ]; then
 	return 1
     else
