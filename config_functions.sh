@@ -263,7 +263,7 @@ function add_config_timer() {
 	return 2
     fi
 
-    timer_from_config=$(get_config_timer $configfile $timer_id)
+    timer_from_config=$(get_config_item $configfile "timer" $timer_id)
     if [ $? == 1 ]; then
 	echo "timer=$timer_id;\"$timer_description;$timer_value\"" >> $configfile
     else
@@ -285,25 +285,6 @@ function del_config_timer() {
     sed -i "/timer=$timer_id;/d" $configfile
 }
 
-# function get_config_timer
-#          get timer from config
-# param    $1: config filename
-#          $2: unique id
-# return   return 1: in case of error (timer id not found)
-function get_config_timer() {
-    local configfile=$1
-    local timer_id=$2
-    local timer_from_config=""
-
-    timer_from_config=$(grep "timer=$timer_id;" $configfile)
-    if [ $? == 1 ]; then
-	echo ""
-	return 1
-    else
-	echo ${timer_from_config#timer=$timer_id;} | sed -e 's#\"##g'
-    fi
-}
-
 # function set_config_timer
 #          set timer to config
 # param    $1: config filename
@@ -318,7 +299,7 @@ function set_config_timer() {
     local timer_value=$4
     local timer_from_config=""
 
-    timer_from_config=$(get_config_timer $configfile $timer_id)
+    timer_from_config=$(get_config_item $configfile "timer" $timer_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1

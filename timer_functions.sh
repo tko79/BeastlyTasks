@@ -215,7 +215,7 @@ function show_whats_left() {
 #          $2: unique id
 #          $3: requested timer parameter
 # return   echo: timer parameter
-#          return 1: in case of error (get_config_timer failed)
+#          return 1: in case of error (get_config_item failed)
 function get_timer_param() {
     local configfile=$1
     local timer_id=$2
@@ -223,7 +223,7 @@ function get_timer_param() {
 
     local timer_from_config=""
 
-    timer_from_config=$(get_config_timer $configfile $timer_id)
+    timer_from_config=$(get_config_item $configfile "timer" $timer_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1
@@ -242,7 +242,7 @@ function get_timer_param() {
 #          $2: unique id
 #          $3: timer parameter
 #          $4: new value for parameter
-# return   return 1: in case of error (get_config_timer failed)
+# return   return 1: in case of error (get_config_item failed)
 function set_timer_param() {
     local configfile=$1
     local timer_id=$2
@@ -251,7 +251,7 @@ function set_timer_param() {
 
     local timer_from_config=""
 
-    timer_from_config=$(get_config_timer $configfile $timer_id)
+    timer_from_config=$(get_config_item $configfile "timer" $timer_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1
@@ -276,7 +276,7 @@ function set_timer_param() {
 #          $2: unique id
 #          $3: format {single|table}
 # return   printf: formatted timer text
-#          return 1: in case of error (get_config_timer failed)
+#          return 1: in case of error (get_config_item failed)
 function get_timer() {
     local configfile=$1
     local timer_id=$2
@@ -285,7 +285,7 @@ function get_timer() {
     local timer_from_config=""
     local desc_width=$(($LIST_DESC_WIDTH-3))
 
-    timer_from_config=$(get_config_timer $configfile $timer_id)
+    timer_from_config=$(get_config_item $configfile "timer" $timer_id)
     if [ $? == 1 ]; then
 	return 1
     else
