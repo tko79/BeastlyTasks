@@ -82,7 +82,7 @@ function show_cal() {
 #          $2: unique id
 #          $3: requested cal parameter
 # return   echo: cal parameter
-#          return 1: in case of error (get_config_cal failed)
+#          return 1: in case of error (get_config_item failed)
 function get_cal_param() {
     local configfile=$1
     local cal_id=$2
@@ -90,7 +90,7 @@ function get_cal_param() {
 
     local cal_from_config=""
 
-    cal_from_config=$(get_config_cal $configfile $cal_id)
+    cal_from_config=$(get_config_item $configfile "cal" $cal_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1
@@ -110,7 +110,7 @@ function get_cal_param() {
 #          $2: unique id
 #          $3: cal parameter
 #          $4: new value for parameter
-# return   return 1: in case of error (get_config_cal failed)
+# return   return 1: in case of error (get_config_item failed)
 #          return 2: in case of error (wrong create-/due-/donedate format)
 function set_cal_param() {
     local configfile=$1
@@ -120,7 +120,7 @@ function set_cal_param() {
 
     local cal_from_config=""
 
-    cal_from_config=$(get_config_cal $configfile $cal_id)
+    cal_from_config=$(get_config_item $configfile "cal" $cal_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1
@@ -155,7 +155,7 @@ function set_cal_param() {
 #          $2: unique id
 #          $3: format {single|table}
 # return   printf: formatted cal text
-#          return 1: in case of error (get_config_cal failed)
+#          return 1: in case of error (get_config_item failed)
 function get_cal() {
     local configfile=$1
     local cal_id=$2
@@ -164,7 +164,7 @@ function get_cal() {
     local cal_from_config=""
     local desc_width=$(($LIST_DESC_WIDTH-3))
 
-    cal_from_config=$(get_config_cal $configfile $cal_id)
+    cal_from_config=$(get_config_item $configfile "cal" $cal_id)
     if [ $? == 1 ]; then
 	return 1
     else

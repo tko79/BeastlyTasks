@@ -347,7 +347,7 @@ function add_config_cal() {
 	return 3
     fi
 
-    cal_from_config=$(get_config_cal $configfile $cal_id)
+    cal_from_config=$(get_config_item $configfile "cal" $cal_id)
     if [ $? == 1 ]; then
 	echo "cal=$cal_id;\"$cal_description;$cal_label;$cal_date\"" >> $configfile
     else
@@ -369,25 +369,6 @@ function del_config_cal() {
     sed -i "/cal=$cal_id;/d" $configfile
 }
 
-# function get_config_cal
-#          get cal from config
-# param    $1: config filename
-#          $2: unique id
-# return   return 1: in case of error (cal id not found)
-function get_config_cal() {
-    local configfile=$1
-    local cal_id=$2
-    local cal_from_config=""
-
-    cal_from_config=$(grep "cal=$cal_id;" $configfile)
-    if [ $? == 1 ]; then
-	echo ""
-	return 1
-    else
-	echo ${cal_from_config#cal=$cal_id;} | sed -e 's#\"##g'
-    fi
-}
-
 # function set_config_cal
 #          set cal to config
 # param    $1: config filename
@@ -404,7 +385,7 @@ function set_config_cal() {
     local cal_date=$5
     local cal_from_config=""
 
-    cal_from_config=$(get_config_cal $configfile $cal_id)
+    cal_from_config=$(get_config_item $configfile "cal" $cal_id)
     if [ $? == 1 ]; then
 	echo ""
 	return 1
