@@ -777,3 +777,15 @@ function set_config_label() {
 	sed -i "s#label=$label_id;\"${label_from_config}\"#label=$label_id;\"$label_description;$label_color\"#g" $configfile
     fi
 }
+
+# function get_element_from_config
+#          extracts and prints the nth element from a full config string
+# param    $1: full config string
+#          $2: nth element from full config string
+# return   echo element from full config string
+function get_element_from_config() {
+    string_from_config=$1
+    nth_element_string=$2
+
+    echo $string_from_config | awk -F';' '{ print $'$nth_element_string' }'
+}
