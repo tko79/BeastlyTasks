@@ -73,13 +73,13 @@ function get_task_param() {
     else
 	task_from_config=${task_from_config#task=$task_id;} | sed -e 's#\"##g'
 	case "$task_param" in
-	    "description") echo $task_from_config | awk -F';' '{ print $1 }' ;;
-	    "label")       echo $task_from_config | awk -F';' '{ print $2 }' ;;
-	    "priority")    echo $task_from_config | awk -F';' '{ print $3 }' ;;
-	    "status")      echo $task_from_config | awk -F';' '{ print $4 }' ;;
-	    "createdate")  echo $task_from_config | awk -F';' '{ print $5 }' ;;
-	    "duedate")     echo $task_from_config | awk -F';' '{ print $6 }' ;;
-	    "donedate")    echo $task_from_config | awk -F';' '{ print $7 }' ;;
+	    "description") $(get_element_from_config "$task_from_config" 1) ;;
+	    "label")       $(get_element_from_config "$task_from_config" 2) ;;
+	    "priority")    $(get_element_from_config "$task_from_config" 3) ;;
+	    "status")      $(get_element_from_config "$task_from_config" 4) ;;
+	    "createdate")  $(get_element_from_config "$task_from_config" 5) ;;
+	    "duedate")     $(get_element_from_config "$task_from_config" 6) ;;
+	    "donedate")    $(get_element_from_config "$task_from_config" 7) ;;
 	esac
     fi
 }
@@ -107,13 +107,13 @@ function set_task_param() {
     else
 	task_from_config=${task_from_config#task=$task_id;} | sed -e 's#\"##g'
 
-	local task_description=$(echo $task_from_config | awk -F';' '{ print $1 }')
-	local task_label=$(echo       $task_from_config | awk -F';' '{ print $2 }')
-	local task_priority=$(echo    $task_from_config | awk -F';' '{ print $3 }')
-	local task_status=$(echo      $task_from_config | awk -F';' '{ print $4 }')
-	local task_createdate=$(echo  $task_from_config | awk -F';' '{ print $5 }')
-	local task_duedate=$(echo     $task_from_config | awk -F';' '{ print $6 }')
-	local task_donedate=$(echo    $task_from_config | awk -F';' '{ print $7 }')
+	local task_description=$(get_element_from_config "$task_from_config" 1)
+	local task_label=$(get_element_from_config       "$task_from_config" 2)
+	local task_priority=$(get_element_from_config    "$task_from_config" 3)
+	local task_status=$(get_element_from_config      "$task_from_config" 4)
+	local task_createdate=$(get_element_from_config  "$task_from_config" 5)
+	local task_duedate=$(get_element_from_config     "$task_from_config" 6)
+	local task_donedate=$(get_element_from_config    "$task_from_config" 7)
 
 	case "$task_param" in
 	    "createdate" | "duedate" | "donedate")
@@ -156,13 +156,13 @@ function get_task() {
     if [ $? == 1 ]; then
 	return 1
     else
-	local task_description=$(echo $task_from_config | awk -F';' '{ print $1 }')
-	local task_label=$(echo       $task_from_config | awk -F';' '{ print $2 }')
-	local task_priority=$(echo    $task_from_config | awk -F';' '{ print $3 }')
-	local task_status=$(echo      $task_from_config | awk -F';' '{ print $4 }')
-	local task_createdate=$(echo  $task_from_config | awk -F';' '{ print $5 }')
-	local task_duedate=$(echo     $task_from_config | awk -F';' '{ print $6 }')
-	local task_donedate=$(echo    $task_from_config | awk -F';' '{ print $7 }')
+	local task_description=$(get_element_from_config "$task_from_config" 1)
+	local task_label=$(get_element_from_config       "$task_from_config" 2)
+	local task_priority=$(get_element_from_config    "$task_from_config" 3)
+	local task_status=$(get_element_from_config      "$task_from_config" 4)
+	local task_createdate=$(get_element_from_config  "$task_from_config" 5)
+	local task_duedate=$(get_element_from_config     "$task_from_config" 6)
+	local task_donedate=$(get_element_from_config    "$task_from_config" 7)
 
 	local prio_text=""
 
