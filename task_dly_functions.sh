@@ -40,9 +40,9 @@ function get_task_dly_param() {
     else
 	task_dly_from_config=${task_dly_from_config#task_dly=$task_dly_id;} | sed -e 's#\"##g'
 	case "$task_dly_param" in
-	    "description") echo $task_dly_from_config | awk -F';' '{ print $1 }' ;;
-	    "label")       echo $task_dly_from_config | awk -F';' '{ print $2 }' ;;
-	    "status")      echo $task_dly_from_config | awk -F';' '{ print $3 }' ;;
+	    "description") $(get_element_from_config "$task_dly_from_config" 1) ;;
+	    "label")       $(get_element_from_config "$task_dly_from_config" 2) ;;
+	    "status")      $(get_element_from_config "$task_dly_from_config" 3) ;;
 	esac
     fi
 }
@@ -69,9 +69,9 @@ function set_task_dly_param() {
     else
 	task_dly_from_config=${task_dly_from_config#task_dly=$task_dly_id;} | sed -e 's#\"##g'
 
-	local task_dly_description=$(echo $task_dly_from_config | awk -F';' '{ print $1 }')
-	local task_dly_label=$(echo       $task_dly_from_config | awk -F';' '{ print $2 }')
-	local task_dly_status=$(echo      $task_dly_from_config | awk -F';' '{ print $3 }')
+	local task_dly_description=$(get_element_from_config "$task_dly_from_config" 1)
+	local task_dly_label=$(get_element_from_config       "$task_dly_from_config" 2)
+	local task_dly_status=$(get_element_from_config      "$task_dly_from_config" 3)
 
 	case "$task_dly_param" in
 	    "description") task_dly_description=$task_dly_newval ;;
@@ -102,9 +102,9 @@ function get_task_dly() {
     if [ $? == 1 ]; then
 	return 1
     else
-	local task_dly_description=$(echo $task_dly_from_config | awk -F';' '{ print $1 }')
-	local task_dly_label=$(echo       $task_dly_from_config | awk -F';' '{ print $2 }')
-	local task_dly_status=$(echo      $task_dly_from_config | awk -F';' '{ print $3 }')
+	local task_dly_description=$(get_element_from_config "$task_dly_from_config" 1)
+	local task_dly_label=$(get_element_from_config       "$task_dly_from_config" 2)
+	local task_dly_status=$(get_element_from_config      "$task_dly_from_config" 3)
 
 	local prio_text=""
 
