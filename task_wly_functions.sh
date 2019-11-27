@@ -40,10 +40,10 @@ function get_task_wly_param() {
     else
 	task_wly_from_config=${task_wly_from_config#task_wly=$task_wly_id;} | sed -e 's#\"##g'
 	case "$task_wly_param" in
-	    "description") echo $task_wly_from_config | awk -F';' '{ print $1 }' ;;
-	    "label")       echo $task_wly_from_config | awk -F';' '{ print $2 }' ;;
-	    "status")      echo $task_wly_from_config | awk -F';' '{ print $3 }' ;;
-	    "biweekly")    echo $task_wly_from_config | awk -F';' '{ print $4 }' ;;
+	    "description") $(get_element_from_config "$task_wly_from_config" 1) ;;
+	    "label")       $(get_element_from_config "$task_wly_from_config" 2) ;;
+	    "status")      $(get_element_from_config "$task_wly_from_config" 3) ;;
+	    "biweekly")    $(get_element_from_config "$task_wly_from_config" 4) ;;
 	esac
     fi
 }
@@ -70,10 +70,10 @@ function set_task_wly_param() {
     else
 	task_wly_from_config=${task_wly_from_config#task_wly=$task_wly_id;} | sed -e 's#\"##g'
 
-	local task_wly_description=$(echo $task_wly_from_config | awk -F';' '{ print $1 }')
-	local task_wly_label=$(echo       $task_wly_from_config | awk -F';' '{ print $2 }')
-	local task_wly_status=$(echo      $task_wly_from_config | awk -F';' '{ print $3 }')
-	local task_wly_biweekly=$(echo    $task_wly_from_config | awk -F';' '{ print $4 }')
+	local task_wly_description=$(get_element_from_config "$task_wly_from_config" 1)
+	local task_wly_label=$(get_element_from_config       "$task_wly_from_config" 2)
+	local task_wly_status=$(get_element_from_config      "$task_wly_from_config" 3)
+	local task_wly_biweekly=$(get_element_from_config    "$task_wly_from_config" 4)
 
 	case "$task_wly_param" in
 	    "description") task_wly_description=$task_wly_newval ;;
@@ -105,10 +105,10 @@ function get_task_wly() {
     if [ $? == 1 ]; then
 	return 1
     else
-	local task_wly_description=$(echo $task_wly_from_config | awk -F';' '{ print $1 }')
-	local task_wly_label=$(echo       $task_wly_from_config | awk -F';' '{ print $2 }')
-	local task_wly_status=$(echo      $task_wly_from_config | awk -F';' '{ print $3 }')
-	local task_wly_biweekly=$(echo    $task_wly_from_config | awk -F';' '{ print $4 }')
+	local task_wly_description=$(get_element_from_config "$task_wly_from_config" 1)
+	local task_wly_label=$(get_element_from_config       "$task_wly_from_config" 2)
+	local task_wly_status=$(get_element_from_config      "$task_wly_from_config" 3)
+	local task_wly_biweekly=$(get_element_from_config    "$task_wly_from_config" 4)
 
 	local prio_text=""
 
