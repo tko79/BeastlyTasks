@@ -230,8 +230,8 @@ function get_timer_param() {
     else
 	timer_from_config=${timer_from_config#timer=$timer_id;} | sed -e 's#\"##g'
 	case "$timer_param" in
-	    "description") echo $timer_from_config | awk -F';' '{ print $1 }' ;;
-	    "value")       echo $timer_from_config | awk -F';' '{ print $2 }' ;;
+	    "description") echo $(get_element_from_config "$timer_from_config" 1) ;;
+	    "value")       echo $(get_element_from_config "$timer_from_config" 2) ;;
 	esac
     fi
 }
@@ -258,8 +258,8 @@ function set_timer_param() {
     else
 	timer_from_config=${timer_from_config#timer=$timer_id;} | sed -e 's#\"##g'
 
-	local timer_description=$(echo $timer_from_config | awk -F';' '{ print $1 }')
-	local timer_value=$(echo       $timer_from_config | awk -F';' '{ print $2 }')
+	local timer_description=$(get_element_from_config    "$timer_from_config" 1)
+	local timer_value=$(get_element_from_config          "$timer_from_config" 2)
 
 	case "$timer_param" in
 	    "description") timer_description=$timer_newval ;;
@@ -289,8 +289,8 @@ function get_timer() {
     if [ $? == 1 ]; then
 	return 1
     else
-	local timer_description=$(echo $timer_from_config | awk -F';' '{ print $1 }')
-	local timer_value=$(echo       $timer_from_config | awk -F';' '{ print $2 }')
+	local timer_description=$(get_element_from_config    "$timer_from_config" 1)
+	local timer_value=$(get_element_from_config          "$timer_from_config" 2)
 
 	if [ "$format" == "table" ]; then
             if [ ${#timer_description} -gt $desc_width ]; then
