@@ -40,8 +40,8 @@ function get_label_param() {
     else
 	label_from_config=${label_from_config#label=$label_id;} | sed -e 's#\"##g'
 	case "$label_param" in
-	    "description") echo $label_from_config | awk -F';' '{ print $1 }' ;;
-	    "color")       echo $label_from_config | awk -F';' '{ print $2 }' ;;
+	    "description") echo $(get_element_from_config "$label_from_config" 1) ;;
+	    "color")       echo $(get_element_from_config "$label_from_config" 2) ;;
 	esac
     fi
 }
@@ -68,8 +68,8 @@ function set_label_param() {
     else
 	label_from_config=${label_from_config#label=$label_id;} | sed -e 's#\"##g'
 
-	local label_description=$(echo $label_from_config | awk -F';' '{ print $1 }')
-	local label_color=$(echo       $label_from_config | awk -F';' '{ print $2 }')
+	local label_description=$(get_element_from_config "$label_from_config" 1)
+	local label_color=$(get_element_from_config       "$label_from_config" 2)
 
 	case "$label_param" in
 	    "description") label_description=$label_newval ;;
@@ -99,8 +99,8 @@ function get_label() {
     if [ $? == 1 ]; then
 	return 1
     else
-	local label_description=$(echo $label_from_config | awk -F';' '{ print $1 }')
-	local label_color=$(echo       $label_from_config | awk -F';' '{ print $2 }')
+	local label_description=$(get_element_from_config "$label_from_config" 1)
+	local label_color=$(get_element_from_config       "$label_from_config" 2)
 
 	if [ "$format" == "table" ]; then
             if [ ${#label_description} -gt $desc_width ]; then
