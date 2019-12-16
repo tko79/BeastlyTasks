@@ -97,9 +97,9 @@ function get_cal_param() {
     else
 	cal_from_config=${cal_from_config#cal=$cal_id;} | sed -e 's#\"##g'
 	case "$cal_param" in
-	    "description") echo $cal_from_config | awk -F';' '{ print $1 }' ;;
-	    "label")       echo $cal_from_config | awk -F';' '{ print $2 }' ;;
-	    "date")        echo $cal_from_config | awk -F';' '{ print $3 }' ;;
+	    "description") echo $(get_element_from_config "$cal_from_config" 1) ;;
+	    "label")       echo $(get_element_from_config "$cal_from_config" 2) ;;
+	    "date")        echo $(get_element_from_config "$cal_from_config" 3) ;;
 	esac
     fi
 }
@@ -127,9 +127,9 @@ function set_cal_param() {
     else
 	cal_from_config=${cal_from_config#cal=$cal_id;} | sed -e 's#\"##g'
 
-	local cal_description=$(echo $cal_from_config | awk -F';' '{ print $1 }')
-	local cal_label=$(echo       $cal_from_config | awk -F';' '{ print $2 }')
-	local cal_date=$(echo        $cal_from_config | awk -F';' '{ print $3 }')
+	local cal_description=$(get_element_from_config "$cal_from_config" 1)
+	local cal_label=$(get_element_from_config       "$cal_from_config" 2)
+	local cal_date=$(get_element_from_config        "$cal_from_config" 3)
 
 	case "$cal_param" in
 	    "date")
@@ -168,9 +168,9 @@ function get_cal() {
     if [ $? == 1 ]; then
 	return 1
     else
-	local cal_description=$(echo $cal_from_config | awk -F';' '{ print $1 }')
-	local cal_label=$(echo       $cal_from_config | awk -F';' '{ print $2 }')
-	local cal_date=$(echo        $cal_from_config | awk -F';' '{ print $3 }')
+	local cal_description=$(get_element_from_config "$cal_from_config" 1)
+	local cal_label=$(get_element_from_config       "$cal_from_config" 2)
+	local cal_date=$(get_element_from_config        "$cal_from_config" 3)
 
 	if [ "$format" == "table" ]; then
             if [ ${#cal_description} -gt $desc_width ]; then
