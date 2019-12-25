@@ -40,13 +40,13 @@ function get_counter_param() {
     else
 	counter_from_config=${counter_from_config#counter=$counter_id;} | sed -e 's#\"##g'
 	case "$counter_param" in
-	    "description") echo $counter_from_config | awk -F';' '{ print $1 }' ;;
-	    "value")       echo $counter_from_config | awk -F';' '{ print $2 }' ;;
-	    "threshold")   echo $counter_from_config | awk -F';' '{ print $3 }' ;;
-	    "belabo")      echo $counter_from_config | awk -F';' '{ print $4 }' ;;
-	    "txtgood")     echo $counter_from_config | awk -F';' '{ print $5 }' ;;
-	    "txtequal")    echo $counter_from_config | awk -F';' '{ print $6 }' ;;
-	    "txtbad")      echo $counter_from_config | awk -F';' '{ print $7 }' ;;
+	    "description") echo $(get_element_from_config "$counter_from_config" 1) ;;
+	    "value")       echo $(get_element_from_config "$counter_from_config" 2) ;;
+	    "threshold")   echo $(get_element_from_config "$counter_from_config" 3) ;;
+	    "belabo")      echo $(get_element_from_config "$counter_from_config" 4) ;;
+	    "txtgood")     echo $(get_element_from_config "$counter_from_config" 5) ;;
+	    "txtequal")    echo $(get_element_from_config "$counter_from_config" 6) ;;
+	    "txtbad")      echo $(get_element_from_config "$counter_from_config" 7) ;;
 	esac
     fi
 }
@@ -73,13 +73,13 @@ function set_counter_param() {
     else
 	counter_from_config=${counter_from_config#counter=$counter_id;} | sed -e 's#\"##g'
 
-	local counter_description=$(echo    $counter_from_config | awk -F';' '{ print $1 }')
-	local counter_value=$(echo          $counter_from_config | awk -F';' '{ print $2 }')
-	local counter_threshold=$(echo      $counter_from_config | awk -F';' '{ print $3 }')
-	local counter_below_above=$(echo    $counter_from_config | awk -F';' '{ print $4 }')
-	local counter_desc_good=$(echo      $counter_from_config | awk -F';' '{ print $5 }')
-	local counter_desc_threshold=$(echo $counter_from_config | awk -F';' '{ print $6 }')
-	local counter_desc_bad=$(echo       $counter_from_config | awk -F';' '{ print $7 }')
+	local counter_description=$(get_element_from_config    "$counter_from_config" 1)
+	local counter_value=$(get_element_from_config          "$counter_from_config" 2)
+	local counter_threshold=$(get_element_from_config      "$counter_from_config" 3)
+	local counter_below_above=$(get_element_from_config    "$counter_from_config" 4)
+	local counter_desc_good=$(get_element_from_config      "$counter_from_config" 5)
+	local counter_desc_threshold=$(get_element_from_config "$counter_from_config" 6)
+	local counter_desc_bad=$(get_element_from_config       "$counter_from_config" 7)
 
 	case "$counter_param" in
 	    "description") counter_description=$counter_newval ;;
@@ -179,13 +179,13 @@ function get_counter() {
     if [ $? == 1 ]; then
 	return 1
     else
-	local counter_description=$(echo    $counter_from_config | awk -F';' '{ print $1 }')
-	local counter_value=$(echo          $counter_from_config | awk -F';' '{ print $2 }')
-	local counter_threshold=$(echo      $counter_from_config | awk -F';' '{ print $3 }')
-	local counter_below_above=$(echo    $counter_from_config | awk -F';' '{ print $4 }')
-	local counter_desc_good=$(echo      $counter_from_config | awk -F';' '{ print $5 }')
-	local counter_desc_threshold=$(echo $counter_from_config | awk -F';' '{ print $6 }')
-	local counter_desc_bad=$(echo       $counter_from_config | awk -F';' '{ print $7 }')
+	local counter_description=$(get_element_from_config    "$counter_from_config" 1)
+	local counter_value=$(get_element_from_config          "$counter_from_config" 2)
+	local counter_threshold=$(get_element_from_config      "$counter_from_config" 3)
+	local counter_below_above=$(get_element_from_config    "$counter_from_config" 4)
+	local counter_desc_good=$(get_element_from_config      "$counter_from_config" 5)
+	local counter_desc_threshold=$(get_element_from_config "$counter_from_config" 6)
+	local counter_desc_bad=$(get_element_from_config       "$counter_from_config" 7)
 
 	if [ "$format" == "table" ]; then
 	    if [ ${#counter_description} -gt $desc_width ]; then
