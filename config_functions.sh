@@ -784,8 +784,8 @@ function set_config_label() {
 #          $2: nth element from full config string
 # return   echo element from full config string
 function get_element_from_config() {
-    string_from_config=$1
+    string_from_config="$1"
     nth_element_string=$2
 
-    echo $string_from_config | awk -F';' '{ print $'$nth_element_string' }'
+    echo "$string_from_config" | awk -F';' '{ print $'$nth_element_string' }'
 }
