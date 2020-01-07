@@ -136,6 +136,20 @@ function get_config_item() {
     fi
 }
 
+# function list_config_items
+#          get itemslist from config
+# param    $1: config filename
+#          $2: item type
+# return   echo itemslist from config
+function list_config_items() {
+    local configfile=$1
+    local items_type=$2
+    local items_from_config=""
+
+    items_from_config=$(grep "${items_type}=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
+    echo $items_from_config
+}
+
 # function list_config_counters
 #          get counters from config
 # param    $1: config filename
