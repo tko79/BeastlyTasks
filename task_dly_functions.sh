@@ -137,7 +137,7 @@ function list_tasks_dly() {
     local tasks_dly_from_config=""
     local width="0"
 
-    tasks_dly_from_config=$(list_config_tasks_dly $configfile)
+    tasks_dly_from_config=$(list_config_items $configfile "task_dly")
     if [ "$format" == "list" ]; then
 	printf "$tasks_dly_from_config"
 	return 0

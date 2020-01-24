@@ -211,7 +211,7 @@ function list_tasks() {
     local tasks_from_config=""
     local width="0"
 
-    tasks_from_config=$(list_config_tasks $configfile)
+    tasks_from_config=$(list_config_items $configfile "task")
     if [ "$format" == "list" ]; then
 	printf "$tasks_from_config"
 	return 0

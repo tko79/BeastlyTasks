@@ -201,7 +201,7 @@ function list_cal() {
     local cal_from_config=""
     local width="0"
 
-    cal_from_config=$(list_config_cal $configfile)
+    cal_from_config=$(list_config_items $configfile "cal")
     if [ "$format" == "list" ]; then
 	printf "$cal_from_config"
 	return 0

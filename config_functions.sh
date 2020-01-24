@@ -150,18 +150,6 @@ function list_config_items() {
     echo $items_from_config
 }
 
-# function list_config_counters
-#          get counters from config
-# param    $1: config filename
-# return   echo counters from config
-function list_config_counters() {
-    local configfile=$1
-    local counters_from_config=""
-
-    counters_from_config=$(grep "counter=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
-    echo $counters_from_config
-}
-
 # function add_config_counter
 #          add counter to config
 # param    $1: config filename
@@ -246,18 +234,6 @@ function set_config_counter() {
     fi
 }
 
-# function list_config_timers
-#          get timers from config
-# param    $1: config filename
-# return   echo timers from config
-function list_config_timers() {
-    local configfile=$1
-    local timers_from_config=""
-
-    timers_from_config=$(grep "timer=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
-    echo $timers_from_config
-}
-
 # function add_config_timer
 #          add timer to config
 # param    $1: config filename
@@ -320,18 +296,6 @@ function set_config_timer() {
     else
 	sed -i "s#timer=$timer_id;\"${timer_from_config}\"#timer=$timer_id;\"$timer_description;$timer_value\"#g" $configfile
     fi
-}
-
-# function list_config_cal
-#          get cal from config
-# param    $1: config filename
-# return   echo cal from config
-function list_config_cal() {
-    local configfile=$1
-    local cal_from_config=""
-
-    cal_from_config=$(grep "cal=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
-    echo $cal_from_config
 }
 
 # function add_config_cal
@@ -406,18 +370,6 @@ function set_config_cal() {
     else
 	sed -i "s#cal=$cal_id;\"${cal_from_config}\"#cal=$cal_id;\"$cal_description;$cal_label;$cal_date\"#g" $configfile
     fi
-}
-
-# function list_config_tasks
-#          get tasks from config
-# param    $1: config filename
-# return   echo tasks from config
-function list_config_tasks() {
-    local configfile=$1
-    local tasks_from_config=""
-
-    tasks_from_config=$(grep "task=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
-    echo $tasks_from_config
 }
 
 # function add_config_task
@@ -529,18 +481,6 @@ function set_config_task() {
     fi
 }
 
-# function list_config_tasks_dly
-#          get tasks_dly from config
-# param    $1: config filename
-# return   echo tasks_dly from config
-function list_config_tasks_dly() {
-    local configfile=$1
-    local tasks_dly_from_config=""
-
-    tasks_dly_from_config=$(grep "task_dly=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
-    echo $tasks_dly_from_config
-}
-
 # function add_config_task_dly
 #          add task_dly to config
 # param    $1: config filename
@@ -619,18 +559,6 @@ function set_config_task_dly() {
     else
 	sed -i "s#task_dly=$task_dly_id;\"${task_dly_from_config}\"#task_dly=$task_dly_id;\"$task_dly_description;$task_dly_label;$task_dly_status\"#g" $configfile
     fi
-}
-
-# function list_config_tasks_wly
-#          get tasks_wly from config
-# param    $1: config filename
-# return   echo tasks_wly from config
-function list_config_tasks_wly() {
-    local configfile=$1
-    local tasks_wly_from_config=""
-
-    tasks_wly_from_config=$(grep "task_wly=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
-    echo $tasks_wly_from_config
 }
 
 # function add_config_task_wly
@@ -715,18 +643,6 @@ function set_config_task_wly() {
     else
 	sed -i "s#task_wly=$task_wly_id;\"${task_wly_from_config}\"#task_wly=$task_wly_id;\"$task_wly_description;$task_wly_label;$task_wly_status;$task_wly_biweekly\"#g" $configfile
     fi
-}
-
-# function list_config_labels
-#          get labels from config
-# param    $1: config filename
-# return   echo labels from config
-function list_config_labels() {
-    local configfile=$1
-    local labels_from_config=""
-
-    labels_from_config=$(grep "label=" $configfile | awk -F';' '{ print $1 }' | awk -F'=' '{ print $2 }')
-    echo $labels_from_config
 }
 
 # function add_config_label

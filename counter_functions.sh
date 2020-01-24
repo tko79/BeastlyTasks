@@ -235,7 +235,7 @@ function list_counters() {
     local counters_from_config=""
     local width="0"
 
-    counters_from_config=$(list_config_counters $configfile)
+    counters_from_config=$(list_config_items $configfile "counter")
     if [ "$format" == "list" ]; then
 	printf "$counters_from_config"
 	return 0

@@ -141,7 +141,7 @@ function list_tasks_wly() {
     local tasks_wly_from_config=""
     local width="0"
 
-    tasks_wly_from_config=$(list_config_tasks_wly $configfile)
+    tasks_wly_from_config=$(list_config_items $configfile "task_wly")
     if [ "$format" == "list" ]; then
 	printf "$tasks_wly_from_config"
 	return 0

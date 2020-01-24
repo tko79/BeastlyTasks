@@ -321,7 +321,7 @@ function list_timers() {
     local timers_from_config=""
     local width="0"
 
-    timers_from_config=$(list_config_timers $configfile)
+    timers_from_config=$(list_config_items $configfile "timer")
     if [ "$format" == "list" ]; then
 	printf "$timers_from_config"
 	return 0

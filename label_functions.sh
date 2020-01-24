@@ -131,7 +131,7 @@ function list_labels() {
     local label_from_config=""
     local width="0"
 
-    label_from_config=$(list_config_labels $configfile)
+    label_from_config=$(list_config_items $configfile "label")
     if [ "$format" == "list" ]; then
 	printf "$label_from_config"
 	return 0
