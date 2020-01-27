@@ -136,6 +136,20 @@ function get_config_item() {
     fi
 }
 
+# function del_config_item
+#          delete item from config
+# param    $1: config filename
+#          $2: item type
+#          $3: unique id
+# return   <none>
+function del_config_item() {
+    local configfile=$1
+    local item_type=$2
+    local item_id=$3
+
+    sed -i "/${item_type}=${item_id};/d" $configfile
+}
+
 # function list_config_items
 #          get itemslist from config
 # param    $1: config filename
