@@ -203,18 +203,6 @@ function add_config_counter() {
     __sort_config $configfile
 }
 
-# function del_config_counter
-#          delete counter from config
-# param    $1: config filename
-#          $2: unique id
-# return   <none>
-function del_config_counter() {
-    local configfile=$1
-    local counter_id=$2
-
-    sed -i "/counter=$counter_id;/d" $configfile
-}
-
 # function set_config_counter
 #          set counter to config
 # param    $1: config filename
@@ -277,18 +265,6 @@ function add_config_timer() {
     __sort_config $configfile
 }
 
-# function del_config_timer
-#          delete timer from config
-# param    $1: config filename
-#          $2: unique id
-# return   <none>
-function del_config_timer() {
-    local configfile=$1
-    local timer_id=$2
-
-    sed -i "/timer=$timer_id;/d" $configfile
-}
-
 # function set_config_timer
 #          set timer to config
 # param    $1: config filename
@@ -347,18 +323,6 @@ function add_config_cal() {
     fi
 
     __sort_config $configfile
-}
-
-# function del_config_cal
-#          delete cal from config
-# param    $1: config filename
-#          $2: unique id
-# return   <none>
-function del_config_cal() {
-    local configfile=$1
-    local cal_id=$2
-
-    sed -i "/cal=$cal_id;/d" $configfile
 }
 
 # function set_config_cal
@@ -444,18 +408,6 @@ function add_config_task() {
     __sort_config $configfile
 }
 
-# function del_config_task
-#          delete task from config
-# param    $1: config filename
-#          $2: unique id
-# return   <none>
-function del_config_task() {
-    local configfile=$1
-    local task_id=$2
-
-    sed -i "/task=$task_id;/d" $configfile
-}
-
 # function set_config_task
 #          set task to config
 # param    $1: config filename
@@ -532,18 +484,6 @@ function add_config_task_dly() {
     __sort_config $configfile
 }
 
-# function del_config_task_dly
-#          delete task_dly from config
-# param    $1: config filename
-#          $2: unique id
-# return   <none>
-function del_config_task_dly() {
-    local configfile=$1
-    local task_dly_id=$2
-
-    sed -i "/task_dly=$task_dly_id;/d" $configfile
-}
-
 # function set_config_task_dly
 #          set task_dly to config
 # param    $1: config filename
@@ -614,18 +554,6 @@ function add_config_task_wly() {
     __sort_config $configfile
 }
 
-# function del_config_task_wly
-#          delete task_wly from config
-# param    $1: config filename
-#          $2: unique id
-# return   <none>
-function del_config_task_wly() {
-    local configfile=$1
-    local task_wly_id=$2
-
-    sed -i "/task_wly=$task_wly_id;/d" $configfile
-}
-
 # function set_config_task_wly
 #          set task_wly to config
 # param    $1: config filename
@@ -685,18 +613,6 @@ function add_config_label() {
     fi
 
     __sort_config $configfile
-}
-
-# function del_config_label
-#          delete label from config
-# param    $1: config filename
-#          $2: unique id
-# return   <none>
-function del_config_label() {
-    local configfile=$1
-    local label_id=$2
-
-    sed -i "/label=$label_id;/d" $configfile
 }
 
 # function set_config_label

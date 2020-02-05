@@ -265,8 +265,8 @@ if [ $params_cnt -gt 0 ]; then
 		;;
 	    "--del-counter")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
-		    # del_config_counter $uid
-		    del_config_counter $configfile "${params_array[$params_curr+1]}"
+		    # del_config_item "counter" $uid
+		    del_config_item $configfile "counter" "${params_array[$params_curr+1]}"
 		    exit 0
 		else
 		    show_params_errormsg "del-counter"
@@ -339,8 +339,8 @@ if [ $params_cnt -gt 0 ]; then
 		;;
 	    "--del-timer")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
-		    # del_config_timer $uid
-		    del_config_timer $configfile "${params_array[$params_curr+1]}"
+		    # del_config_item "timer" $uid
+		    del_config_item $configfile "timer" "${params_array[$params_curr+1]}"
 		    exit 0
 		else
 		    show_params_errormsg "del-timer"
@@ -386,8 +386,8 @@ if [ $params_cnt -gt 0 ]; then
 		;;
 	    "--del-cal")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
-		    # del_config_cal $uid
-		    del_config_cal $configfile "${params_array[$params_curr+1]}"
+		    # del_config_item "cal" $uid
+		    del_config_item $configfile "cal" "${params_array[$params_curr+1]}"
 		    exit 0
 		else
 		    show_params_errormsg "del-cal"
@@ -433,8 +433,8 @@ if [ $params_cnt -gt 0 ]; then
 		;;
 	    "--del-task")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
-		    # del_config_task $uid
-		    del_config_task $configfile "${params_array[$params_curr+1]}"
+		    # del_config_item "task" $uid
+		    del_config_item $configfile "task" "${params_array[$params_curr+1]}"
 		    exit 0
 		else
 		    show_params_errormsg "del-task"
@@ -480,8 +480,8 @@ if [ $params_cnt -gt 0 ]; then
 		;;
 	    "--del-task-dly")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
-		    # del_config_task_dly $uid
-		    del_config_task_dly $configfile "${params_array[$params_curr+1]}"
+		    # del_config_item "task_dly" $uid
+		    del_config_item $configfile "task_dly" "${params_array[$params_curr+1]}"
 		    exit 0
 		else
 		    show_params_errormsg "del-task-dly"
@@ -527,8 +527,8 @@ if [ $params_cnt -gt 0 ]; then
 		;;
 	    "--del-label")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
-		    # del_config_label $uid
-		    del_config_label $configfile "${params_array[$params_curr+1]}"
+		    # del_config_item "label" $uid
+		    del_config_item $configfile "label" "${params_array[$params_curr+1]}"
 		    exit 0
 		else
 		    show_params_errormsg "del-label"
