@@ -14,6 +14,7 @@ misc:
                                         END week and (optional) (IMPO:impo) flag
   --show-cal OPTION                     show calendar with OPTION:next|<year>
                                         (next 90 days or complete year)
+  --show-all                            show a complete list of all items
 
 counters:
   --list-counters FORMAT                list all counters in FORMAT:list|table

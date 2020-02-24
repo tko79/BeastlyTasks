@@ -30,6 +30,7 @@
 | <sub>swl                    | <sub>read  | <sub>show_whats_left        | <sub>format start until start-items current-items |
 | <sub>cti                    | <sub>write | <sub>create_task_image      | <sub>name start end impo                          |
 | <sub>show-cal               | <sub>read  | <sub>show_cal               | <sub>option                                       |
+| <sub>show-all               | <sub>read  | <sub>show_all               |                                                   |
 | <sub>help                   | <sub>read  | <sub>show_help              |                                                   |
 
 ## counters
