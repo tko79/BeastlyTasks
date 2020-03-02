@@ -56,6 +56,7 @@ source $btpath/counter_functions.sh
 source $btpath/cal_functions.sh
 source $btpath/task_functions.sh
 source $btpath/task_dly_functions.sh
+source $btpath/task_wly_functions.sh
 source $btpath/label_functions.sh
 
 # function show_help
@@ -120,6 +121,10 @@ show_all() {
     echo -e $COL_WHITE_U"tasks_dly"$COL_DEFAULT
     echo ""
     printf "$(list_tasks_dly $configfile table)\n"
+
+    echo -e $COL_WHITE_U"tasks_wly"$COL_DEFAULT
+    echo ""
+    printf "$(list_tasks_wly $configfile table)\n"
 }
 
 # function show_command_errormsg
@@ -485,6 +490,53 @@ if [ $params_cnt -gt 0 ]; then
 		    exit 0
 		else
 		    show_params_errormsg "del-task-dly"
+		fi
+		;;
+
+	    # item parameters: tasks_wly
+	    "--list-tasks-wly")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # list_tasks_wly $format
+		    printf "$(list_tasks_wly $configfile ${params_array[$params_curr+1]})\n"
+		    exit 0
+		else
+		    show_params_errormsg "list-tasks-wly"
+		fi
+		;;
+	    "--add-task-wly")
+		if [ "${params_array[$params_curr+5]}" != "" ]; then
+		    # add_config_task_wly $uid $description $label $status $biweekly
+		    add_config_task_wly $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}" "${params_array[$params_curr+4]}" "${params_array[$params_curr+5]}"
+		    exit 0
+		else
+		    show_params_errormsg "add-task-wly"
+		fi
+		;;
+	    "--get-task-wly")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # get_task_wly $uid 'single'
+		    printf "$(get_task_wly $configfile ${params_array[$params_curr+1]} 'single')\n"
+		    exit 0
+		else
+		    show_params_errormsg "get-task-wly"
+		fi
+		;;
+	    "--set-task-wly")
+		if [ "${params_array[$params_curr+3]}" != "" ]; then
+		    # set_task_wly_param $uid $param $newval
+		    set_task_wly_param $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}"
+		    exit 0
+		else
+		    show_params_errormsg "set-task-wly"
+		fi
+		;;
+	    "--del-task-wly")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # del_config_item "task_wly" $uid
+		    del_config_item $configfile "task_wly" "${params_array[$params_curr+1]}"
+		    exit 0
+		else
+		    show_params_errormsg "del-task-wly"
 		fi
 		;;
 

@@ -71,6 +71,17 @@ daily tasks:
                                         status for daily task UID
   --del-task-dly UID                    delete daily task UID
 
+weekly tasks:
+  --list-tasks-wly FORMAT               list all weekly tasks in FORMAT:list|
+                                        table
+  --add-task-wly UID DESCRIPTION LABEL  add a new weekly task with UID,
+                 STATUS BIWEEKLY        DESCRIPTION, LABEL, STATUS:open|done and
+                                        BIWEEKLY:yes|
+  --get-task-wly UID                    get value of weekly task UID
+  --set-task-wly UID PARAM NEWVAL       set NEWVAL of PARAM:description|label|
+                                        status|biweekly for weekly task UID
+  --del-task-wly UID                    delete weekly task UID
+
 labels:
   --list-labels FORMAT                  list all labels in FORMAT:list|table
   --add-label UID DESCRIPTION COLOR     add a new label with UID, DESCRIPTION

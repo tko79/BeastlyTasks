@@ -129,6 +129,24 @@
 | <sub>set-task-dly   | <sub>write | <sub>set_task_dly_param  | <sub>uid param newval             |
 | <sub>del-task-dly   | <sub>write | <sub>del_config_task_dly | <sub>uid                          |
 
+## weekly tasks
+
+| <sub>parameter      | <sub>description                                                                                       |
+|---------------------|--------------------------------------------------------------------------------------------------------|
+| <sub>list-tasks-wly | <sub>list all weeky tasks in {format:list\|table}                                                      |
+| <sub>add-task-wly   | <sub>add a new weeky task with {uid}, {description}, {label}, {status:open\|done} and {biweekly:yes\|} |
+| <sub>get-task-wly   | <sub>get value of weeky task {uid}                                                                     |
+| <sub>set-task-wly   | <sub>set {newval} of {param} for weeky task {uid}                                                      |
+| <sub>del-task-wly   | <sub>delete task {uid}                                                                                 |
+
+| <sub>parameter      | <sub>rd/wr | <sub>internal function   | <sub>params array                          |
+|---------------------|------------|--------------------------|--------------------------------------------|
+| <sub>list-tasks-wly | <sub>read  | <sub>list_tasks_wly      | <sub>format                                |
+| <sub>add-task-wly   | <sub>write | <sub>add_config_task_wly | <sub>uid description label status biweekly |
+| <sub>get-task-wly   | <sub>read  | <sub>get_task_wly        | <sub>uid                                   |
+| <sub>set-task-wly   | <sub>write | <sub>set_task_wly_param  | <sub>uid param newval                      |
+| <sub>del-task-wly   | <sub>write | <sub>del_config_task_wly | <sub>uid                                   |
+
 ## labels
 
 | <sub>parameter   | <sub>description                                           |
