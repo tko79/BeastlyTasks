@@ -48,6 +48,9 @@ __sort_config() {
     echo ""                             >> $tmpfile
     echo "[tasks-wly]"                  >> $tmpfile
     grep 'task_wly=' $configfile | sort >> $tmpfile
+    echo ""                             >> $tmpfile
+    echo "[tasks-mly]"                  >> $tmpfile
+    grep 'task_mly=' $configfile | sort >> $tmpfile
 
     mv -f $tmpfile $configfile
 }
@@ -584,6 +587,74 @@ function set_config_task_wly() {
 	return 1
     else
 	sed -i "s#task_wly=$task_wly_id;\"${task_wly_from_config}\"#task_wly=$task_wly_id;\"$task_wly_description;$task_wly_label;$task_wly_status;$task_wly_biweekly\"#g" $configfile
+    fi
+}
+
+# function add_config_task_mly
+#          add task_mly to config
+# param    $1: config filename
+#          $2: unique id
+#          $3: description
+#          $4: label
+#          $5: status {open|done}
+# return   return 1: in case of error (task_mly id already existing)
+#          return 2: in case of error (task_mly status not open or done)
+#          return 3: in case of error (task_mly id too long)
+function add_config_task_mly() {
+    local configfile=$1
+    local task_mly_id=$2
+    local task_mly_description=$3
+    local task_mly_label=$4
+    local task_mly_status=$5
+    local task_mly_from_config=""
+
+    if [ ! "$task_mly_status" == "open" ] && [ ! "$task_mly_status" == "done" ]; then
+	echo ""
+	return 2
+    fi
+
+    if [ ${#task_mly_id} -gt $ID_LENGTH ]; then
+	return 3
+    fi
+
+    task_mly_from_config=$(get_config_item $configfile "task_mly" $task_mly_id)
+    if [ $? == 1 ]; then
+	echo "task_mly=$task_mly_id;\"$task_mly_description;$task_mly_label;$task_mly_status\"" >> $configfile
+    else
+	return 1
+    fi
+
+    __sort_config $configfile
+}
+
+# function set_config_task_mly
+#          set task_mly to config
+# param    $1: config filename
+#          $2: unique id
+#          $3: description
+#          $4: label
+#          $5: status {open|done}
+# return   return 1: in case of error (task_mly id not found)
+#          return 2: in case of error (task_mly status not open or done)
+function set_config_task_mly() {
+    local configfile=$1
+    local task_mly_id=$2
+    local task_mly_description=$3
+    local task_mly_label=$4
+    local task_mly_status=$5
+    local task_mly_from_config=""
+
+    if [ ! "$task_mly_status" == "open" ] && [ ! "$task_mly_status" == "done" ]; then
+	echo ""
+	return 2
+    fi
+
+    task_mly_from_config=$(get_config_item $configfile "task_mly" $task_mly_id)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	sed -i "s#task_mly=$task_mly_id;\"${task_mly_from_config}\"#task_mly=$task_mly_id;\"$task_mly_description;$task_mly_label;$task_mly_status\"#g" $configfile
     fi
 }
 
