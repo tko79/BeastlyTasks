@@ -57,6 +57,7 @@ source $btpath/cal_functions.sh
 source $btpath/task_functions.sh
 source $btpath/task_dly_functions.sh
 source $btpath/task_wly_functions.sh
+source $btpath/task_mly_functions.sh
 source $btpath/label_functions.sh
 
 # function show_help
@@ -96,6 +97,8 @@ show_all() {
     printf "$(list_tasks $configfile list)\n"
     echo -n "daily tasks: "
     printf "$(list_tasks_dly $configfile list)\n"
+    echo -n "monthly tasks: "
+    printf "$(list_tasks_mly $configfile list)\n"
     echo ""
 
     echo -e $COL_WHITE_U"counters"$COL_DEFAULT
@@ -125,6 +128,11 @@ show_all() {
     echo -e $COL_WHITE_U"tasks_wly"$COL_DEFAULT
     echo ""
     printf "$(list_tasks_wly $configfile table)\n"
+    echo ""
+
+    echo -e $COL_WHITE_U"tasks_mly"$COL_DEFAULT
+    echo ""
+    printf "$(list_tasks_mly $configfile table)\n"
 }
 
 # function show_command_errormsg
@@ -537,6 +545,53 @@ if [ $params_cnt -gt 0 ]; then
 		    exit 0
 		else
 		    show_params_errormsg "del-task-wly"
+		fi
+		;;
+
+	    # item parameters: tasks_mly
+	    "--list-tasks-mly")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # list_tasks_mly $format
+		    printf "$(list_tasks_mly $configfile ${params_array[$params_curr+1]})\n"
+		    exit 0
+		else
+		    show_params_errormsg "list-tasks-mly"
+		fi
+		;;
+	    "--add-task-mly")
+		if [ "${params_array[$params_curr+4]}" != "" ]; then
+		    # add_config_task_mly $uid $description $label $status
+		    add_config_task_mly $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}" "${params_array[$params_curr+4]}"
+		    exit 0
+		else
+		    show_params_errormsg "add-task-mly"
+		fi
+		;;
+	    "--get-task-mly")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # get_task_mly $uid 'single'
+		    printf "$(get_task_mly $configfile ${params_array[$params_curr+1]} 'single')\n"
+		    exit 0
+		else
+		    show_params_errormsg "get-task-mly"
+		fi
+		;;
+	    "--set-task-mly")
+		if [ "${params_array[$params_curr+3]}" != "" ]; then
+		    # set_task_mly_param $uid $param $newval
+		    set_task_mly_param $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}"
+		    exit 0
+		else
+		    show_params_errormsg "set-task-mly"
+		fi
+		;;
+	    "--del-task-mly")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # del_config_item "task_mly" $uid
+		    del_config_item $configfile "task_mly" "${params_array[$params_curr+1]}"
+		    exit 0
+		else
+		    show_params_errormsg "del-task-mly"
 		fi
 		;;
 

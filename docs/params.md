@@ -147,6 +147,24 @@
 | <sub>set-task-wly   | <sub>write | <sub>set_task_wly_param  | <sub>uid param newval                      |
 | <sub>del-task-wly   | <sub>write | <sub>del_config_task_wly | <sub>uid                                   |
 
+## monthly tasks
+
+| <sub>parameter      | <sub>description                                                                       |
+|---------------------|----------------------------------------------------------------------------------------|
+| <sub>list-tasks-mly | <sub>list all monthly tasks in {format:list\|table}                                    |
+| <sub>add-task-mly   | <sub>add a new monthly task with {uid}, {description}, {label} and {status:open\|done} |
+| <sub>get-task-mly   | <sub>get value of monthly task {uid}                                                   |
+| <sub>set-task-mly   | <sub>set {newval} of {param} for monthly task {uid}                                    |
+| <sub>del-task-mly   | <sub>delete task {uid}                                                                 |
+
+| <sub>parameter      | <sub>rd/wr | <sub>internal function   | <sub>params array                 |
+|---------------------|------------|--------------------------|-----------------------------------|
+| <sub>list-tasks-mly | <sub>read  | <sub>list_tasks_mly      | <sub>format                       |
+| <sub>add-task-mly   | <sub>write | <sub>add_config_task_mly | <sub>uid description label status |
+| <sub>get-task-mly   | <sub>read  | <sub>get_task_mly        | <sub>uid                          |
+| <sub>set-task-mly   | <sub>write | <sub>set_task_mly_param  | <sub>uid param newval             |
+| <sub>del-task-mly   | <sub>write | <sub>del_config_task_mly | <sub>uid                          |
+
 ## labels
 
 | <sub>parameter   | <sub>description                                           |
