@@ -51,6 +51,9 @@ __sort_config() {
     echo ""                             >> $tmpfile
     echo "[tasks-mly]"                  >> $tmpfile
     grep 'task_mly=' $configfile | sort >> $tmpfile
+    echo ""                             >> $tmpfile
+    echo "[tasks-yly]"                  >> $tmpfile
+    grep 'task_yly=' $configfile | sort >> $tmpfile
 
     mv -f $tmpfile $configfile
 }
@@ -655,6 +658,78 @@ function set_config_task_mly() {
 	return 1
     else
 	sed -i "s#task_mly=$task_mly_id;\"${task_mly_from_config}\"#task_mly=$task_mly_id;\"$task_mly_description;$task_mly_label;$task_mly_status\"#g" $configfile
+    fi
+}
+
+# function add_config_task_yly
+#          add task_yly to config
+# param    $1: config filename
+#          $2: unique id
+#          $3: description
+#          $4: label
+#          $5: status {open|done}
+#          $6: due date (format cw/yy)
+# return   return 1: in case of error (task_yly id already existing)
+#          return 2: in case of error (task_yly status not open or done)
+#          return 3: in case of error (task_yly id too long)
+function add_config_task_yly() {
+    local configfile=$1
+    local task_yly_id=$2
+    local task_yly_description=$3
+    local task_yly_label=$4
+    local task_yly_status=$5
+    local task_yly_duedate=$6
+    local task_yly_from_config=""
+
+    if [ ! "$task_yly_status" == "open" ] && [ ! "$task_yly_status" == "done" ]; then
+	echo ""
+	return 2
+    fi
+
+    if [ ${#task_yly_id} -gt $ID_LENGTH ]; then
+	return 3
+    fi
+
+    task_yly_from_config=$(get_config_item $configfile "task_yly" $task_yly_id)
+    if [ $? == 1 ]; then
+	echo "task_yly=$task_yly_id;\"$task_yly_description;$task_yly_label;$task_yly_status;$task_yly_duedate\"" >> $configfile
+    else
+	return 1
+    fi
+
+    __sort_config $configfile
+}
+
+# function set_config_task_yly
+#          set task_yly to config
+# param    $1: config filename
+#          $2: unique id
+#          $3: description
+#          $4: label
+#          $5: status {open|done}
+#          $6: due date (format cw/yy)
+# return   return 1: in case of error (task_yly id not found)
+#          return 2: in case of error (task_yly status not open or done)
+function set_config_task_yly() {
+    local configfile=$1
+    local task_yly_id=$2
+    local task_yly_description=$3
+    local task_yly_label=$4
+    local task_yly_status=$5
+    local task_yly_duedate=$6
+    local task_yly_from_config=""
+
+    if [ ! "$task_yly_status" == "open" ] && [ ! "$task_yly_status" == "done" ]; then
+	echo ""
+	return 2
+    fi
+
+    task_yly_from_config=$(get_config_item $configfile "task_yly" $task_yly_id)
+    if [ $? == 1 ]; then
+	echo ""
+	return 1
+    else
+	sed -i "s#task_yly=$task_yly_id;\"${task_yly_from_config}\"#task_yly=$task_yly_id;\"$task_yly_description;$task_yly_label;$task_yly_status;$task_yly_duedate\"#g" $configfile
     fi
 }
 
