@@ -58,6 +58,7 @@ source $btpath/task_functions.sh
 source $btpath/task_dly_functions.sh
 source $btpath/task_wly_functions.sh
 source $btpath/task_mly_functions.sh
+source $btpath/task_yly_functions.sh
 source $btpath/label_functions.sh
 
 # function show_help
@@ -99,6 +100,8 @@ show_all() {
     printf "$(list_tasks_dly $configfile list)\n"
     echo -n "monthly tasks: "
     printf "$(list_tasks_mly $configfile list)\n"
+    echo -n "yearly tasks:  "
+    printf "$(list_tasks_yly $configfile list)\n"
     echo ""
 
     echo -e $COL_WHITE_U"counters"$COL_DEFAULT
@@ -133,6 +136,11 @@ show_all() {
     echo -e $COL_WHITE_U"tasks_mly"$COL_DEFAULT
     echo ""
     printf "$(list_tasks_mly $configfile table)\n"
+    echo ""
+
+    echo -e $COL_WHITE_U"tasks_yly"$COL_DEFAULT
+    echo ""
+    printf "$(list_tasks_yly $configfile table)\n"
 }
 
 # function show_command_errormsg
@@ -592,6 +600,53 @@ if [ $params_cnt -gt 0 ]; then
 		    exit 0
 		else
 		    show_params_errormsg "del-task-mly"
+		fi
+		;;
+
+	    # item parameters: tasks_yly
+	    "--list-tasks-yly")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # list_tasks_yly $format
+		    printf "$(list_tasks_yly $configfile ${params_array[$params_curr+1]})\n"
+		    exit 0
+		else
+		    show_params_errormsg "list-tasks-yly"
+		fi
+		;;
+	    "--add-task-yly")
+		if [ "${params_array[$params_curr+5]}" != "" ]; then
+		    # add_config_task_yly $uid $description $label $status $duedate
+		    add_config_task_yly $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}" "${params_array[$params_curr+4]}" "${params_array[$params_curr+5]}"
+		    exit 0
+		else
+		    show_params_errormsg "add-task-yly"
+		fi
+		;;
+	    "--get-task-yly")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # get_task_yly $uid 'single'
+		    printf "$(get_task_yly $configfile ${params_array[$params_curr+1]} 'single')\n"
+		    exit 0
+		else
+		    show_params_errormsg "get-task-yly"
+		fi
+		;;
+	    "--set-task-yly")
+		if [ "${params_array[$params_curr+3]}" != "" ]; then
+		    # set_task_yly_param $uid $param $newval
+		    set_task_yly_param $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}"
+		    exit 0
+		else
+		    show_params_errormsg "set-task-yly"
+		fi
+		;;
+	    "--del-task-yly")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # del_config_item "task_yly" $uid
+		    del_config_item $configfile "task_yly" "${params_array[$params_curr+1]}"
+		    exit 0
+		else
+		    show_params_errormsg "del-task-yly"
 		fi
 		;;
 

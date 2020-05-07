@@ -165,6 +165,24 @@
 | <sub>set-task-mly   | <sub>write | <sub>set_task_mly_param  | <sub>uid param newval             |
 | <sub>del-task-mly   | <sub>write | <sub>del_config_task_mly | <sub>uid                          |
 
+## yearly tasks
+
+| <sub>parameter      | <sub>description                                                                                 |
+|---------------------|--------------------------------------------------------------------------------------------------|
+| <sub>list-tasks-yly | <sub>list all yearly tasks in {format:list\|table}                                               |
+| <sub>add-task-yly   | <sub>add a new yearly task with {uid}, {description}, {label}, {status:open\|done} and {duedate} |
+| <sub>get-task-yly   | <sub>get value of yearly task {uid}                                                              |
+| <sub>set-task-yly   | <sub>set {newval} of {param} for yearly task {uid}                                               |
+| <sub>del-task-yly   | <sub>delete task {uid}                                                                           |
+
+| <sub>parameter      | <sub>rd/wr | <sub>internal function   | <sub>params array                         |
+|---------------------|------------|--------------------------|-------------------------------------------|
+| <sub>list-tasks-yly | <sub>read  | <sub>list_tasks_yly      | <sub>format                               |
+| <sub>add-task-yly   | <sub>write | <sub>add_config_task_yly | <sub>uid description label status duedate |
+| <sub>get-task-yly   | <sub>read  | <sub>get_task_yly        | <sub>uid                                  |
+| <sub>set-task-yly   | <sub>write | <sub>set_task_yly_param  | <sub>uid param newval                     |
+| <sub>del-task-yly   | <sub>write | <sub>del_config_task_yly | <sub>uid                                  |
+
 ## labels
 
 | <sub>parameter   | <sub>description                                           |

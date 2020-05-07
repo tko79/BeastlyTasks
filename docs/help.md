@@ -92,6 +92,17 @@ monthly tasks:
                                         status for monthly task UID
   --del-task-mly UID                    delete monthly task UID
 
+yearly tasks:
+  --list-tasks-yly FORMAT               list all yearly tasks in FORMAT:list|
+                                        table
+  --add-task-yly UID DESCRIPTION LABEL  add a new yearly task with UID,
+                 STATUS DUEDATE         DESCRIPTION, LABEL, STATUS:open|done and
+                                        DUEDATE
+  --get-task-yly UID                    get value of yearly task UID
+  --set-task-yly UID PARAM NEWVAL       set NEWVAL of PARAM:description|label|
+                                        status|duedate for yearly task UID
+  --del-task-yly UID                    delete yearly task UID
+
 labels:
   --list-labels FORMAT                  list all labels in FORMAT:list|table
   --add-label UID DESCRIPTION COLOR     add a new label with UID, DESCRIPTION
