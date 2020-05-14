@@ -98,6 +98,8 @@ show_all() {
     printf "$(list_tasks $configfile list)\n"
     echo -n "daily tasks: "
     printf "$(list_tasks_dly $configfile list)\n"
+    echo -n "weekly tasks: "
+    printf "$(list_tasks_wly $configfile list)\n"
     echo -n "monthly tasks: "
     printf "$(list_tasks_mly $configfile list)\n"
     echo -n "yearly tasks:  "
@@ -127,6 +129,7 @@ show_all() {
     echo -e $COL_WHITE_U"tasks_dly"$COL_DEFAULT
     echo ""
     printf "$(list_tasks_dly $configfile table)\n"
+    echo ""
 
     echo -e $COL_WHITE_U"tasks_wly"$COL_DEFAULT
     echo ""
