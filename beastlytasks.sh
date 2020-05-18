@@ -88,21 +88,21 @@ show_help() {
 show_all() {
     echo -e $COL_WHITE_U"overview"$COL_DEFAULT
     echo ""
-    echo -n "counters:    "
+    echo -ne $COL_WHITE"counters:      "$COL_DEFAULT
     printf "$(list_counters $configfile list)\n"
-    echo -n "timers:      "
+    echo -ne $COL_WHITE"timers:        "$COL_DEFAULT
     printf "$(list_timers $configfile list)\n"
-    echo -n "calendar:    "
+    echo -ne $COL_WHITE"calendar:      "$COL_DEFAULT
     printf "$(list_cal $configfile list)\n"
-    echo -n "tasks:       "
+    echo -ne $COL_WHITE"tasks:         "$COL_DEFAULT
     printf "$(list_tasks $configfile list)\n"
-    echo -n "daily tasks: "
+    echo -ne $COL_WHITE"daily tasks:   "$COL_DEFAULT
     printf "$(list_tasks_dly $configfile list)\n"
-    echo -n "weekly tasks: "
+    echo -ne $COL_WHITE"weekly tasks:  "$COL_DEFAULT
     printf "$(list_tasks_wly $configfile list)\n"
-    echo -n "monthly tasks: "
+    echo -ne $COL_WHITE"monthly tasks: "$COL_DEFAULT
     printf "$(list_tasks_mly $configfile list)\n"
-    echo -n "yearly tasks:  "
+    echo -ne $COL_WHITE"yearly tasks:  "$COL_DEFAULT
     printf "$(list_tasks_yly $configfile list)\n"
     echo ""
 
@@ -126,22 +126,22 @@ show_all() {
     printf "$(list_tasks $configfile table)\n"
     echo ""
 
-    echo -e $COL_WHITE_U"tasks_dly"$COL_DEFAULT
+    echo -e $COL_WHITE_U"daily tasks"$COL_DEFAULT
     echo ""
     printf "$(list_tasks_dly $configfile table)\n"
     echo ""
 
-    echo -e $COL_WHITE_U"tasks_wly"$COL_DEFAULT
+    echo -e $COL_WHITE_U"weekly tasks"$COL_DEFAULT
     echo ""
     printf "$(list_tasks_wly $configfile table)\n"
     echo ""
 
-    echo -e $COL_WHITE_U"tasks_mly"$COL_DEFAULT
+    echo -e $COL_WHITE_U"monthly tasks"$COL_DEFAULT
     echo ""
     printf "$(list_tasks_mly $configfile table)\n"
     echo ""
 
-    echo -e $COL_WHITE_U"tasks_yly"$COL_DEFAULT
+    echo -e $COL_WHITE_U"yearly tasks"$COL_DEFAULT
     echo ""
     printf "$(list_tasks_yly $configfile table)\n"
 }
