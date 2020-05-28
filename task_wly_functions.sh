@@ -110,8 +110,6 @@ function get_task_wly() {
 	local task_wly_status=$(get_element_from_config      "$task_wly_from_config" 3)
 	local task_wly_biweekly=$(get_element_from_config    "$task_wly_from_config" 4)
 
-	local prio_text=""
-
 	if [ "$format" == "table" ]; then
             if [ ${#task_wly_description} -gt $desc_width ]; then
 		task_wly_description=${task_wly_description:0:$desc_width}"..."

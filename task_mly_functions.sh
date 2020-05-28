@@ -106,8 +106,6 @@ function get_task_mly() {
 	local task_mly_label=$(get_element_from_config       "$task_mly_from_config" 2)
 	local task_mly_status=$(get_element_from_config      "$task_mly_from_config" 3)
 
-	local prio_text=""
-
 	if [ "$format" == "table" ]; then
             if [ ${#task_mly_description} -gt $desc_width ]; then
 		task_mly_description=${task_mly_description:0:$desc_width}"..."

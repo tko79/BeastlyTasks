@@ -110,8 +110,6 @@ function get_task_yly() {
 	local task_yly_status=$(get_element_from_config      "$task_yly_from_config" 3)
 	local task_yly_duedate=$(get_element_from_config     "$task_yly_from_config" 4)
 
-	local prio_text=""
-
 	if [ "$format" == "table" ]; then
             if [ ${#task_yly_description} -gt $desc_width ]; then
 		task_yly_description=${task_yly_description:0:$desc_width}"..."
