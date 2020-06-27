@@ -296,22 +296,22 @@ if [ $params_cnt -gt 0 ]; then
 		    show_params_errormsg "del-counter"
 		fi
 		;;
-	    "--increment-counter")
+	    "--inc-counter")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
-		    # increment_counter $uid
-		    increment_counter $configfile "${params_array[$params_curr+1]}"
+		    # inc_counter $uid
+		    inc_counter $configfile "${params_array[$params_curr+1]}"
 		    exit 0
 		else
-		    show_params_errormsg "increment-counter"
+		    show_params_errormsg "inc-counter"
 		fi
 		;;
-	    "--decrement-counter")
+	    "--dec-counter")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
-		    # decrement_counter $uid
-		    decrement_counter $configfile "${params_array[$params_curr+1]}"
+		    # dec_counter $uid
+		    dec_counter $configfile "${params_array[$params_curr+1]}"
 		    exit 0
 		else
-		    show_params_errormsg "decrement-counter"
+		    show_params_errormsg "dec-counter"
 		fi
 		;;
 	    "--reset-counter")

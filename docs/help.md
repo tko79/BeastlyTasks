@@ -28,8 +28,8 @@ counters:
                                         threshold|belabo|txtgood|txtequal|txtbad
                                         for counter UID
   --del-counter UID                     delete counter UID
-  --increment-counter UID               increment counter UID
-  --decrement-counter UID               decrement counter UID
+  --inc-counter UID                     increment counter UID
+  --dec-counter UID                     decrement counter UID
   --reset-counter UID                   reset counter UID
 
 timers:
