@@ -99,10 +99,12 @@ function set_counter_param() {
 #          inc counter value
 # param    $1: config filename
 #          $2: unique id
+#          $3: increment value
 # return   return 1: in case of error (get_counter_param failed)
 function inc_counter() {
     local configfile=$1
     local counter_id=$2
+    local value=$3
 
     local counter_val=0
 
@@ -110,7 +112,7 @@ function inc_counter() {
     if [ $? == 1 ]; then
 	return 1
     else
-	counter_val=$(( $counter_val+1 ))
+	counter_val=$(( $counter_val+$value ))
 	$(set_counter_param $configfile $counter_id value $counter_val)
     fi
 }
@@ -119,11 +121,13 @@ function inc_counter() {
 #          dec counter value
 # param    $1: config filename
 #          $2: unique id
+#          $3: decrement value
 # return   return 1: in case of error (get_counter_param failed)
 #          return 2: in case of negative value
 function dec_counter() {
     local configfile=$1
     local counter_id=$2
+    local value=$3
 
     local counter_val=0
 
@@ -135,7 +139,7 @@ function dec_counter() {
 	if [ $counter_val -eq 0 ]; then
 	    return 2
 	else
-	    counter_val=$(( $counter_val-1 ))
+	    counter_val=$(( $counter_val-$value ))
 	    $(set_counter_param $configfile $counter_id value $counter_val)
 	fi
     fi

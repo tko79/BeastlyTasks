@@ -42,8 +42,8 @@
 | <sub>get-counter       | <sub>get value of counter {uid}                                                                                                                              |
 | <sub>set-counter       | <sub>set {newval} of {param} for counter {uid}                                                                                                               |
 | <sub>del-counter       | <sub>delete counter {uid}                                                                                                                                    |
-| <sub>inc-counter       | <sub>increment counter {uid}                                                                                                                                 |
-| <sub>dec-counter       | <sub>decrement counter {uid}                                                                                                                                 |
+| <sub>inc-counter       | <sub>increment counter {uid} by 1 or (optional) {value}                                                                                                      |
+| <sub>dec-counter       | <sub>decrement counter {uid} by 1 or (optional) {value}                                                                                                      |
 | <sub>reset-counter     | <sub>reset counter {uid}                                                                                                                                     |
 
 | <sub>parameter         | <sub>rd/wr | <sub>internal function    | <sub>params array                                                          |
@@ -53,8 +53,8 @@
 | <sub>get-counter       | <sub>read  | <sub>get_counter          | <sub>uid                                                                   |
 | <sub>set-counter       | <sub>write | <sub>set_counter_param    | <sub>uid param newval                                                      |
 | <sub>del-counter       | <sub>write | <sub>del_config_counter   | <sub>uid                                                                   |
-| <sub>inc-counter       | <sub>write | <sub>increment_counter    | <sub>uid                                                                   |
-| <sub>dec-counter       | <sub>write | <sub>decrement_counter    | <sub>uid                                                                   |
+| <sub>inc-counter       | <sub>write | <sub>increment_counter    | <sub>uid value                                                             |
+| <sub>dec-counter       | <sub>write | <sub>decrement_counter    | <sub>uid value                                                             |
 | <sub>reset-counter     | <sub>write | <sub>reset_counter        | <sub>uid                                                                   |
 
 ## timers

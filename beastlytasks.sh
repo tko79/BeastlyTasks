@@ -297,18 +297,26 @@ if [ $params_cnt -gt 0 ]; then
 		fi
 		;;
 	    "--inc-counter")
-		if [ "${params_array[$params_curr+1]}" != "" ]; then
-		    # inc_counter $uid
-		    inc_counter $configfile "${params_array[$params_curr+1]}"
+		if [ "${params_array[$params_curr+2]}" != "" ]; then
+		    # inc_counter $uid $value
+		    inc_counter $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}"
+		    exit 0
+		elif [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # inc_counter $uid 1
+		    inc_counter $configfile "${params_array[$params_curr+1]}" 1
 		    exit 0
 		else
 		    show_params_errormsg "inc-counter"
 		fi
 		;;
 	    "--dec-counter")
-		if [ "${params_array[$params_curr+1]}" != "" ]; then
-		    # dec_counter $uid
-		    dec_counter $configfile "${params_array[$params_curr+1]}"
+		if [ "${params_array[$params_curr+2]}" != "" ]; then
+		    # dec_counter $uid $value
+		    dec_counter $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}"
+		    exit 0
+		elif [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # dec_counter $uid 1
+		    dec_counter $configfile "${params_array[$params_curr+1]}" 1
 		    exit 0
 		else
 		    show_params_errormsg "dec-counter"
