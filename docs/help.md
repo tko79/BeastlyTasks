@@ -27,12 +27,22 @@ counters:
   --set-counter UID PARAM NEWVAL        set NEWVAL of PARAM:description|value|
                                         threshold|belabo|txtgood|txtequal|txtbad
                                         for counter UID
+  --set-and-show-counter UID PARAM      set NEWVAL of PARAM:description|value|
+                         NEWVAL         threshold|belabo|txtgood|txtequal|txtbad
+                                        and show table of counters
+                                        for counter UID
   --del-counter UID                     delete counter UID
   --inc-counter UID (VALUE)             increment counter UID by 1 (or optional,
                                         by VALUE)
+  --inc-and-show-counter UID (VALUE)    increment counter UID by 1 (or optional,
+                                        by VALUE) and show table of counters
   --dec-counter UID (VALUE)             decrement counter UID by 1 (or optional,
                                         by VALUE)
+  --dec-and-show-counter UID (VALUE)    decrement counter UID by 1 (or optional,
+                                        by VALUE) and show table of counters
   --reset-counter UID                   reset counter UID
+  --reset-and-show-counter UID          reset counter UID and show table of
+                                        counters
 
 timers:
   --list-timers FORMAT                  list all timers in FORMAT:list|table

@@ -287,6 +287,16 @@ if [ $params_cnt -gt 0 ]; then
 		    show_params_errormsg "set-counter"
 		fi
 		;;
+	    "--set-and-show-counter")
+		if [ "${params_array[$params_curr+3]}" != "" ]; then
+		    # set_counter_param $uid $param $newval
+		    set_counter_param $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}"
+		    printf "$(list_counters $configfile table)\n"
+		    exit 0
+		else
+		    show_params_errormsg "set-counter"
+		fi
+		;;
 	    "--del-counter")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
 		    # del_config_item "counter" $uid
@@ -309,6 +319,21 @@ if [ $params_cnt -gt 0 ]; then
 		    show_params_errormsg "inc-counter"
 		fi
 		;;
+	    "--inc-and-show-counter")
+		if [ "${params_array[$params_curr+2]}" != "" ]; then
+		    # inc_counter $uid $value
+		    inc_counter $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}"
+		    printf "$(list_counters $configfile table)\n"
+		    exit 0
+		elif [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # inc_counter $uid 1
+		    inc_counter $configfile "${params_array[$params_curr+1]}" 1
+		    printf "$(list_counters $configfile table)\n"
+		    exit 0
+		else
+		    show_params_errormsg "inc-counter"
+		fi
+		;;
 	    "--dec-counter")
 		if [ "${params_array[$params_curr+2]}" != "" ]; then
 		    # dec_counter $uid $value
@@ -322,10 +347,35 @@ if [ $params_cnt -gt 0 ]; then
 		    show_params_errormsg "dec-counter"
 		fi
 		;;
+	    "--dec-and-show-counter")
+		if [ "${params_array[$params_curr+2]}" != "" ]; then
+		    # dec_counter $uid $value
+		    dec_counter $configfile "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}"
+		    printf "$(list_counters $configfile table)\n"
+		    exit 0
+		elif [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # dec_counter $uid 1
+		    dec_counter $configfile "${params_array[$params_curr+1]}" 1
+		    printf "$(list_counters $configfile table)\n"
+		    exit 0
+		else
+		    show_params_errormsg "dec-counter"
+		fi
+		;;
 	    "--reset-counter")
 		if [ "${params_array[$params_curr+1]}" != "" ]; then
 		    # reset_counter $uid
 		    reset_counter $configfile "${params_array[$params_curr+1]}"
+		    exit 0
+		else
+		    show_params_errormsg "reset-counter"
+		fi
+		;;
+	    "--reset-and-show-counter")
+		if [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # reset_counter $uid
+		    reset_counter $configfile "${params_array[$params_curr+1]}"
+		    printf "$(list_counters $configfile table)\n"
 		    exit 0
 		else
 		    show_params_errormsg "reset-counter"
