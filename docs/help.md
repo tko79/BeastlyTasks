@@ -10,8 +10,8 @@ misc:
         CURRENTITEMS                    conky using: START date:d:hh:mm, UNTIL
                                         date:d:hh:mm, #START-ITEMS and
                                         #CURRENT-ITEMS
-  --cti NAME START END (IMPO)           create task image with NAME, START week,
-                                        END week and (optional) (IMPO:impo) flag
+  --cti NAME START END [IMPO]           create task image with NAME, START week,
+                                        END week and (optional) [IMPO:impo] flag
   --show-cal OPTION                     show calendar with OPTION:next|<year>
                                         (next 90 days or complete year)
   --show-all                            show a complete list of all items
@@ -32,14 +32,14 @@ counters:
                                         and show table of counters
                                         for counter UID
   --del-counter UID                     delete counter UID
-  --inc-counter UID (VALUE)             increment counter UID by 1 (or optional,
-                                        by VALUE)
-  --inc-and-show-counter UID (VALUE)    increment counter UID by 1 (or optional,
-                                        by VALUE) and show table of counters
-  --dec-counter UID (VALUE)             decrement counter UID by 1 (or optional,
-                                        by VALUE)
-  --dec-and-show-counter UID (VALUE)    decrement counter UID by 1 (or optional,
-                                        by VALUE) and show table of counters
+  --inc-counter UID [VALUE]             increment counter UID by 1 (or optional,
+                                        by [VALUE])
+  --inc-and-show-counter UID [VALUE]    increment counter UID by 1 (or optional,
+                                        by [VALUE]) and show table of counters
+  --dec-counter UID [VALUE]             decrement counter UID by 1 (or optional,
+                                        by [VALUE])
+  --dec-and-show-counter UID [VALUE]    decrement counter UID by 1 (or optional,
+                                        by [VALUE]) and show table of counters
   --reset-counter UID                   reset counter UID
   --reset-and-show-counter UID          reset counter UID and show table of
                                         counters

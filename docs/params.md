@@ -19,7 +19,7 @@
 | <sub>time-per-task-currtime | <sub>calculate time per task of #{ntasks} {until} date                                                                      |
 | <sub>sum-10h-timers         | <sub>sumup 10h-timers {timer1} and {timer2}                                                                                 |
 | <sub>swl                    | <sub>show what's left in {format:normal\|csv\|conky} using: {start} date, {until} date, #{start-items} and #{current-items} |
-| <sub>cti                    | <sub>create a task image with {name}, {start} week, {end} week and (optional) {impo:impo} flag                              |
+| <sub>cti                    | <sub>create a task image with {name}, {start} week, {end} week and (optional) [{impo:impo}] flag                            |
 | <sub>show-cal               | <sub>show calendar (next 90 days ({next}) or a complete year ({<year>}))                                                    |
 | <sub>help                   | <sub>show license and help text                                                                                             |
 
@@ -28,7 +28,7 @@
 | <sub>time-per-task-currtime | <sub>read  | <sub>time_per_task_currtime | <sub>until ntasks                                 |
 | <sub>sum-10h-timers         | <sub>read  | <sub>sum_10h_timers         | <sub>timer1 timer2                                |
 | <sub>swl                    | <sub>read  | <sub>show_whats_left        | <sub>format start until start-items current-items |
-| <sub>cti                    | <sub>write | <sub>create_task_image      | <sub>name start end impo                          |
+| <sub>cti                    | <sub>write | <sub>create_task_image      | <sub>name start end [impo]                        |
 | <sub>show-cal               | <sub>read  | <sub>show_cal               | <sub>option                                       |
 | <sub>show-all               | <sub>read  | <sub>show_all               |                                                   |
 | <sub>help                   | <sub>read  | <sub>show_help              |                                                   |
@@ -43,10 +43,10 @@
 | <sub>set-counter            | <sub>set {newval} of {param} for counter {uid}                                                                                                               |
 | <sub>set-and-show-counter   | <sub>set {newval} of {param} for counter {uid} and show table of counters                                                                                    |
 | <sub>del-counter            | <sub>delete counter {uid}                                                                                                                                    |
-| <sub>inc-counter            | <sub>increment counter {uid} by 1 or (optional) {value}                                                                                                      |
-| <sub>inc-and-show-counter   | <sub>increment counter {uid} by 1 or (optional) {value} and show table of counters                                                                           |
-| <sub>dec-counter            | <sub>decrement counter {uid} by 1 or (optional) {value}                                                                                                      |
-| <sub>dec-and-show-counter   | <sub>decrement counter {uid} by 1 or (optional) {value} and show table of counters                                                                           |
+| <sub>inc-counter            | <sub>increment counter {uid} by 1 or (optional) [{value}]                                                                                                    |
+| <sub>inc-and-show-counter   | <sub>increment counter {uid} by 1 or (optional) [{value}] and show table of counters                                                                         |
+| <sub>dec-counter            | <sub>decrement counter {uid} by 1 or (optional) [{value}]                                                                                                    |
+| <sub>dec-and-show-counter   | <sub>decrement counter {uid} by 1 or (optional) [{value}] and show table of counters                                                                         |
 | <sub>reset-counter          | <sub>reset counter {uid}                                                                                                                                     |
 | <sub>reset-and-show-counter | <sub>reset counter {uid}                                                                                                                                     |
 
@@ -58,10 +58,10 @@
 | <sub>set-counter            | <sub>write | <sub>set_counter_param    | <sub>uid param newval                                                      |
 | <sub>set-and-show-counter   | <sub>write | <sub>set_counter_param    | <sub>uid param newval                                                      |
 | <sub>del-counter            | <sub>write | <sub>del_config_counter   | <sub>uid                                                                   |
-| <sub>inc-counter            | <sub>write | <sub>increment_counter    | <sub>uid value                                                             |
-| <sub>inc-and-show-counter   | <sub>write | <sub>increment_counter    | <sub>uid value                                                             |
-| <sub>dec-counter            | <sub>write | <sub>decrement_counter    | <sub>uid value                                                             |
-| <sub>dec-and-show-counter   | <sub>write | <sub>decrement_counter    | <sub>uid value                                                             |
+| <sub>inc-counter            | <sub>write | <sub>increment_counter    | <sub>uid [value]                                                           |
+| <sub>inc-and-show-counter   | <sub>write | <sub>increment_counter    | <sub>uid [value]                                                           |
+| <sub>dec-counter            | <sub>write | <sub>decrement_counter    | <sub>uid [value]                                                           |
+| <sub>dec-and-show-counter   | <sub>write | <sub>decrement_counter    | <sub>uid [value]                                                           |
 | <sub>reset-counter          | <sub>write | <sub>reset_counter        | <sub>uid                                                                   |
 | <sub>reset-and-show-counter | <sub>write | <sub>reset_counter        | <sub>uid                                                                   |
 

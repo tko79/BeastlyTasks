@@ -223,7 +223,7 @@ if [ $params_cnt -gt 0 ]; then
 		;;
 	    "--cti")
 		if [ "${params_array[$params_curr+3]}" != "" ]; then
-		    # create_task_image $name $start $end $impo(optional)
+		    # create_task_image $name $start $end [$impo]
 		    create_task_image "${params_array[$params_curr+1]}" "${params_array[$params_curr+2]}" "${params_array[$params_curr+3]}" "${params_array[$params_curr+4]}"
 		    exit 0
 		else
