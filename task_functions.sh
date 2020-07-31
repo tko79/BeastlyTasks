@@ -33,9 +33,9 @@ function create_task_image() {
     end=$3
     impo=$4
 
-    local template_red=$btpath"/docs/images/task_template_red.png"
-    local template_done=$btpath"/docs/images/task_template_done.png"
-    local template_impo=$btpath"/docs/images/task_template_impo.png"
+    local template_red=$btpath"/images/task_template_red.png"
+    local template_done=$btpath"/images/task_template_done.png"
+    local template_impo=$btpath"/images/task_template_impo.png"
     local outfile="/tmp/out.png"
 
     convert $template_red -gravity Center -pointsize 20 -fill white \

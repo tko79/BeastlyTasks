@@ -10,7 +10,7 @@ conky.
 
 Here is a nice example:
 
-![conky](/docs/images/conky_bt.jpg)
+![conky](/images/conky_bt.jpg)
 
 To configure this example (or something similar) the following lines have to be
 added in the conkyrc:
