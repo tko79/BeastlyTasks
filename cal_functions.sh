@@ -44,7 +44,8 @@ function show_cal() {
     # check option (next or year, print 45 days or given year)
     if [ "$opt" == "next" ]; then
 	startdate=$(date "+%m/%d/%Y")
-	let cnt_days=$CAL_SHOW_NEXT
+	let day=$CAL_SHOW_NEXT_START
+	let cnt_days=$(($CAL_SHOW_NEXT_START+$CAL_SHOW_NEXT_COUNT))
     else
 	# do we have a leapyear or a normal year?
 	if [ $(date -d ${startdate}"+365days" +"%j") -eq 355 ]; then

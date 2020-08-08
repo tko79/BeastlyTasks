@@ -41,7 +41,8 @@ COL_DEFAULT="\e[0m"      # system default
 
 # defaults
 LIST_DESC_WIDTH=35
-CAL_SHOW_NEXT=45
+CAL_SHOW_NEXT_START=-15
+CAL_SHOW_NEXT_COUNT=45
 ID_LENGTH=16
 
 if [ "$BTPATH" == "" ]; then
