@@ -26,11 +26,6 @@ or (at your option) any later version.
 EOF
 )
 
-params_cnt=$#
-params_array=("$@")
-user=$(whoami)
-configfile="/home/"$user"/.beastlytasks"
-
 # color defines
 COL_WHITE="\e[1;37m"     # bold white
 COL_RED="\e[1;31m"       # bold red
@@ -45,12 +40,20 @@ CAL_SHOW_NEXT_START=-15
 CAL_SHOW_NEXT_COUNT=45
 ID_LENGTH=16
 
+# basic configuration
+params_cnt=$#
+params_array=("$@")
+user=$(whoami)
+configfile="/home/"$user"/.beastlytasks"
+
+# root path of beastlytasks
 if [ "$BTPATH" == "" ]; then
     btpath="."
 else
     btpath=$BTPATH
 fi
 
+# include additional sources
 source $btpath/config_functions.sh
 source $btpath/timer_functions.sh
 source $btpath/counter_functions.sh
