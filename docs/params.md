@@ -20,7 +20,7 @@
 | <sub>sum-10h-timers         | <sub>sumup 10h-timers {timer1} and {timer2}                                                                                 |
 | <sub>swl                    | <sub>show what's left in {format:normal\|csv\|conky} using: {start} date, {until} date, #{start-items} and #{current-items} |
 | <sub>cti                    | <sub>create a task image with {name}, {start} week, {end} week and (optional) [{impo:impo}] flag                            |
-| <sub>show-cal               | <sub>show calendar (next 90 days ({next}) or a complete year ({<year>}))                                                    |
+| <sub>show-cal               | <sub>show calendar (90 days (starting at -15) ({next}) or a complete year ({<year>}))                                       |
 | <sub>help                   | <sub>show license and help text                                                                                             |
 
 | <sub>parameter              | <sub>rd/wr | <sub>internal function      | <sub>params array                                 |
