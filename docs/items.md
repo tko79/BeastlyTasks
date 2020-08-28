@@ -84,7 +84,7 @@
 ### daily
 
 - description: daily tasks
-- parameters and format in config: `$uid;"$description;$label;$status;$donedate"`
+- parameters and format in config: `$uid;"$description;$label;$status"`
 
 | <sub>parameter   | <sub>description             | <sub>format              |
 |------------------|------------------------------|--------------------------|
@@ -96,7 +96,7 @@
 ### weekly
 
 - description: weekly tasks
-- parameters and format in config: `$uid;"$description;$label;$status;$donedate;$biweekly"`
+- parameters and format in config: `$uid;"$description;$label;$status;$biweekly"`
 
 | <sub>parameter   | <sub>description             | <sub>format              |
 |------------------|------------------------------|--------------------------|
@@ -109,7 +109,7 @@
 ### monthly
 
 - description: monthly tasks
-- parameters and format in config: `$uid;"$description;$label;$status;$donedate"`
+- parameters and format in config: `$uid;"$description;$label;$status"`
 
 | <sub>parameter   | <sub>description             | <sub>format              |
 |------------------|------------------------------|--------------------------|
@@ -121,7 +121,7 @@
 ### yearly
 
 - description: yearly tasks
-- parameters and format in config: `$uid;"$description;$label;$status;$donedate;$duedate"`
+- parameters and format in config: `$uid;"$description;$label;$status;$duedate"`
 
 | <sub>parameter   | <sub>description             | <sub>format              |
 |------------------|------------------------------|--------------------------|
