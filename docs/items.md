@@ -130,6 +130,7 @@
 | <sub>label       | <sub>one or more labels/tags | <sub>string              |
 | <sub>status      | <sub>status of task          | <sub>string:{open\|done} |
 | <sub>duedate     | <sub>due date of task        | <sub>date:(cw/yy)        |
+|                  |                              | <sub>date:(dd.mm.yyyy)   |
 
 ### label
 
