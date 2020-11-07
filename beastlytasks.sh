@@ -36,8 +36,8 @@ COL_DEFAULT="\e[0m"      # system default
 
 # defaults
 LIST_DESC_WIDTH=35
-CAL_SHOW_NEXT_START=-15
-CAL_SHOW_NEXT_COUNT=45
+CAL_SHOW_NEXT_START=-8
+CAL_SHOW_NEXT_COUNT=40
 ID_LENGTH=16
 
 # basic configuration
