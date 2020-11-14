@@ -26,7 +26,7 @@ source $btpath/generic_functions.sh
 # return   printf: calendar (either next 45 days or the given year)
 function show_cal() {
     local configfile=$1
-    local opt=$2
+    local print_option=$2
 
     local cnt_days=""
     local cal=""
@@ -39,10 +39,10 @@ function show_cal() {
 
     let day=0
     let week=0
-    let year=$opt
+    let year=$print_option
 
     # check option (next or year, print 45 days or given year)
-    if [ "$opt" == "next" ]; then
+    if [ "$print_option" == "next" ]; then
 	startdate=$(date "+%m/%d/%Y")
 	let day=$CAL_SHOW_NEXT_START
 	let cnt_days=$(($CAL_SHOW_NEXT_START+$CAL_SHOW_NEXT_COUNT))
