@@ -235,9 +235,13 @@ if [ $params_cnt -gt 0 ]; then
 		fi
 		;;
 	    "--show-cal")
-		if [ "${params_array[$params_curr+1]}" != "" ]; then
-		    # show calendar
-		    printf "$(show_cal $configfile ${params_array[$params_curr+1]})"
+		if [ "${params_array[$params_curr+3]}" != "" ]; then
+		    # show calendar $start $count
+		    printf "$(show_cal $configfile ${params_array[$params_curr+1]} ${params_array[$params_curr+2]} ${params_array[$params_curr+3]})"
+		    exit 0
+		elif [ "${params_array[$params_curr+1]}" != "" ]; then
+		    # show calendar $CAL_SHOW_NEXT_START $CAL_SHOW_NEXT_COUNT
+		    printf "$(show_cal $configfile ${params_array[$params_curr+1]} $CAL_SHOW_NEXT_START $CAL_SHOW_NEXT_COUNT)"
 		    exit 0
 		else
 		    show_params_errormsg "show-cal"

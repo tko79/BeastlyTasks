@@ -23,10 +23,14 @@ source $btpath/generic_functions.sh
 #          show calendar
 # param    $1: config filename
 #          $2: print option {next|<year>}
-# return   printf: calendar (either next 45 days or the given year)
+#          $3: start date (for next option)
+#          $4: count days (for next option)
+# return   printf: calendar (either next days or the given year)
 function show_cal() {
     local configfile=$1
     local print_option=$2
+    local next_start=$3
+    local next_count=$4
 
     local cnt_days=""
     local cal=""
@@ -44,8 +48,13 @@ function show_cal() {
     # check option (next or year, print 45 days or given year)
     if [ "$print_option" == "next" ]; then
 	startdate=$(date "+%m/%d/%Y")
-	let day=$CAL_SHOW_NEXT_START
-	let cnt_days=$(($CAL_SHOW_NEXT_START+$CAL_SHOW_NEXT_COUNT))
+	let next_start=$next_start
+	let next_count=$next_count
+	if [ $next_count -lt 1 ]; then
+	    let next_count=$CAL_SHOW_NEXT_COUNT
+	fi
+	let day=$next_start
+	let cnt_days=$(($next_start+$next_count))
     else
 	# do we have a leapyear or a normal year?
 	if [ $(date -d ${startdate}"+365days" +"%j") -eq 355 ]; then
