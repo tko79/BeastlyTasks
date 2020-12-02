@@ -20,7 +20,7 @@
 | <sub>sum-10h-timers         | <sub>sumup 10h-timers {timer1} and {timer2}                                                                                 |
 | <sub>swl                    | <sub>show what's left in {format:normal\|csv\|conky} using: {start} date, {until} date, #{start-items} and #{current-items} |
 | <sub>cti                    | <sub>create a task image with {name}, {start} week, {end} week and (optional) [{impo:impo}] flag                            |
-| <sub>show-cal               | <sub>show calendar (90 days (starting at -15) ({next}) or a complete year ({<year>}))                                       |
+| <sub>show-cal               | <sub>show calendar entries ({next} with optional [{start}] and [{count}] or a complete year ({<year>}))                     |
 | <sub>help                   | <sub>show license and help text                                                                                             |
 
 | <sub>parameter              | <sub>rd/wr | <sub>internal function      | <sub>params array                                 |
@@ -29,7 +29,7 @@
 | <sub>sum-10h-timers         | <sub>read  | <sub>sum_10h_timers         | <sub>timer1 timer2                                |
 | <sub>swl                    | <sub>read  | <sub>show_whats_left        | <sub>format start until start-items current-items |
 | <sub>cti                    | <sub>write | <sub>create_task_image      | <sub>name start end [impo]                        |
-| <sub>show-cal               | <sub>read  | <sub>show_cal               | <sub>option                                       |
+| <sub>show-cal               | <sub>read  | <sub>show_cal               | <sub>option [start] [count]                       |
 | <sub>show-all               | <sub>read  | <sub>show_all               |                                                   |
 | <sub>help                   | <sub>read  | <sub>show_help              |                                                   |
 
